@@ -38,9 +38,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
   <style>
+    .call-btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      cursor: pointer;
+      bottom: 70px;
+      right: 0;
+      height: 3.8rem;
+      width: 3.8rem;
+      margin: 1rem;
+      border-radius: 50%;
+      background-color: #fff;
+      color: #000;
+      font-size: 2.2rem;
+      transition: all ease-in-out .2s;
+      z-index: 100;
+    }
     .whatsapp-btn{
       display: flex;
       align-items: center;
@@ -49,13 +68,13 @@
       cursor: pointer;
       bottom: 0;
       right: 0;
-      height: 3rem;
-      width: 3rem;
+      height: 3.8rem;
+      width: 3.8rem;
       margin: 1rem;
       border-radius: 50%;
-      background-color: #fff;
-      color: #000;
-      font-size: 2rem;
+      background-color: #00CA68;
+      color: #fff;
+      font-size: 2.8rem;
       transition: all ease-in-out .2s;
       z-index: 100;
     }
@@ -65,7 +84,7 @@
       color: #fff;
     }
     @media(max-width:900px){
-      .whatsapp-btn{
+      .call-btn, .whatsapp-btn{
         height: 2.6rem;
         width: 2.6rem;
         margin: 8px 10px;
@@ -87,6 +106,10 @@
     -->
 
     <!-- ------Whatsapp Button-------- -->
+
+     <a class="call-btn" href='tel:7877251820'>
+      <i class='bx bx-phone-call'></i>
+     </a>
 
      <a class="whatsapp-btn" href=" https://wa.me/7851822581">
       <i class='bx bxl-whatsapp'></i>
