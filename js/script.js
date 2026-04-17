@@ -396,7 +396,7 @@ if (testimonialsTrack) {
 
 // ===== GA4 Analytics (consent-gated) =====
 function initGA4() {
-    if (!window.GA_MEASUREMENT_ID || window.GA_MEASUREMENT_ID === 'G-KZ28NS98BR') return;
+    if (!window.GA_MEASUREMENT_ID || window.GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
     if (document.getElementById('ga4-script')) return;
 
     const script = document.createElement('script');
