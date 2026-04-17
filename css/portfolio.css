@@ -1,0 +1,271 @@
+/* ===== Portfolio Hero ===== */
+.portfolio-hero {
+    padding: 160px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(200, 255, 0, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.portfolio-hero__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.portfolio-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 10vw, 100px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #777777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.portfolio-hero__desc {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.portfolio-section {
+    padding: 0 0 120px;
+}
+
+/* ===== Portfolio Grid ===== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ===== Project Card ===== */
+.pf-card {
+    display: block;
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+}
+
+.pf-card.hidden {
+    display: none;
+}
+
+.pf-card:hover {
+    border-color: rgba(200, 255, 0, 0.2);
+    transform: translateY(-6px);
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(200, 255, 0, 0.06);
+}
+
+/* Visual area */
+.pf-card__visual {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(200, 255, 0, 0.03) 0%, transparent 60%),
+        var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.pf-card__visual img {
+    max-height: 100%;
+    max-width: 80%;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    filter: brightness(0.95);
+}
+
+.pf-card:hover .pf-card__visual img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+}
+
+/* Placeholder for projects without images */
+.pf-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(200, 255, 0, 0.04) 0%, rgba(200, 255, 0, 0.01) 100%);
+    border-radius: 8px;
+}
+
+.pf-card__placeholder span {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.06);
+    letter-spacing: 4px;
+    transition: color 0.4s ease;
+}
+
+.pf-card:hover .pf-card__placeholder span {
+    color: rgba(200, 255, 0, 0.12);
+}
+
+.pf-card__placeholder--accent {
+    background: linear-gradient(135deg, rgba(153, 69, 255, 0.06) 0%, rgba(200, 255, 0, 0.03) 100%);
+}
+
+/* Number watermark */
+.pf-card__number {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+    transition: color 0.5s ease;
+}
+
+.pf-card:hover .pf-card__number {
+    color: rgba(200, 255, 0, 0.06);
+}
+
+/* Card body */
+.pf-card__body {
+    padding: 24px 28px;
+    position: relative;
+}
+
+.pf-card__body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 28px;
+    right: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+.pf-card__tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(200, 255, 0, 0.08);
+    border: 1px solid rgba(200, 255, 0, 0.15);
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.pf-card__title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.pf-card__desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.pf-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.pf-card:hover .pf-card__link {
+    color: var(--accent);
+    gap: 9px;
+}
+
+.pf-card__link svg {
+    transition: transform 0.3s ease;
+}
+
+.pf-card:hover .pf-card__link svg {
+    transform: translate(2px, -2px);
+}
+
+/* ===== Project count ===== */
+.portfolio-grid::after {
+    content: '14 Projects';
+    display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portfolio-hero {
+        padding: 140px 0 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-hero {
+        padding: 120px 0 48px;
+    }
+
+    .portfolio-hero__title {
+        letter-spacing: -1px;
+    }
+
+    .pf-card__visual {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pf-card__visual {
+        height: 180px;
+        padding: 24px;
+    }
+
+    .pf-card__body {
+        padding: 20px 22px;
+    }
+}

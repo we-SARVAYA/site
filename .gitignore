@@ -1,0 +1,38 @@
+# Build output
+dist/
+
+# Tools hub — lives in a separate repo (deployed to Vercel at tools.sarvaya.in)
+linkedin-video-downloader/
+
+# Dependencies
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Python build cache
+__pycache__/
+*.pyc
+
+# Claude notify signals (local agent files)
+C:UsersClaude.claudeclaude-notify-signalsnotification
+C:UsersClaude.claudeclaude-notify-signalsstop
+C:UsersClaude.claudeclaude-notify-signalspermission
+
+# Claude agent runtime artifacts
+.claude/
+C:UsersClaude.claudeclaude-notify-signals*

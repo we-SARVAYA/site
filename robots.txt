@@ -1,0 +1,5 @@
+# robots.txt for sarvaya.in
+User-agent: *
+Allow: /
+
+Sitemap: https://sarvaya.in/sitemap.xml
