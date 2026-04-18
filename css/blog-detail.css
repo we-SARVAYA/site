@@ -9,6 +9,24 @@ body * {
     cursor: auto !important;
 }
 
+/* ===== Article TL;DR callout ===== */
+.tldr-block {
+    border-left: 3px solid var(--accent);
+    padding: 14px 20px;
+    margin: 0 0 32px;
+    background: rgba(200, 255, 0, 0.06);
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.tldr-block strong {
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-right: 4px;
+}
+
 /* ===== Blog Detail Hero ===== */
 .blog-hero {
     padding: 160px 0 48px;
