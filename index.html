@@ -134,6 +134,24 @@
                     }
                 }
             ]
+        },
+        {
+            "@type": "ItemList",
+            "@id": "https://sarvaya.in/#sitenav",
+            "name": "SARVAYA Main Navigation",
+            "itemListElement": [
+                {"@type": "SiteNavigationElement", "position": 1, "name": "Portfolio", "url": "https://sarvaya.in/portfolio.html"},
+                {"@type": "SiteNavigationElement", "position": 2, "name": "About", "url": "https://sarvaya.in/#about"},
+                {"@type": "SiteNavigationElement", "position": 3, "name": "24-Hour Website", "url": "https://sarvaya.in/24hrs.html"},
+                {"@type": "SiteNavigationElement", "position": 4, "name": "Services", "url": "https://sarvaya.in/#services"},
+                {"@type": "SiteNavigationElement", "position": 5, "name": "White Label", "url": "https://sarvaya.in/whitelabel.html"},
+                {"@type": "SiteNavigationElement", "position": 6, "name": "Free Tools", "url": "https://freetools.sarvaya.in/"},
+                {"@type": "SiteNavigationElement", "position": 7, "name": "Blog", "url": "https://sarvaya.in/blog.html"},
+                {"@type": "SiteNavigationElement", "position": 8, "name": "FAQ", "url": "https://sarvaya.in/#faq"},
+                {"@type": "SiteNavigationElement", "position": 9, "name": "Contact", "url": "https://sarvaya.in/contact.html"},
+                {"@type": "SiteNavigationElement", "position": 10, "name": "Privacy Policy", "url": "https://sarvaya.in/privacy.html"},
+                {"@type": "SiteNavigationElement", "position": 11, "name": "Terms & Conditions", "url": "https://sarvaya.in/terms.html"}
+            ]
         }
         ]
     }
@@ -189,9 +207,18 @@
                 <a href="#about">About</a>
                 <a href="24hrs.html">24hrs</a>
                 <a href="#services">Services</a>
-                <a href="#faq">FAQ</a>
-                <a href="blog.html">Blog</a>
-                <a href="#contact">Contact</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">More
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu">
+                        <a href="whitelabel.html" role="menuitem">White Label</a>
+                        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener" role="menuitem">Free Tools</a>
+                        <a href="blog.html" role="menuitem">Blog</a>
+                        <a href="#faq" role="menuitem">FAQ</a>
+                    </div>
+                </div>
+                <a href="contact.html">Contact</a>
             </div>
             <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="nav-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -208,9 +235,11 @@
         <a href="#about">About</a>
         <a href="24hrs.html">24hrs</a>
         <a href="#services">Services</a>
+        <a href="whitelabel.html">White Label</a>
+        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener">Free Tools</a>
+        <a href="blog.html">Blog</a>
         <a href="#faq">FAQ</a>
-                <a href="blog.html">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="contact.html">Contact</a>
         <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="mobile-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
     </div>
 
@@ -593,7 +622,7 @@
                     <div class="blog-card__body">
                         <div class="blog-meta">
                             <span class="blog-tag">Business</span>
-                            <time class="blog-date" datetime="2026-04-15">April 2026</time>
+                            <time class="blog-date" datetime="2026-04-15">15 April 2026</time>
                         </div>
                         <h3 class="blog-title">Why Your Business Needs a Website Today</h3>
                         <a href="blog/why-your-business-needs-a-website.html" class="blog-link">Read Article
@@ -608,7 +637,7 @@
                     <div class="blog-card__body">
                         <div class="blog-meta">
                             <span class="blog-tag">Branding</span>
-                            <time class="blog-date" datetime="2026-04-12">April 2026</time>
+                            <time class="blog-date" datetime="2026-04-12">12 April 2026</time>
                         </div>
                         <h3 class="blog-title">The Power of Storytelling in Branding</h3>
                         <a href="blog/storytelling-in-branding.html" class="blog-link">Read Article
@@ -623,7 +652,7 @@
                     <div class="blog-card__body">
                         <div class="blog-meta">
                             <span class="blog-tag">Design</span>
-                            <time class="blog-date" datetime="2026-04-10">April 2026</time>
+                            <time class="blog-date" datetime="2026-04-10">10 April 2026</time>
                         </div>
                         <h3 class="blog-title">The Importance of UX and Visual Designers in Successful Projects</h3>
                         <a href="blog/importance-of-ux-designers.html" class="blog-link">Read Article
@@ -908,13 +937,14 @@
                         <a href="portfolio.html">Portfolio</a>
                         <a href="#about">About</a>
                         <a href="#services">Services</a>
-                        <a href="24hrs.html">24hrs</a>
+                        <a href="24hrs.html">24-Hour Website</a>
                     </div>
                     <div class="footer-col">
                         <h4>More</h4>
                         <a href="whitelabel.html">White Label</a>
                         <a href="contact.html">Contact</a>
                         <a href="blog.html">Blog</a>
+                        <a href="#faq">FAQ</a>
                     </div>
                     <div class="footer-col">
                         <h4>Free Tools</h4>

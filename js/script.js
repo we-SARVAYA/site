@@ -210,6 +210,51 @@ if (hamburger && mobileMenu) {
     });
 }
 
+// ===== Nav Dropdown =====
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+        if (!wasOpen) {
+            dropdown.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+        } else {
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    dropdown.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            dropdown.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+});
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+            d.classList.remove('open');
+            const t = d.querySelector('.nav-dropdown-toggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        });
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+            d.classList.remove('open');
+            const t = d.querySelector('.nav-dropdown-toggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        });
+    }
+});
+
 // ===== FAQ Accordion =====
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
