@@ -18,6 +18,7 @@ import html
 import io
 import json
 import os
+import random
 import re
 import subprocess
 import sys
@@ -42,6 +43,39 @@ TODAY = datetime.now(timezone.utc).date().isoformat()
 DATE_HUMAN = datetime.strptime(TODAY, "%Y-%m-%d").strftime("%d %B %Y")
 
 GEMINI_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
+
+# Topic categories the blog covers. Each run picks one to focus the research on,
+# so the archive stays balanced instead of drifting into one niche. Order and
+# weights tune how often each shows up.
+TOPIC_CATEGORIES = [
+    ("AEO / GEO / AI search",
+     "Answer Engine Optimization, Generative Engine Optimization, Google AI Overviews, ChatGPT Search, Perplexity, Copilot, llms.txt, schema for AI citation, AI crawler policies",
+     "GEO"),
+    ("Claude + AI tooling",
+     "Anthropic Claude product launches and new features, Claude Agent SDK, Claude Code, AI coding assistants, practical AI integrations for small businesses",
+     "AI"),
+    ("Traditional SEO",
+     "Google algorithm updates, core updates, Core Web Vitals, technical SEO, local SEO, backlinks, on-page SEO, search ranking factors, SERP features",
+     "SEO"),
+    ("Web development",
+     "Web performance, frameworks (Next.js, Astro, Remix), Jamstack, edge rendering, React / Vue / Svelte patterns, build tools, web standards",
+     "Development"),
+    ("UI / UX design",
+     "Design systems, interaction patterns, accessibility, design tools (Figma), UX research, conversion design, mobile UX",
+     "Design"),
+    ("Brand identity + storytelling",
+     "Brand strategy, logo design trends, brand storytelling, content marketing voice, brand positioning for small businesses and agencies",
+     "Branding"),
+    ("AI automation for business",
+     "Workflow automation, no-code AI tools, Zapier / Make / n8n patterns, AI customer support, AI content ops, practical AI use cases for SMBs",
+     "Automation"),
+    ("Agency / white-label growth",
+     "Agency business models, white-label services, client acquisition, pricing, freelancer / agency operations, productized services",
+     "Agency"),
+    ("App development",
+     "Mobile app trends, React Native / Flutter, PWAs, app store optimization, native vs cross-platform, mobile performance",
+     "Development"),
+]
 
 
 def load_topics() -> list[dict]:
@@ -80,31 +114,44 @@ def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900) -> str:
     return result.stdout.strip()
 
 
-def research_topic(attempt: int = 1) -> dict:
+def pick_category() -> tuple:
+    """Return (label, description, tag) for this run.
+
+    Uses recent topic-log history to avoid repeating the same category
+    twice in a row. Falls back to random if history is thin.
+    """
+    topics = load_topics()
+    recent_tags = [t.get("tag") for t in topics[-3:] if t.get("tag")]
+    candidates = [c for c in TOPIC_CATEGORIES if c[2] not in recent_tags]
+    if not candidates:
+        candidates = list(TOPIC_CATEGORIES)
+    return random.choice(candidates)
+
+
+def research_topic(attempt: int = 1, category: tuple | None = None) -> dict:
     past = sorted({t["slug"] for t in load_topics()} | existing_slugs())
     # Cap at 120 most recent to keep the prompt bounded as the archive grows
     exclusions = "\n".join(f"- {s}" for s in past[-120:])
+    if category is None:
+        category = pick_category()
+    cat_label, cat_desc, cat_tag = category
     tries_hint = (
         ""
         if attempt == 1
-        else f"\n\nIMPORTANT: your previous suggestion collided with an existing slug. Pick a distinctly DIFFERENT angle this time."
+        else "\n\nIMPORTANT: your previous suggestion collided with an existing slug. Pick a distinctly DIFFERENT angle within the same category."
     )
-    prompt = f"""You are a research agent for sarvaya.in, a digital agency blog.
+    prompt = f"""You are a research agent for sarvaya.in, a digital agency blog covering web dev, app dev, UI/UX, SEO, AEO/GEO, AI automation, branding, and white-label agency topics.
 
-Use WebSearch to find ONE trending topic from the past 14 days in these niches:
-- AEO (Answer Engine Optimization)
-- GEO (Generative Engine Optimization)
-- Anthropic Claude product launches / new features
-- AI search (Google AI Overviews, ChatGPT Search, Perplexity, Copilot)
-- llms.txt, schema for AI, AI crawler policies
+FOCUS CATEGORY FOR THIS POST: {cat_label}
+Scope: {cat_desc}
 
-Prefer specific, actionable angles (e.g. "How Anthropic's new Skills SDK reshapes AEO workflows") over generic ones ("AI is changing SEO"). The topic must be concrete enough that an expert could write 1200+ words with specifics.
+Use WebSearch to find ONE trending, newsworthy story from the past 14 days within that category. Prefer specific, actionable angles (e.g. "How the new Core Web Vitals INP threshold changes React app design") over generic evergreens ("Why UX matters"). The topic must be concrete enough that an expert could write 1200+ words with named tools, numbers, and specific techniques.
 
 MUST NOT duplicate any of these existing slugs:
 {exclusions}{tries_hint}
 
 Output ONLY minified JSON (no markdown fences, no preamble). Schema:
-{{"slug":"kebab-case-slug-max-50-chars","title":"5-14 word title","tag":"AEO|GEO|AI|Claude|SEO","excerpt":"1-2 sentences under 160 chars","keywords":["kw1","kw2","kw3","kw4","kw5","kw6"],"thumbnail_prompt":"detailed visual description for a 1200x675 editorial hero image — abstract, no text, no logos"}}"""
+{{"slug":"kebab-case-slug-max-50-chars","title":"5-14 word title","tag":"{cat_tag}","excerpt":"1-2 sentences under 160 chars","keywords":["kw1","kw2","kw3","kw4","kw5","kw6"],"thumbnail_prompt":"detailed abstract visual description for a 1200x675 hero image - no text, no logos, no named brand references"}}"""
     raw = run_claude(prompt, allow_web=True)
     match = re.search(r"\{.*\}", raw, re.DOTALL)
     if not match:
@@ -404,18 +451,19 @@ def main() -> None:
         if not os.environ.get(var):
             sys.exit(f"Missing required env var: {var}")
 
-    print("[1/5] Researching trending topic...", flush=True)
-    topic = research_topic(attempt=1)
+    category = pick_category()
+    print(f"[1/5] Researching trending topic in category: {category[0]}", flush=True)
+    topic = research_topic(attempt=1, category=category)
     print(f"  -> slug: {topic['slug']}", flush=True)
     print(f"  -> title: {topic['title']}", flush=True)
 
     if topic["slug"] in existing_slugs():
-        print("  (slug collision — retrying research)", flush=True)
-        topic = research_topic(attempt=2)
+        print("  (slug collision, retrying research)", flush=True)
+        topic = research_topic(attempt=2, category=category)
         print(f"  -> slug: {topic['slug']}", flush=True)
         print(f"  -> title: {topic['title']}", flush=True)
         if topic["slug"] in existing_slugs():
-            sys.exit(f"Slug '{topic['slug']}' still collides after retry — aborting")
+            sys.exit(f"Slug '{topic['slug']}' still collides after retry - aborting")
 
     print("[2/5] Generating article HTML...", flush=True)
     article_html = generate_article_html(topic)
@@ -466,7 +514,12 @@ def main() -> None:
     new_sitemap = patch_sitemap(topic)
     new_llms = patch_llms(topic)
     topics = load_topics()
-    topics.append({"slug": topic["slug"], "title": topic["title"], "date": TODAY})
+    topics.append({
+        "slug": topic["slug"],
+        "title": topic["title"],
+        "date": TODAY,
+        "tag": topic.get("tag", ""),
+    })
 
     print("[5/5] Writing all files to disk...", flush=True)
     IMAGES_DIR.mkdir(parents=True, exist_ok=True)
