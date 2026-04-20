@@ -265,25 +265,38 @@ STYLE_REFERENCE_IMAGES = [
 
 
 def _is_on_brand_pixel(r: int, g: int, b: int) -> bool:
-    """True if the pixel is close to black, warm off-white, or lime-green #C8FF00."""
-    # Near-black (covers the dark background)
+    """True if the pixel is close to black, warm neutral (bone/grey), or lime-green.
+
+    Warm neutral covers the full range of grainy/textured line work from
+    mid-grey shading to bone-white — any desaturated color with a slight warm
+    bias (R >= B). Strong hues (teal, orange, blue, purple) fail saturation.
+    """
+    # Near-black background
     if max(r, g, b) < 40:
         return True
-    # Warm off-white / bone: R and G high, B slightly lower, all close together
-    if r > 140 and g > 130 and b > 100 and abs(r - g) < 40 and (r - b) < 80 and (r - b) > -10:
+    # Lime green accent (#C8FF00 and nearby)
+    if g >= 140 and r >= 120 and b < 130 and g > b + 50 and g >= r - 30:
         return True
-    # Lime green accent: high G, high R, low B
-    if r > 140 and g > 180 and b < 120 and g > b + 60:
+    # Warm neutral: low saturation, warm bias (no blue cast)
+    if (max(r, g, b) - min(r, g, b)) <= 35 and r >= b - 5:
         return True
     return False
 
 
 def _off_brand_ratio(img: "Image.Image") -> float:
-    """Return fraction of sampled pixels that are neither black, off-white, nor lime-green."""
+    """Off-brand fraction measured against foreground pixels only.
+
+    Most of the frame is black background; including it dilutes contamination
+    so that heavy teal/orange lines score ~5% of the whole image and slip under
+    the threshold. We only count non-background (max channel >= 40) pixels.
+    """
     small = img.resize((120, 68), Image.LANCZOS)
     pixels = list(small.getdata())
-    off = sum(1 for r, g, b in pixels if not _is_on_brand_pixel(r, g, b))
-    return off / len(pixels)
+    foreground = [(r, g, b) for r, g, b in pixels if max(r, g, b) >= 40]
+    if not foreground:
+        return 1.0
+    off = sum(1 for r, g, b in foreground if not _is_on_brand_pixel(r, g, b))
+    return off / len(foreground)
 
 
 def _gemini_call(parts: list) -> "Image.Image":
@@ -361,20 +374,20 @@ SUBJECT (depict ABSTRACTLY with shapes, never with labels or named logos):
 {topic['thumbnail_prompt']}
 
 Reproduce the attached references' style exactly: pure black background, warm off-white grainy hand-drawn lines (all the same color), ONE green filled shape, small 4-point sparkles and dots in the negative space, flat 2D, NOTHING readable as text anywhere."""
-    # Calibrated against existing on-brand thumbnails which score 3-7% off-brand
-    # due to subtle texture + mid-grey shading. 12% leaves margin above the
-    # brand baseline while still catching the multicolor / perspective disasters
-    # (which scored 20%+).
-    acceptable_ratio = 0.12
+    # Threshold is now measured against foreground pixels (non-background).
+    # Clean on-brand thumbnails score ~15-25% (texture, anti-aliasing on lines);
+    # contaminated images with teal/orange lines score 40%+.
+    acceptable_ratio = 0.30
     parts = reference_parts + [{"text": prompt_text}]
     last_err = None
     best_img = None
     best_ratio = 1.0
-    for attempt in (1, 2, 3):
+    max_attempts = 5
+    for attempt in range(1, max_attempts + 1):
         try:
             img = _gemini_call(parts)
             ratio = _off_brand_ratio(img)
-            print(f"  attempt {attempt}: off-brand pixels = {ratio:.1%}", flush=True)
+            print(f"  attempt {attempt}: off-brand foreground = {ratio:.1%}", flush=True)
             if ratio < best_ratio:
                 best_ratio, best_img = ratio, img
             if ratio <= acceptable_ratio:
@@ -383,10 +396,12 @@ Reproduce the attached references' style exactly: pure black background, warm of
             last_err = e
             print(f"  (attempt {attempt} failed: {e}; retrying)", flush=True)
             time.sleep(3)
-    if best_img is not None:
-        print(f"  using best of 3 (off-brand={best_ratio:.1%})", flush=True)
-        return _encode_webp(best_img)
-    raise RuntimeError(f"Thumbnail generation failed after 3 attempts: {last_err}")
+    if last_err is not None and best_img is None:
+        raise RuntimeError(f"Thumbnail generation failed after {max_attempts} attempts: {last_err}")
+    raise RuntimeError(
+        f"Thumbnail off-brand ratio {best_ratio:.1%} exceeded acceptable {acceptable_ratio:.0%} "
+        f"across {max_attempts} attempts. Refusing to publish contaminated thumbnail."
+    )
 
 
 CARD_TEMPLATE = """
