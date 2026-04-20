@@ -1700,6 +1700,9 @@ img {
     gap: 20px;
     animation: scroll-testimonials 40s linear infinite;
     width: max-content;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .testimonials-track:hover {
@@ -1707,8 +1710,8 @@ img {
 }
 
 @keyframes scroll-testimonials {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
 }
 
 .testimonial-card {
@@ -2482,6 +2485,8 @@ img {
     .testimonials-track-wrap {
         margin: 0 -16px;
         padding: 0 16px;
+        -webkit-mask-image: none;
+        mask-image: none;
     }
 }
 
