@@ -61,6 +61,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Why ChatGPT, Perplexity, and Google AI Cite Completely Different Sources](https://sarvaya.in/blog/ai-citation-divergence-chatgpt-perplexity-google.html)
 - [Google AI Overviews Is Now the #2 Referral: GEO Tactics That Win](https://sarvaya.in/blog/google-ai-overviews-second-referral-geo-playbook.html)
 - [iOS 26 Liquid Glass Fails WCAG Contrast: What Designers Must Fix Now](https://sarvaya.in/blog/ios26-liquid-glass-wcag-contrast-ux-fix.html)
+- [Remix 3 Drops React for Preact: What Dev Teams Must Do Now](https://sarvaya.in/blog/remix-3-drops-react-preact-migration-guide.html)
 
 ## License
 
