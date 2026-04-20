@@ -4,8 +4,7 @@ These rules are loaded into every blog-generation prompt. Edit this file to chan
 
 ## Punctuation
 
-- **No em dashes (—) anywhere.** Replace with a period, comma, or parentheses. "Pro-level, not gimmicky" — not "Pro-level — not gimmicky."
-- **No en dashes (–) in prose.** Fine inside date ranges only.
+- **No em dashes (—) or en dashes (–) anywhere.** The pipeline auto-replaces any that slip through with " - " (space-hyphen-space), matching the site's existing title style ("SEO in 2026 - What Actually Works Now"). Still prefer periods, commas, or parentheses when you can restructure the sentence.
 - **No rhetorical dashes for drama.** If the sentence needs emphasis, rewrite it.
 - Use straight quotes, not curly smart quotes.
 - Avoid semicolons. Break into two sentences.

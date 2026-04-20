@@ -189,13 +189,18 @@ OUTPUT RULES — CRITICAL
 - Do NOT explain what you did. Do NOT add preamble, summary, or markdown fences.
 - Your entire response must be ONLY the raw HTML, starting with <!DOCTYPE html> and ending with </html>. Nothing before, nothing after."""
     raw = run_claude(prompt, allow_web=False, timeout=900)
-    # Tolerate stray markdown fences or narration — extract the HTML block directly
+    # Tolerate stray markdown fences or narration; extract the HTML block directly
     m = re.search(r"<!DOCTYPE html.*?</html>", raw, re.IGNORECASE | re.DOTALL)
     if not m:
         raise ValueError(
             f"Generated output contains no <!DOCTYPE html>...</html> block. First 600 chars:\n{raw[:600]}"
         )
-    return m.group(0).strip()
+    html_out = m.group(0).strip()
+    # Normalize em/en dashes to the site's " - " convention site-wide.
+    html_out = html_out.replace("\u2014", " - ").replace("\u2013", " - ")
+    # Collapse accidental double spaces introduced by the replacement
+    html_out = re.sub(r"  +", " ", html_out)
+    return html_out
 
 
 THUMBNAIL_STYLE_FILE = Path(__file__).resolve().parent / "thumbnail_style.md"
@@ -362,13 +367,12 @@ def main() -> None:
     if missing:
         sys.exit(f"Article references non-existent images: {sorted(missing)} - aborting")
 
-    # Enforce writing rules. Fail the build if em dashes or banned words leak through.
+    # Enforce writing rules. Em/en dashes are auto-normalized upstream;
+    # here we only hard-fail on banned AI-slop vocabulary.
     body_match = re.search(
         r'<article class="blog-body">(.*?)</article>', article_html, re.DOTALL
     )
     body_text = body_match.group(1) if body_match else article_html
-    if "\u2014" in body_text or "\u2013" in body_text:
-        sys.exit("Article body contains em/en dashes - aborting (see writing_style.md)")
     banned = [
         "delve", "leverage", "utilize", "utilise", "tapestry", "unleash",
         "realm", "dive in", "dive into", "in today's world", "in the digital age",
