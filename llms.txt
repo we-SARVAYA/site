@@ -58,6 +58,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [AI Automation for Small Businesses — Where to Start](https://sarvaya.in/blog/ai-automation-small-business.html)
 - [Web App vs Mobile App — Which One Does Your Business Need?](https://sarvaya.in/blog/web-app-vs-mobile-app.html)
 - [Why AI Search Engines Ignore Your Top-Ranked Google Pages](https://sarvaya.in/blog/ai-citations-vs-google-rankings-geo-strategy.html)
+- [Why ChatGPT, Perplexity, and Google AI Cite Completely Different Sources](https://sarvaya.in/blog/ai-citation-divergence-chatgpt-perplexity-google.html)
 
 ## License
 
