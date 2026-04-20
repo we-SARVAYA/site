@@ -44,4 +44,4 @@ The script only writes files at the very end; if any step fails, nothing on disk
 - **Topic niche** — edit the research prompt in `research_topic()`.
 - **Voice / length** — edit the article prompt in `generate_article_html()`.
 - **Image style** — edit the prompt builder in `generate_thumbnail()`.
-- **Image model** — set env `GEMINI_IMAGE_MODEL` (default `gemini-2.5-flash-image-preview`).
+- **Image model** — set env `GEMINI_IMAGE_MODEL` (default `gemini-2.5-flash-image`).

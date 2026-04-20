@@ -40,7 +40,7 @@ REFERENCE_POST = BLOG_DIR / "seo-in-2026.html"
 TODAY = datetime.now(timezone.utc).date().isoformat()
 DATE_HUMAN = datetime.strptime(TODAY, "%Y-%m-%d").strftime("%d %B %Y")
 
-GEMINI_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image-preview")
+GEMINI_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
 
 
 def load_topics() -> list[dict]:
