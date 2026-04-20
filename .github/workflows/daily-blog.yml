@@ -49,6 +49,7 @@ jobs:
         run: python scripts/generate_blog.py
 
       - name: Commit and push
+        id: push
         env:
           SLUG: ${{ steps.gen.outputs.slug }}
           TITLE: ${{ steps.gen.outputs.title }}
@@ -64,3 +65,48 @@ jobs:
 
           ${TITLE}"
           git push
+
+      - name: Notify on success
+        if: success() && steps.gen.outputs.slug != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          from: SARVAYA Auto-Blog <${{ secrets.GMAIL_USER }}>
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          subject: "✅ New blog published: ${{ steps.gen.outputs.title }}"
+          body: |
+            A new post just went live on sarvaya.in.
+
+            Title: ${{ steps.gen.outputs.title }}
+            Slug:  ${{ steps.gen.outputs.slug }}
+            URL:   https://sarvaya.in/blog/${{ steps.gen.outputs.slug }}.html
+
+            Run log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          content_type: text/plain
+
+      - name: Notify on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          from: SARVAYA Auto-Blog <${{ secrets.GMAIL_USER }}>
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          subject: "❌ Auto-blog run FAILED (${{ github.run_id }})"
+          body: |
+            The scheduled blog pipeline just failed.
+
+            Repo: ${{ github.repository }}
+            Run:  https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Ref:  ${{ github.ref_name }}
+            Triggered by: ${{ github.event_name }}
+
+            Open the run URL above and click the red step to see the error.
+          content_type: text/plain
