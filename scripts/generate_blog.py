@@ -190,7 +190,7 @@ NEW POST METADATA
 - excerpt: {topic['excerpt']}
 - keywords: {', '.join(topic['keywords'])}
 - date: {TODAY}
-- canonical: https://sarvaya.in/blog/{topic['slug']}.html
+- canonical: https://sarvaya.in/blog/{topic['slug']}
 - image path in HTML: ../assets/images/blog/blog-{topic['slug']}.webp
 - og:image full URL: https://sarvaya.in/assets/images/blog/blog-{topic['slug']}.webp
 
@@ -415,7 +415,7 @@ CARD_TEMPLATE = """
                             <time class="blog-date" datetime="{date}">{date_human}</time>
                         </div>
                         <h3 class="blog-title">{title_text}</h3>
-                        <a href="blog/{slug}.html" class="blog-link">Read Article
+                        <a href="blog/{slug}" class="blog-link">Read Article
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
                     </div>
@@ -443,7 +443,7 @@ def patch_sitemap(topic: dict) -> str:
     text = SITEMAP.read_text(encoding="utf-8")
     entry = (
         "    <url>\n"
-        f"        <loc>https://sarvaya.in/blog/{topic['slug']}.html</loc>\n"
+        f"        <loc>https://sarvaya.in/blog/{topic['slug']}</loc>\n"
         f"        <lastmod>{TODAY}</lastmod>\n"
         "        <changefreq>monthly</changefreq>\n"
         "        <priority>0.6</priority>\n"
@@ -457,11 +457,11 @@ def patch_llms(topic: dict) -> str:
     lines = text.split("\n")
     last_idx = -1
     for i, ln in enumerate(lines):
-        if ln.startswith("- [") and "/blog/" in ln and ".html)" in ln:
+        if ln.startswith("- [") and "/blog/" in ln:
             last_idx = i
     if last_idx == -1:
         raise RuntimeError("No blog article lines found in llms.txt")
-    new_line = f"- [{topic['title']}](https://sarvaya.in/blog/{topic['slug']}.html)"
+    new_line = f"- [{topic['title']}](https://sarvaya.in/blog/{topic['slug']})"
     lines.insert(last_idx + 1, new_line)
     return "\n".join(lines)
 
