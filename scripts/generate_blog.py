@@ -361,6 +361,11 @@ SUBJECT (depict ABSTRACTLY with shapes, never with labels or named logos):
 {topic['thumbnail_prompt']}
 
 Reproduce the attached references' style exactly: pure black background, warm off-white grainy hand-drawn lines (all the same color), ONE green filled shape, small 4-point sparkles and dots in the negative space, flat 2D, NOTHING readable as text anywhere."""
+    # Calibrated against existing on-brand thumbnails which score 3-7% off-brand
+    # due to subtle texture + mid-grey shading. 12% leaves margin above the
+    # brand baseline while still catching the multicolor / perspective disasters
+    # (which scored 20%+).
+    acceptable_ratio = 0.12
     parts = reference_parts + [{"text": prompt_text}]
     last_err = None
     best_img = None
@@ -372,7 +377,7 @@ Reproduce the attached references' style exactly: pure black background, warm of
             print(f"  attempt {attempt}: off-brand pixels = {ratio:.1%}", flush=True)
             if ratio < best_ratio:
                 best_ratio, best_img = ratio, img
-            if ratio <= 0.05:
+            if ratio <= acceptable_ratio:
                 return _encode_webp(img)
         except Exception as e:  # noqa: BLE001
             last_err = e
