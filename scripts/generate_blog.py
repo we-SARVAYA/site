@@ -35,6 +35,7 @@ BLOG_INDEX = ROOT / "blog.html"
 SITEMAP = ROOT / "sitemap.xml"
 LLMS = ROOT / "llms.txt"
 TOPICS_LOG = Path(__file__).resolve().parent / "topics_log.json"
+STYLE_FILE = Path(__file__).resolve().parent / "writing_style.md"
 REFERENCE_POST = BLOG_DIR / "seo-in-2026.html"
 
 TODAY = datetime.now(timezone.utc).date().isoformat()
@@ -119,7 +120,12 @@ Output ONLY minified JSON (no markdown fences, no preamble). Schema:
 
 def generate_article_html(topic: dict) -> str:
     reference = REFERENCE_POST.read_text(encoding="utf-8")
+    style_rules = STYLE_FILE.read_text(encoding="utf-8")
     prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.
+
+<<<WRITING_RULES (follow EVERY rule; violation = failure)
+{style_rules}
+WRITING_RULES
 
 Copy the structure of this reference post EXACTLY — every tag, class, nav
 link, sidebar, script, and schema block must appear in the new post. Change
@@ -330,7 +336,32 @@ def main() -> None:
     existing_images = {p.name for p in IMAGES_DIR.glob("blog-*.webp")}
     missing = referenced - existing_images
     if missing:
-        sys.exit(f"Article references non-existent images: {sorted(missing)} — aborting")
+        sys.exit(f"Article references non-existent images: {sorted(missing)} - aborting")
+
+    # Enforce writing rules. Fail the build if em dashes or banned words leak through.
+    body_match = re.search(
+        r'<article class="blog-body">(.*?)</article>', article_html, re.DOTALL
+    )
+    body_text = body_match.group(1) if body_match else article_html
+    if "\u2014" in body_text or "\u2013" in body_text:
+        sys.exit("Article body contains em/en dashes - aborting (see writing_style.md)")
+    banned = [
+        "delve", "leverage", "utilize", "utilise", "tapestry", "unleash",
+        "realm", "dive in", "dive into", "in today's world", "in the digital age",
+        "revolutionize", "revolutionise", "game-changer", "game changer",
+        "cutting-edge", "seamless", "synergy", "paradigm", "holistic", "empower",
+        "pivotal", "foster", "embark", "harness", "spearhead", "elevate",
+        "bespoke", "meticulous", "testament", "ever-evolving", "transformative",
+        "thought leader", "supercharge", "at the forefront", "plethora", "myriad",
+        "it's not just", "it is not just", "more than just", "in a world where",
+        "let's explore", "let's dive", "let's take a look", "in conclusion",
+        "to sum up", "at the end of the day", "it's worth noting",
+        "it is important to note", "it goes without saying", "needless to say",
+    ]
+    lower = body_text.lower()
+    hits = [w for w in banned if w in lower]
+    if hits:
+        sys.exit(f"Article body contains banned phrases {hits} - aborting (see writing_style.md)")
 
     print("[3/5] Generating thumbnail...", flush=True)
     webp_bytes = generate_thumbnail(topic)
