@@ -10,7 +10,7 @@ Hand-drawn continuous-line illustration on a pure black background, one single i
 
 **Background:** Pure black (#000000). No texture, no gradient, no stars, no glow.
 
-**Line work:** Thin-to-medium weight continuous lines in warm off-white / bone / parchment color (approximately #E8E2D4, never pure white). Lines have a slight hand-drawn irregularity and a subtle grainy / chalky / sketched texture as if drawn with pen on textured paper. NO clean vector perfection.
+**Line work:** Thin-to-medium weight continuous lines in warm off-white / bone / parchment color (approximately #E8E2D4, never pure white). **ALL lines are the SAME color.** Never multicolor, never blue, never purple, never any hue other than the off-white bone. Lines have a slight hand-drawn irregularity and a subtle grainy / chalky / sketched texture as if drawn with pen on textured paper. NO clean vector perfection.
 
 **Subject:** A single centered object, symbol, or small composition (2-3 linked elements max) representing the article topic. Examples of good subjects: a book with a speech bubble, a laptop with a pencil and magnifying glass, a globe with a chat bubble, a brain with gears, a flag on a mountain, a document with checkmarks, a shopping cart with arrows, a handshake, a rocket, a compass, a magnifying glass over a graph. Think simple editorial-icon composition.
 
@@ -21,14 +21,14 @@ Hand-drawn continuous-line illustration on a pure black background, one single i
 **Composition:** 16:9 ratio (1200 x 675 final). Subject centered with generous negative space. No frame, no border. Nothing touches the edges.
 
 **Absolutely forbidden:**
-- NO text, words, letters, numbers, labels, captions, watermarks, or signatures of any kind anywhere in the image
+- NO text, words, letters, numbers, labels, captions, watermarks, or signatures of any kind anywhere in the image. Not even a single letter inside a box. If the subject is about named entities (ChatGPT, Google, etc), represent them with abstract geometric shapes (circle, square, triangle), never labels.
 - NO photography, no photo-realistic elements
-- NO 3D rendering, no perspective shading, no drop shadows
+- NO 3D rendering, no perspective grids, no vanishing points, no depth, no drop shadows
 - NO gradients in the background
-- NO color other than pure black, warm off-white, and a single lime-green fill
-- NO light beams, no glow, no particle effects, no bokeh
+- NO color other than pure black, warm off-white, and a single lime-green fill. This means: NO blue, NO purple, NO orange, NO yellow, NO red, NO pink, NO cyan, NO teal, NO gold. All lines are the same off-white, never multicolor.
+- NO light beams, no glow, no particle effects, no bokeh, no motion blur
 - NO logos of any brand
-- NO cluttered scenes — one clear subject only
+- NO cluttered scenes, one clear subject only
 
 ## Direction for composition by topic
 

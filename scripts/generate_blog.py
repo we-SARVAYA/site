@@ -205,14 +205,41 @@ OUTPUT RULES — CRITICAL
 
 THUMBNAIL_STYLE_FILE = Path(__file__).resolve().parent / "thumbnail_style.md"
 # Existing thumbnails used as visual style references for every generation.
-# These lock Gemini into the hand-drawn line-illustration aesthetic.
+# More references = stronger style lock. Only on-brand thumbnails here.
 STYLE_REFERENCE_IMAGES = [
     "blog-storytelling.webp",
     "blog-ux.webp",
+    "blog-website.webp",
+    "blog-seo.webp",
+    "blog-app.webp",
+    "blog-whitelabel.webp",
+    "blog-ai.webp",
 ]
 
 
-def _gemini_call(parts: list) -> bytes:
+def _is_on_brand_pixel(r: int, g: int, b: int) -> bool:
+    """True if the pixel is close to black, warm off-white, or lime-green #C8FF00."""
+    # Near-black (covers the dark background)
+    if max(r, g, b) < 40:
+        return True
+    # Warm off-white / bone: R and G high, B slightly lower, all close together
+    if r > 140 and g > 130 and b > 100 and abs(r - g) < 40 and (r - b) < 80 and (r - b) > -10:
+        return True
+    # Lime green accent: high G, high R, low B
+    if r > 140 and g > 180 and b < 120 and g > b + 60:
+        return True
+    return False
+
+
+def _off_brand_ratio(img: "Image.Image") -> float:
+    """Return fraction of sampled pixels that are neither black, off-white, nor lime-green."""
+    small = img.resize((120, 68), Image.LANCZOS)
+    pixels = list(small.getdata())
+    off = sum(1 for r, g, b in pixels if not _is_on_brand_pixel(r, g, b))
+    return off / len(pixels)
+
+
+def _gemini_call(parts: list) -> "Image.Image":
     api_key = os.environ["GEMINI_API_KEY"]
     url = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
@@ -230,10 +257,14 @@ def _gemini_call(parts: list) -> bytes:
                 img_bytes = base64.b64decode(inline["data"])
                 img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
                 img = img.resize((1200, 675), Image.LANCZOS)
-                buf = io.BytesIO()
-                img.save(buf, "WEBP", quality=85, method=6)
-                return buf.getvalue()
+                return img
     raise RuntimeError(f"No inline image in Gemini response:\n{json.dumps(data)[:800]}")
+
+
+def _encode_webp(img: "Image.Image") -> bytes:
+    buf = io.BytesIO()
+    img.save(buf, "WEBP", quality=85, method=6)
+    return buf.getvalue()
 
 
 def generate_thumbnail(topic: dict) -> bytes:
@@ -246,29 +277,64 @@ def generate_thumbnail(topic: dict) -> bytes:
             reference_parts.append(
                 {"inlineData": {"mimeType": "image/webp", "data": b64}}
             )
-    prompt_text = (
-        "Generate a new blog-post thumbnail image matching the EXACT visual style of the "
-        "reference images attached. Study them: hand-drawn continuous-line illustration, "
-        "warm off-white / bone-colored lines with subtle grainy chalk texture on a pure BLACK "
-        "background, a single centered subject, ONE shape filled solid lime green (#C8FF00), "
-        "a few small sparkle and dot decorations in the negative space.\n\n"
-        "STYLE RULES (from the SARVAYA brand guide):\n"
-        f"{style_rules}\n\n"
-        f"SUBJECT for this new image: {topic['thumbnail_prompt']}\n\n"
-        "CRITICAL: absolutely NO text, NO words, NO letters, NO numbers, NO punctuation, "
-        "NO watermarks anywhere in the image. Pure black background. Match the reference "
-        "style exactly."
-    )
+    n_refs = len(reference_parts)
+    prompt_text = f"""NO TEXT. NO LETTERS. NO WORDS. NO NUMBERS. NO SYMBOLS THAT LOOK LIKE LETTERS.
+
+This is the SINGLE MOST IMPORTANT RULE. Study these example violations and do NOT produce anything similar:
+- A box labeled "P" or "G" = FAILURE (contains a letter)
+- A page with "ABC" or squiggle-text that reads as words = FAILURE
+- Any character that could be confused with a letter, number, or punctuation = FAILURE
+
+If you are tempted to put ANY character inside any shape, STOP. Use abstract geometric shapes (circle, square, triangle, star), dots, or stripes instead, or leave the shape empty.
+
+Generate a blog thumbnail matching the visual style of the {n_refs} reference images attached.
+
+ALLOWED COLORS - ONLY these three:
+1. Pure black (#000000) background
+2. Warm off-white / bone color for ALL line work (same color everywhere)
+3. ONE single shape filled with solid lime green (#C8FF00)
+
+BANNED COLORS - do not use ANY of these anywhere in the image:
+- NO blue, cyan, teal, navy
+- NO purple, violet, magenta, pink
+- NO red, orange, yellow, gold
+- NO green other than the single lime-green accent shape
+- NO gradients, NO color fades, NO color glows
+- NO multicolor lines - every line must be the SAME warm off-white
+
+BANNED COMPOSITION:
+- NO 3D rendering, perspective grids, vanishing points, or depth
+- NO photography, realism, drop shadows, or lighting effects
+- NO frame or border
+
+STYLE GUIDE:
+{style_rules}
+
+SUBJECT (depict ABSTRACTLY with shapes, never with labels or named logos):
+{topic['thumbnail_prompt']}
+
+Reproduce the attached references' style exactly: pure black background, warm off-white grainy hand-drawn lines (all the same color), ONE green filled shape, small 4-point sparkles and dots in the negative space, flat 2D, NOTHING readable as text anywhere."""
     parts = reference_parts + [{"text": prompt_text}]
     last_err = None
-    for attempt in (1, 2):
+    best_img = None
+    best_ratio = 1.0
+    for attempt in (1, 2, 3):
         try:
-            return _gemini_call(parts)
+            img = _gemini_call(parts)
+            ratio = _off_brand_ratio(img)
+            print(f"  attempt {attempt}: off-brand pixels = {ratio:.1%}", flush=True)
+            if ratio < best_ratio:
+                best_ratio, best_img = ratio, img
+            if ratio <= 0.05:
+                return _encode_webp(img)
         except Exception as e:  # noqa: BLE001
             last_err = e
-            print(f"  (thumbnail attempt {attempt} failed: {e}; retrying)", flush=True)
+            print(f"  (attempt {attempt} failed: {e}; retrying)", flush=True)
             time.sleep(3)
-    raise RuntimeError(f"Thumbnail generation failed after 2 attempts: {last_err}")
+    if best_img is not None:
+        print(f"  using best of 3 (off-brand={best_ratio:.1%})", flush=True)
+        return _encode_webp(best_img)
+    raise RuntimeError(f"Thumbnail generation failed after 3 attempts: {last_err}")
 
 
 CARD_TEMPLATE = """
