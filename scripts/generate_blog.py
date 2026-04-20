@@ -65,6 +65,12 @@ def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900) -> str:
     ]
     if allow_web:
         cmd += ["--allowed-tools", "WebSearch,WebFetch"]
+    else:
+        # Block any file/shell tools so Claude returns text only (no side effects)
+        cmd += [
+            "--disallowed-tools",
+            "Write,Edit,NotebookEdit,Bash,WebSearch,WebFetch,Task",
+        ]
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
     if result.returncode != 0:
         raise RuntimeError(
@@ -152,15 +158,18 @@ CONTENT REQUIREMENTS
 - Keep all nav, sidebar share buttons, CSS/JS includes, and footer scripts
   byte-for-byte identical to the reference
 
-OUTPUT: raw HTML only. No markdown fences. Start with <!DOCTYPE html> and end with </html>."""
-    html = run_claude(prompt, allow_web=False, timeout=900)
-    html = re.sub(r"^```(?:html)?\s*", "", html, flags=re.IGNORECASE).strip()
-    html = re.sub(r"\s*```$", "", html).strip()
-    if not html.lower().startswith("<!doctype"):
-        raise ValueError(f"Generated HTML missing DOCTYPE. First 400 chars:\n{html[:400]}")
-    if "</html>" not in html.lower():
-        raise ValueError("Generated HTML missing closing </html> tag")
-    return html
+OUTPUT RULES — CRITICAL
+- Do NOT write files. Do NOT call any tools. Do NOT narrate.
+- Do NOT explain what you did. Do NOT add preamble, summary, or markdown fences.
+- Your entire response must be ONLY the raw HTML, starting with <!DOCTYPE html> and ending with </html>. Nothing before, nothing after."""
+    raw = run_claude(prompt, allow_web=False, timeout=900)
+    # Tolerate stray markdown fences or narration — extract the HTML block directly
+    m = re.search(r"<!DOCTYPE html.*?</html>", raw, re.IGNORECASE | re.DOTALL)
+    if not m:
+        raise ValueError(
+            f"Generated output contains no <!DOCTYPE html>...</html> block. First 600 chars:\n{raw[:600]}"
+        )
+    return m.group(0).strip()
 
 
 def _gemini_call(prompt: str) -> bytes:
