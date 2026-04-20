@@ -152,9 +152,29 @@ CONTENT REQUIREMENTS
   title tag, meta description, meta keywords
 - The cover image <img src> must be ../assets/images/blog/blog-{topic['slug']}.webp
 - For the "More from our blog" related section, pick any 3 DIFFERENT posts
-  from this list: why-your-business-needs-a-website, storytelling-in-branding,
-  importance-of-ux-designers, white-label-growth-hack, ai-automation-small-business,
-  web-app-vs-mobile-app
+  from this MANDATORY mapping. Use the image filename and title EXACTLY as
+  written — do NOT invent filenames, do NOT paraphrase titles:
+    * why-your-business-needs-a-website
+      image: ../assets/images/blog/blog-website.webp
+      title: Why Your Business Needs a Website Today
+    * storytelling-in-branding
+      image: ../assets/images/blog/blog-storytelling.webp
+      title: The Power of Storytelling in Branding
+    * importance-of-ux-designers
+      image: ../assets/images/blog/blog-ux.webp
+      title: The Importance of UX and Visual Designers in Successful Projects
+    * white-label-growth-hack
+      image: ../assets/images/blog/blog-whitelabel.webp
+      title: White Label Services - The Growth Hack for Agencies
+    * ai-automation-small-business
+      image: ../assets/images/blog/blog-ai.webp
+      title: AI Automation for Small Businesses - Where to Start
+    * web-app-vs-mobile-app
+      image: ../assets/images/blog/blog-app.webp
+      title: Web App vs Mobile App - Which One Does Your Business Need
+    * seo-in-2026
+      image: ../assets/images/blog/blog-seo.webp
+      title: SEO in 2026 - What Actually Works Now
 - Keep all nav, sidebar share buttons, CSS/JS includes, and footer scripts
   byte-for-byte identical to the reference
 
@@ -303,6 +323,14 @@ def main() -> None:
     expected_img = f"blog-{topic['slug']}.webp"
     if expected_img not in article_html:
         sys.exit(f"Generated article does not reference {expected_img} — aborting")
+
+    # Verify every other image reference points to a file that actually exists
+    referenced = set(re.findall(r"blog-[a-z0-9-]+\.webp", article_html))
+    referenced.discard(expected_img)
+    existing_images = {p.name for p in IMAGES_DIR.glob("blog-*.webp")}
+    missing = referenced - existing_images
+    if missing:
+        sys.exit(f"Article references non-existent images: {sorted(missing)} — aborting")
 
     print("[3/5] Generating thumbnail...", flush=True)
     webp_bytes = generate_thumbnail(topic)
