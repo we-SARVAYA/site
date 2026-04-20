@@ -198,13 +198,22 @@ OUTPUT RULES — CRITICAL
     return m.group(0).strip()
 
 
-def _gemini_call(prompt: str) -> bytes:
+THUMBNAIL_STYLE_FILE = Path(__file__).resolve().parent / "thumbnail_style.md"
+# Existing thumbnails used as visual style references for every generation.
+# These lock Gemini into the hand-drawn line-illustration aesthetic.
+STYLE_REFERENCE_IMAGES = [
+    "blog-storytelling.webp",
+    "blog-ux.webp",
+]
+
+
+def _gemini_call(parts: list) -> bytes:
     api_key = os.environ["GEMINI_API_KEY"]
     url = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
         f"{GEMINI_MODEL}:generateContent?key={api_key}"
     )
-    body = {"contents": [{"parts": [{"text": prompt}]}]}
+    body = {"contents": [{"parts": parts}]}
     r = requests.post(url, json=body, timeout=180)
     if r.status_code != 200:
         raise RuntimeError(f"Gemini error {r.status_code}: {r.text[:800]}")
@@ -223,18 +232,33 @@ def _gemini_call(prompt: str) -> bytes:
 
 
 def generate_thumbnail(topic: dict) -> bytes:
-    prompt = (
-        f'Editorial hero image for a blog post titled "{topic["title"]}". '
-        f"Composition: {topic['thumbnail_prompt']}. "
-        "Style: minimalist, high-contrast, dark background with vibrant "
-        "lime-green (#c8ff00) accents, abstract 3D-render or cinematic photography. "
-        "STRICT: absolutely NO text, NO words, NO letters, NO logos, NO watermarks. "
-        "16:9 aspect, editorial tech-magazine quality."
+    style_rules = THUMBNAIL_STYLE_FILE.read_text(encoding="utf-8")
+    reference_parts = []
+    for name in STYLE_REFERENCE_IMAGES:
+        ref_path = IMAGES_DIR / name
+        if ref_path.exists():
+            b64 = base64.b64encode(ref_path.read_bytes()).decode()
+            reference_parts.append(
+                {"inlineData": {"mimeType": "image/webp", "data": b64}}
+            )
+    prompt_text = (
+        "Generate a new blog-post thumbnail image matching the EXACT visual style of the "
+        "reference images attached. Study them: hand-drawn continuous-line illustration, "
+        "warm off-white / bone-colored lines with subtle grainy chalk texture on a pure BLACK "
+        "background, a single centered subject, ONE shape filled solid lime green (#C8FF00), "
+        "a few small sparkle and dot decorations in the negative space.\n\n"
+        "STYLE RULES (from the SARVAYA brand guide):\n"
+        f"{style_rules}\n\n"
+        f"SUBJECT for this new image: {topic['thumbnail_prompt']}\n\n"
+        "CRITICAL: absolutely NO text, NO words, NO letters, NO numbers, NO punctuation, "
+        "NO watermarks anywhere in the image. Pure black background. Match the reference "
+        "style exactly."
     )
+    parts = reference_parts + [{"text": prompt_text}]
     last_err = None
     for attempt in (1, 2):
         try:
-            return _gemini_call(prompt)
+            return _gemini_call(parts)
         except Exception as e:  # noqa: BLE001
             last_err = e
             print(f"  (thumbnail attempt {attempt} failed: {e}; retrying)", flush=True)
