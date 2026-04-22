@@ -63,6 +63,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [iOS 26 Liquid Glass Fails WCAG Contrast: What Designers Must Fix Now](https://sarvaya.in/blog/ios26-liquid-glass-wcag-contrast-ux-fix)
 - [Remix 3 Drops React for Preact: What Dev Teams Must Do Now](https://sarvaya.in/blog/remix-3-drops-react-preact-migration-guide)
 - [How Zapier MCP Lets AI Agents Control 9,000 Business Apps](https://sarvaya.in/blog/zapier-mcp-ai-agents-9000-apps-automation)
+- [New IETF Standard Gives Publishers Control Over AI Crawlers](https://sarvaya.in/blog/ietf-aipref-ai-crawler-content-preferences-standard)
 
 ## License
 
