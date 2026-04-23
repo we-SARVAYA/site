@@ -65,6 +65,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [How Zapier MCP Lets AI Agents Control 9,000 Business Apps](https://sarvaya.in/blog/zapier-mcp-ai-agents-9000-apps-automation)
 - [New IETF Standard Gives Publishers Control Over AI Crawlers](https://sarvaya.in/blog/ietf-aipref-ai-crawler-content-preferences-standard)
 - [Why Top Brands Are Abandoning Social Feeds for Substack and Reddit](https://sarvaya.in/blog/brand-storytelling-substack-reddit-2026)
+- [Google Play's April 2026 Permissions Crackdown: What Developers Must Do Now](https://sarvaya.in/blog/google-play-april-2026-permissions-policy)
 
 ## License
 
