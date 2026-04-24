@@ -66,6 +66,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [New IETF Standard Gives Publishers Control Over AI Crawlers](https://sarvaya.in/blog/ietf-aipref-ai-crawler-content-preferences-standard)
 - [Why Top Brands Are Abandoning Social Feeds for Substack and Reddit](https://sarvaya.in/blog/brand-storytelling-substack-reddit-2026)
 - [Google Play's April 2026 Permissions Crackdown: What Developers Must Do Now](https://sarvaya.in/blog/google-play-april-2026-permissions-policy)
+- [Claude Agent SDK for Python: Build Autonomous AI Agents in 2026](https://sarvaya.in/blog/claude-agent-sdk-python-launch-2026)
 
 ## License
 
