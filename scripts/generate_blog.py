@@ -88,7 +88,7 @@ def existing_slugs() -> set[str]:
     return {p.stem for p in BLOG_DIR.glob("*.html")}
 
 
-def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900) -> str:
+def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900, max_attempts: int = 2) -> str:
     cmd = [
         "claude",
         "-p",
@@ -106,12 +106,21 @@ def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900) -> str:
             "--disallowed-tools",
             "Write,Edit,NotebookEdit,Bash,WebSearch,WebFetch,Task",
         ]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-    if result.returncode != 0:
-        raise RuntimeError(
-            f"Claude CLI failed (exit {result.returncode}):\nSTDERR: {result.stderr}\nSTDOUT: {result.stdout[:500]}"
-        )
-    return result.stdout.strip()
+    last_err: Exception | None = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+            if result.returncode != 0:
+                raise RuntimeError(
+                    f"Claude CLI failed (exit {result.returncode}):\nSTDERR: {result.stderr[:600]}\nSTDOUT: {result.stdout[:400]}"
+                )
+            return result.stdout.strip()
+        except (subprocess.TimeoutExpired, RuntimeError) as e:
+            last_err = e
+            if attempt < max_attempts:
+                print(f"  claude CLI failed (attempt {attempt}/{max_attempts}); retrying in 5s", flush=True)
+                time.sleep(5)
+    raise RuntimeError(f"Claude CLI failed after {max_attempts} attempts: {last_err}")
 
 
 def pick_category() -> tuple:
@@ -165,10 +174,11 @@ Output ONLY minified JSON (no markdown fences, no preamble). Schema:
     return topic
 
 
-def generate_article_html(topic: dict) -> str:
+def generate_article_html(topic: dict, extra_hint: str = "") -> str:
     reference = REFERENCE_POST.read_text(encoding="utf-8")
     style_rules = STYLE_FILE.read_text(encoding="utf-8")
-    prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.
+    hint_block = f"\n\n{extra_hint.strip()}\n" if extra_hint.strip() else ""
+    prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.{hint_block}
 
 <<<WRITING_RULES (follow EVERY rule; violation = failure)
 {style_rules}
@@ -454,16 +464,129 @@ def patch_sitemap(topic: dict) -> str:
 
 def patch_llms(topic: dict) -> str:
     text = LLMS.read_text(encoding="utf-8")
+    new_line = f"- [{topic['title']}](https://sarvaya.in/blog/{topic['slug']})"
     lines = text.split("\n")
     last_idx = -1
     for i, ln in enumerate(lines):
         if ln.startswith("- [") and "/blog/" in ln:
             last_idx = i
-    if last_idx == -1:
-        raise RuntimeError("No blog article lines found in llms.txt")
-    new_line = f"- [{topic['title']}](https://sarvaya.in/blog/{topic['slug']})"
-    lines.insert(last_idx + 1, new_line)
-    return "\n".join(lines)
+    if last_idx != -1:
+        lines.insert(last_idx + 1, new_line)
+        return "\n".join(lines)
+    # Fallback: no existing blog line found — append at end instead of failing
+    if text and not text.endswith("\n"):
+        text += "\n"
+    return text + new_line + "\n"
+
+
+BANNED_PHRASES = [
+    "delve", "leverage", "utilize", "utilise", "tapestry", "unleash",
+    "realm", "dive in", "dive into", "in today's world", "in the digital age",
+    "revolutionize", "revolutionise", "game-changer", "game changer",
+    "cutting-edge", "seamless", "synergy", "paradigm", "holistic", "empower",
+    "pivotal", "foster", "embark", "harness", "spearhead", "elevate",
+    "bespoke", "meticulous", "testament", "ever-evolving", "transformative",
+    "thought leader", "supercharge", "at the forefront", "plethora", "myriad",
+    "it's not just", "it is not just", "more than just", "in a world where",
+    "let's explore", "let's dive", "let's take a look", "in conclusion",
+    "to sum up", "at the end of the day", "it's worth noting",
+    "it is important to note", "it goes without saying", "needless to say",
+]
+
+
+def _research_topic_with_retry(category: tuple, max_attempts: int = 3) -> dict:
+    """Research a topic and retry on slug collisions or malformed LLM output."""
+    last_err: Exception | None = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            topic = research_topic(attempt=attempt, category=category)
+        except (ValueError, RuntimeError, json.JSONDecodeError) as e:
+            last_err = e
+            print(f"  research attempt {attempt}/{max_attempts} failed: {e}; retrying", flush=True)
+            time.sleep(2)
+            continue
+        if topic["slug"] in existing_slugs():
+            last_err = ValueError(f"slug collision: {topic['slug']}")
+            print(f"  research attempt {attempt}/{max_attempts}: slug collision, retrying", flush=True)
+            continue
+        return topic
+    raise RuntimeError(f"Topic research failed after {max_attempts} attempts: {last_err}")
+
+
+def _generate_validated_article_with_retry(topic: dict, max_attempts: int = 3) -> str:
+    """Generate the article HTML, validate it, and retry with feedback on failure.
+
+    Retryable failures: malformed output (no DOCTYPE block), missing required
+    image reference, references to nonexistent images, banned phrases.
+    On each retry the prompt receives a hint listing prior offenses so Claude
+    can avoid repeating them.
+    """
+    expected_img = f"blog-{topic['slug']}.webp"
+    existing_images = {p.name for p in IMAGES_DIR.glob("blog-*.webp")}
+
+    banned_history: list[str] = []
+    structural_history: list[str] = []
+    last_err: Exception | None = None
+
+    for attempt in range(1, max_attempts + 1):
+        hint_parts: list[str] = []
+        if banned_history:
+            uniq = sorted(set(banned_history))
+            hint_parts.append(
+                "PRIOR ATTEMPT FAILED — your output contained these banned words/phrases: "
+                f"{uniq}. Do NOT use any of them, their tenses, plurals, or close synonyms in any part of the article body."
+            )
+        if structural_history:
+            hint_parts.append(
+                "PRIOR ATTEMPT FAILED — output was malformed. Your entire response MUST start with "
+                "<!DOCTYPE html> and end with </html>. No markdown fences, no narration, no preamble. "
+                f"All blog-*.webp filenames must come from the mandatory related-post mapping AND must reference {expected_img} for the cover."
+            )
+        extra_hint = "\n\n".join(hint_parts)
+
+        try:
+            article_html = generate_article_html(topic, extra_hint=extra_hint)
+        except ValueError as e:
+            structural_history.append(f"malformed: {str(e)[:120]}")
+            last_err = e
+            print(f"  generation attempt {attempt}/{max_attempts}: malformed output, retrying", flush=True)
+            continue
+        except RuntimeError as e:
+            last_err = e
+            print(f"  generation attempt {attempt}/{max_attempts}: CLI error: {e}; retrying", flush=True)
+            time.sleep(3)
+            continue
+
+        if expected_img not in article_html:
+            structural_history.append(f"missing required cover image {expected_img}")
+            last_err = RuntimeError(f"article missing required image {expected_img}")
+            print(f"  generation attempt {attempt}/{max_attempts}: cover image not referenced, retrying", flush=True)
+            continue
+
+        referenced = set(re.findall(r"blog-[a-z0-9-]+\.webp", article_html))
+        referenced.discard(expected_img)
+        invented = referenced - existing_images
+        if invented:
+            structural_history.append(f"invented images {sorted(invented)}")
+            last_err = RuntimeError(f"article references nonexistent images {sorted(invented)}")
+            print(f"  generation attempt {attempt}/{max_attempts}: invented images {sorted(invented)}, retrying", flush=True)
+            continue
+
+        body_match = re.search(
+            r'<article class="blog-body">(.*?)</article>', article_html, re.DOTALL
+        )
+        body_text = body_match.group(1) if body_match else article_html
+        lower = body_text.lower()
+        hits = [w for w in BANNED_PHRASES if w in lower]
+        if hits:
+            banned_history.extend(hits)
+            last_err = RuntimeError(f"banned phrases {hits}")
+            print(f"  generation attempt {attempt}/{max_attempts}: banned phrases {hits}, retrying", flush=True)
+            continue
+
+        return article_html
+
+    raise RuntimeError(f"Article generation failed after {max_attempts} attempts. Last error: {last_err}")
 
 
 def main() -> None:
@@ -473,57 +596,13 @@ def main() -> None:
 
     category = pick_category()
     print(f"[1/5] Researching trending topic in category: {category[0]}", flush=True)
-    topic = research_topic(attempt=1, category=category)
+    topic = _research_topic_with_retry(category=category, max_attempts=3)
     print(f"  -> slug: {topic['slug']}", flush=True)
     print(f"  -> title: {topic['title']}", flush=True)
 
-    if topic["slug"] in existing_slugs():
-        print("  (slug collision, retrying research)", flush=True)
-        topic = research_topic(attempt=2, category=category)
-        print(f"  -> slug: {topic['slug']}", flush=True)
-        print(f"  -> title: {topic['title']}", flush=True)
-        if topic["slug"] in existing_slugs():
-            sys.exit(f"Slug '{topic['slug']}' still collides after retry - aborting")
-
     print("[2/5] Generating article HTML...", flush=True)
-    article_html = generate_article_html(topic)
+    article_html = _generate_validated_article_with_retry(topic, max_attempts=3)
     print(f"  -> {len(article_html):,} chars", flush=True)
-
-    expected_img = f"blog-{topic['slug']}.webp"
-    if expected_img not in article_html:
-        sys.exit(f"Generated article does not reference {expected_img} — aborting")
-
-    # Verify every other image reference points to a file that actually exists
-    referenced = set(re.findall(r"blog-[a-z0-9-]+\.webp", article_html))
-    referenced.discard(expected_img)
-    existing_images = {p.name for p in IMAGES_DIR.glob("blog-*.webp")}
-    missing = referenced - existing_images
-    if missing:
-        sys.exit(f"Article references non-existent images: {sorted(missing)} - aborting")
-
-    # Enforce writing rules. Em/en dashes are auto-normalized upstream;
-    # here we only hard-fail on banned AI-slop vocabulary.
-    body_match = re.search(
-        r'<article class="blog-body">(.*?)</article>', article_html, re.DOTALL
-    )
-    body_text = body_match.group(1) if body_match else article_html
-    banned = [
-        "delve", "leverage", "utilize", "utilise", "tapestry", "unleash",
-        "realm", "dive in", "dive into", "in today's world", "in the digital age",
-        "revolutionize", "revolutionise", "game-changer", "game changer",
-        "cutting-edge", "seamless", "synergy", "paradigm", "holistic", "empower",
-        "pivotal", "foster", "embark", "harness", "spearhead", "elevate",
-        "bespoke", "meticulous", "testament", "ever-evolving", "transformative",
-        "thought leader", "supercharge", "at the forefront", "plethora", "myriad",
-        "it's not just", "it is not just", "more than just", "in a world where",
-        "let's explore", "let's dive", "let's take a look", "in conclusion",
-        "to sum up", "at the end of the day", "it's worth noting",
-        "it is important to note", "it goes without saying", "needless to say",
-    ]
-    lower = body_text.lower()
-    hits = [w for w in banned if w in lower]
-    if hits:
-        sys.exit(f"Article body contains banned phrases {hits} - aborting (see writing_style.md)")
 
     print("[3/5] Generating thumbnail...", flush=True)
     webp_bytes = generate_thumbnail(topic)
