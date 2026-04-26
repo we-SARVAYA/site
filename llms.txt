@@ -70,6 +70,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [87% of Agency Pros Say the Model Is Broken—Here's the Pivot](https://sarvaya.in/blog/agency-model-broken-productized-pivot-2026)
 - [The Storyteller Gold Rush: Why Brands Are Hiring Like Media Companies](https://sarvaya.in/blog/brands-hiring-storytelling-teams-media-brand-2026)
 - [iOS 26 SDK Deadline: How React Native and Flutter Teams Must Migrate Now](https://sarvaya.in/blog/ios26-sdk-deadline-react-native-flutter-migration)
+- [Google Workspace Studio: Build No-Code AI Agents Across Gmail and Docs](https://sarvaya.in/blog/google-workspace-studio-no-code-ai-agents)
 
 ## License
 
