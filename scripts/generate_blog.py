@@ -417,7 +417,7 @@ Reproduce the attached references' style exactly: pure black background, warm of
 CARD_TEMPLATE = """
                 <article class="blog-card">
                     <div class="blog-card__img">
-                        <img src="assets/images/blog/blog-{slug}.webp" alt="{title_attr}" loading="lazy" width="400" height="240">
+                        <img src="{img_src}" alt="{title_attr}" loading="lazy" width="400" height="240">
                     </div>
                     <div class="blog-card__body">
                         <div class="blog-meta">
@@ -433,20 +433,106 @@ CARD_TEMPLATE = """
 """
 
 
-def patch_blog_index(topic: dict) -> str:
-    text = BLOG_INDEX.read_text(encoding="utf-8")
+FEATURED_TEMPLATE = """<article class="blog-featured">
+                <div class="blog-featured__img">
+                    <img src="assets/images/blog/blog-{slug}.webp" alt="{title_attr}" loading="eager" width="720" height="400">
+                </div>
+                <div class="blog-featured__content">
+                    <div class="blog-featured__meta">
+                        <span class="blog-tag">{tag}</span>
+                        <time datetime="{date}">{date_human}</time>
+                    </div>
+                    <h2 class="blog-featured__title">{title_text}</h2>
+                    <p class="blog-featured__excerpt">{excerpt}</p>
+                    <a href="blog/{slug}" class="blog-featured__link">Read Article
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </article>"""
+
+
+def _extract_featured_fields(featured_html: str) -> dict | None:
+    """Parse the existing featured block so it can be rebuilt as a card."""
+    img_m = re.search(r'<img\s+src="([^"]+)"\s+alt="([^"]+)"', featured_html)
+    href_m = re.search(r'<a href="blog/([^"]+)"', featured_html)
+    tag_m = re.search(r'<span class="blog-tag">([^<]+)</span>', featured_html)
+    time_m = re.search(r'<time datetime="([^"]+)">([^<]+)</time>', featured_html)
+    title_m = re.search(r'<h2 class="blog-featured__title">([^<]+)</h2>', featured_html)
+    if not all([img_m, href_m, tag_m, time_m, title_m]):
+        return None
+    return {
+        "img_src": img_m.group(1),
+        "title_attr": img_m.group(2),
+        "slug": href_m.group(1),
+        "tag": tag_m.group(1),
+        "datetime": time_m.group(1),
+        "date_human": time_m.group(2),
+        "title_text": title_m.group(1),
+    }
+
+
+def _insert_card_chronologically(text: str, card_html: str, card_datetime: str) -> str:
+    """Insert card before the first existing grid card whose datetime is older."""
     marker = '<!-- All Posts -->\n            <div class="blog-grid">\n'
     if marker not in text:
         raise RuntimeError("blog.html grid marker not found")
-    card = CARD_TEMPLATE.format(
+    grid_start = text.find(marker) + len(marker)
+    card_pattern = re.compile(r'<article class="blog-card">.*?</article>', re.DOTALL)
+    for m in card_pattern.finditer(text, pos=grid_start):
+        dt_m = re.search(r'<time class="blog-date" datetime="([^"]+)"', m.group(0))
+        # Use <= so a demoted card with the same date as existing cards lands
+        # at the top of its date group (it's the most recently demoted).
+        if dt_m and dt_m.group(1) <= card_datetime:
+            # Insert directly before this older card. The card template carries
+            # its own leading newline + indentation; trim whitespace already at
+            # this position to avoid stacking blank lines.
+            insert_at = m.start()
+            # back up to start of the line so we drop the existing 16-space indent
+            line_start = text.rfind("\n", 0, insert_at) + 1
+            return text[:line_start] + card_html.lstrip("\n") + "\n" + text[line_start:]
+    # All existing cards are newer (or grid empty) -> insert at top of grid.
+    return text.replace(marker, marker + card_html, 1)
+
+
+def patch_blog_index(topic: dict) -> str:
+    """Promote the new topic into the featured slot, demote the previous featured to a card."""
+    text = BLOG_INDEX.read_text(encoding="utf-8")
+
+    featured_match = re.search(
+        r'<article class="blog-featured">.*?</article>', text, re.DOTALL
+    )
+    if not featured_match:
+        raise RuntimeError("blog.html featured block not found")
+    fields = _extract_featured_fields(featured_match.group(0))
+    if fields is None:
+        raise RuntimeError("could not parse current featured block")
+
+    new_featured = FEATURED_TEMPLATE.format(
         slug=topic["slug"],
         title_text=html.escape(topic["title"]),
         title_attr=html.escape(topic["title"], quote=True),
+        excerpt=html.escape(topic["excerpt"]),
         tag=html.escape(topic["tag"]),
         date=TODAY,
         date_human=DATE_HUMAN,
     )
-    return text.replace(marker, marker + card, 1)
+    text = text[:featured_match.start()] + new_featured + text[featured_match.end():]
+
+    # Demote previous featured -> card. Skip if the slug is already represented
+    # as a card (defensive, in case of an earlier botched rotation).
+    if re.search(rf'<a href="blog/{re.escape(fields["slug"])}" class="blog-link"', text):
+        return text
+
+    demoted_card = CARD_TEMPLATE.format(
+        img_src=fields["img_src"],
+        slug=fields["slug"],
+        title_text=fields["title_text"],
+        title_attr=fields["title_attr"],
+        tag=fields["tag"],
+        date=fields["datetime"],
+        date_human=fields["date_human"],
+    )
+    return _insert_card_chronologically(text, demoted_card, fields["datetime"])
 
 
 def patch_sitemap(topic: dict) -> str:
