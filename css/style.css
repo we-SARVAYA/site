@@ -388,11 +388,18 @@ img {
     z-index: 999;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 32px;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 88px 20px 32px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition);
+}
+
+body:has(.mobile-menu.active) .navbar {
+    background: var(--bg-primary);
 }
 
 .mobile-menu.active {
