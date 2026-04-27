@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT / "blog"
 IMAGES_DIR = ROOT / "assets" / "images" / "blog"
 BLOG_INDEX = ROOT / "blog.html"
+HOME_INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 LLMS = ROOT / "llms.txt"
 TOPICS_LOG = Path(__file__).resolve().parent / "topics_log.json"
@@ -494,6 +495,78 @@ def _insert_card_chronologically(text: str, card_html: str, card_datetime: str) 
     return text.replace(marker, marker + card_html, 1)
 
 
+def _latest_posts_from_blog_index(blog_index_html: str, n: int = 3) -> list[dict]:
+    """Extract the n most recent posts from blog.html (featured + top grid cards)."""
+    posts: list[dict] = []
+
+    feat_match = re.search(
+        r'<article class="blog-featured">.*?</article>', blog_index_html, re.DOTALL
+    )
+    if feat_match:
+        f = _extract_featured_fields(feat_match.group(0))
+        if f:
+            posts.append(f)
+
+    grid_marker = '<!-- All Posts -->\n            <div class="blog-grid">\n'
+    grid_pos = blog_index_html.find(grid_marker)
+    if grid_pos != -1:
+        for m in re.finditer(
+            r'<article class="blog-card">.*?</article>',
+            blog_index_html[grid_pos:],
+            re.DOTALL,
+        ):
+            if len(posts) >= n:
+                break
+            card = m.group(0)
+            img_m = re.search(r'<img\s+src="([^"]+)"\s+alt="([^"]+)"', card)
+            href_m = re.search(r'<a href="blog/([^"]+)"', card)
+            tag_m = re.search(r'<span class="blog-tag">([^<]+)</span>', card)
+            time_m = re.search(
+                r'<time class="blog-date" datetime="([^"]+)">([^<]+)</time>', card
+            )
+            title_m = re.search(r'<h3 class="blog-title">([^<]+)</h3>', card)
+            if all([img_m, href_m, tag_m, time_m, title_m]):
+                posts.append({
+                    "img_src": img_m.group(1),
+                    "slug": href_m.group(1),
+                    "tag": tag_m.group(1),
+                    "datetime": time_m.group(1),
+                    "date_human": time_m.group(2),
+                    "title_text": title_m.group(1),
+                    "title_attr": img_m.group(2),
+                })
+    return posts[:n]
+
+
+def patch_home_blog_section(latest_posts: list[dict]) -> str:
+    """Replace the 3 hardcoded cards in index.html "Our Blogs" with the latest 3."""
+    text = HOME_INDEX.read_text(encoding="utf-8")
+    section_re = re.compile(
+        r'(<h2 class="section-title">Our Blogs</h2>\s*\n\s*<div class="blog-grid">\n)'
+        r'(.*?)'
+        r'(\n            </div>\s*\n\s*</div>\s*\n\s*</section>)',
+        re.DOTALL,
+    )
+    m = section_re.search(text)
+    if not m:
+        raise RuntimeError("index.html 'Our Blogs' section not found")
+
+    cards_html = ""
+    for p in latest_posts:
+        cards_html += CARD_TEMPLATE.format(
+            img_src=p["img_src"],
+            slug=p["slug"],
+            title_text=p["title_text"],
+            title_attr=p["title_attr"],
+            tag=p["tag"],
+            date=p["datetime"],
+            date_human=p["date_human"],
+        )
+    # CARD_TEMPLATE has a leading newline; trim it so the first card sits flush
+    # with the grid's opening blank line. Trailing newline kept as separator.
+    return text[:m.start(2)] + cards_html.lstrip("\n").rstrip("\n") + text[m.end(2):]
+
+
 def patch_blog_index(topic: dict) -> str:
     """Promote the new topic into the featured slot, demote the previous featured to a card."""
     text = BLOG_INDEX.read_text(encoding="utf-8")
@@ -696,6 +769,9 @@ def main() -> None:
 
     print("[4/5] Computing patched files (in memory)...", flush=True)
     new_blog_index = patch_blog_index(topic)
+    new_home_index = patch_home_blog_section(
+        _latest_posts_from_blog_index(new_blog_index, n=3)
+    )
     new_sitemap = patch_sitemap(topic)
     new_llms = patch_llms(topic)
     topics = load_topics()
@@ -711,6 +787,7 @@ def main() -> None:
     (BLOG_DIR / f"{topic['slug']}.html").write_text(article_html, encoding="utf-8")
     (IMAGES_DIR / f"blog-{topic['slug']}.webp").write_bytes(webp_bytes)
     BLOG_INDEX.write_text(new_blog_index, encoding="utf-8")
+    HOME_INDEX.write_text(new_home_index, encoding="utf-8")
     SITEMAP.write_text(new_sitemap, encoding="utf-8")
     LLMS.write_text(new_llms, encoding="utf-8")
     TOPICS_LOG.write_text(json.dumps(topics, indent=2) + "\n", encoding="utf-8")

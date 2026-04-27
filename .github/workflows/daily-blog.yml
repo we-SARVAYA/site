@@ -56,7 +56,7 @@ jobs:
         run: |
           git config user.name "sarvaya-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add blog/ assets/images/blog/ blog.html sitemap.xml llms.txt scripts/topics_log.json
+          git add blog/ assets/images/blog/ blog.html index.html sitemap.xml llms.txt scripts/topics_log.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
