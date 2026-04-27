@@ -705,8 +705,8 @@ body * {
 
     .blog-sidebar {
         position: fixed;
-        left: auto;
-        right: 16px;
+        left: 16px;
+        right: auto;
         top: auto;
         bottom: 24px;
         transform: none;
@@ -716,8 +716,8 @@ body * {
     }
 
     .blog-share-dropdown {
-        left: auto;
-        right: 0;
+        left: 0;
+        right: auto;
         top: auto;
         bottom: calc(100% + 12px);
         transform: translateY(8px);
