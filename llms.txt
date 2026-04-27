@@ -90,6 +90,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Google Workspace Studio: Build No-Code AI Agents Across Gmail and Docs](https://sarvaya.in/blog/google-workspace-studio-no-code-ai-agents)
 - [Figma Weave's 20+ AI Workflows Reshape Creative Production in 2026](https://sarvaya.in/blog/figma-weave-ai-workflows-creative-production-2026)
 - [What Xbox's 2026 Rebrand Reveals About Brand Heritage Strategy](https://sarvaya.in/blog/xbox-rebrand-brand-heritage-identity-reset-2026)
+- [Vercel Workflows Goes GA: Durable Execution Reshapes Next.js Backend Design](https://sarvaya.in/blog/vercel-workflows-ga-durable-nextjs-architecture)
 
 ## License
 
