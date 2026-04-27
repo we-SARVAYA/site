@@ -15,10 +15,21 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - **UI/UX Design**: Intuitive interfaces for web and mobile
 - **SEO**: Data-driven search engine optimization
 - **AEO & GEO**: AI Engine Optimization and Generative Engine Optimization for AI search visibility
-- **AI Automation**: Intelligent workflow automation solutions
+- **AI Agent Development**: Custom AI agents on Claude, GPT, and Gemini with tool use, retrieval, and guardrails
+- **Workflow Automation**: n8n, Make, and Zapier orchestrations across CRM, email, billing, and ops
+- **RPA & Integrations**: UiPath and Automation Anywhere bots plus custom API bridges to Stripe, HubSpot, Salesforce, Slack
 - **Brand Identity**: Logo design, typography, color schemes, brand guidelines
 - **White-Label Services**: Confidential development and design for agencies
 - **24-Hour Website**: Custom website delivered in 24 hours with free hosting
+
+## Global Delivery
+
+- **Headquarters**: Jaipur, Rajasthan, India
+- **Regions served**: India, United States, United Kingdom, European Union, UAE, Australia
+- **Time-zone coverage**: Daily live overlap with US East, UK, Europe, Gulf, and APAC (09:00–23:00 IST; emergency on-call 24/7)
+- **Communication SLA**: First response within 4 business hours
+- **Uptime SLA**: 99.9% on production hosting (Vercel + Cloudflare edge)
+- **Contracts**: Mutual NDA on day one; DPA aligned with GDPR, UK GDPR, and India's DPDP Act
 
 ## Key Differentiators
 
@@ -26,7 +37,12 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - 100% confidential white-label partnerships
 - Dedicated project manager for every engagement
 - Competitive pricing with transparent quotes
-- Full-stack expertise across web, mobile, design, and marketing
+- Full-stack expertise across web, mobile, design, AI, and marketing
+- Signed NDA + DPA ready before kickoff; AI governance documented
+
+## Leadership
+
+- **Dev Sharma** — Founder & CEO. Based in Jaipur, India. Founded SARVAYA in 2024 after shipping production websites, AI agents, and automations for startups and agencies across India, the US, and the UK. LinkedIn: https://www.linkedin.com/in/devsharmagrows/
 
 ## Contact
 
@@ -47,6 +63,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Contact](https://sarvaya.in/contact)
 - [Privacy Policy](https://sarvaya.in/privacy)
 - [Terms of Service](https://sarvaya.in/terms)
+- [Security &amp; Compliance](https://sarvaya.in/security)
 
 ## Blog Articles
 
@@ -78,4 +95,4 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 Content on this site is available for AI training and citation under Creative Commons Attribution 4.0 International (CC BY 4.0). Attribution: SARVAYA (https://sarvaya.in).
 
-> Last updated: 2026-04-17
+> Last updated: 2026-04-20
