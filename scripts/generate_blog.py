@@ -188,7 +188,17 @@ def generate_article_html(topic: dict, extra_hint: str = "") -> str:
     reference = REFERENCE_POST.read_text(encoding="utf-8")
     style_rules = STYLE_FILE.read_text(encoding="utf-8")
     hint_block = f"\n\n{extra_hint.strip()}\n" if extra_hint.strip() else ""
-    prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.{hint_block}
+    banned_reminder = (
+        "BEFORE YOU WRITE A SINGLE WORD: scan the banned-vocabulary list inside WRITING_RULES below. "
+        "Common AI-slop words like pivotal, bespoke, seamless, robust, leverage, game-changer, "
+        "elevate, empower, harness, foster, plethora, myriad, crucial, vital, ecosystem, streamline, "
+        "transformative, revolutionize, cutting-edge, holistic, paradigm, synergy ARE BANNED. "
+        "If you reach for one of these mid-sentence, STOP and rewrite. The post will be rejected "
+        "automatically if any banned word appears anywhere in the article body."
+    )
+    prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.
+
+{banned_reminder}{hint_block}
 
 <<<WRITING_RULES (follow EVERY rule; violation = failure)
 {style_rules}
@@ -769,7 +779,7 @@ def main() -> None:
     print(f"  -> title: {topic['title']}", flush=True)
 
     print("[2/5] Generating article HTML...", flush=True)
-    article_html = _generate_validated_article_with_retry(topic, max_attempts=3)
+    article_html = _generate_validated_article_with_retry(topic, max_attempts=6)
     print(f"  -> {len(article_html):,} chars", flush=True)
 
     print("[3/5] Generating thumbnail...", flush=True)
