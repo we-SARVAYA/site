@@ -2,9 +2,9 @@
 """Auto-publish a blog post for sarvaya.in.
 
 Pipeline:
-  1. Research a trending topic via Claude CLI + WebSearch.
-  2. Generate the full blog HTML via Claude CLI, copying structure from an
-     existing post.
+  1. Research a trending topic via OpenAI Responses API + web_search tool.
+  2. Generate the full blog HTML via OpenAI Chat Completions, copying
+     structure from an existing post.
   3. Generate a hero thumbnail via Gemini 2.5 Flash Image, resize + encode WebP.
   4. Patch blog.html (insert card), sitemap.xml (insert url), llms.txt (append).
   5. Append an entry to scripts/topics_log.json.
@@ -20,13 +20,13 @@ import json
 import os
 import random
 import re
-import subprocess
 import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
+from openai import OpenAI
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -44,6 +44,7 @@ TODAY = datetime.now(timezone.utc).date().isoformat()
 DATE_HUMAN = datetime.strptime(TODAY, "%Y-%m-%d").strftime("%d %B %Y")
 
 GEMINI_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o")
 
 # Topic categories the blog covers. Each run picks one to focus the research on,
 # so the archive stays balanced instead of drifting into one niche. Order and
@@ -89,39 +90,47 @@ def existing_slugs() -> set[str]:
     return {p.stem for p in BLOG_DIR.glob("*.html")}
 
 
-def run_claude(prompt: str, allow_web: bool = False, timeout: int = 900, max_attempts: int = 2) -> str:
-    cmd = [
-        "claude",
-        "-p",
-        prompt,
-        "--output-format",
-        "text",
-        "--permission-mode",
-        "bypassPermissions",
-    ]
-    if allow_web:
-        cmd += ["--allowed-tools", "WebSearch,WebFetch"]
-    else:
-        # Block any file/shell tools so Claude returns text only (no side effects)
-        cmd += [
-            "--disallowed-tools",
-            "Write,Edit,NotebookEdit,Bash,WebSearch,WebFetch,Task",
-        ]
+_openai_client: OpenAI | None = None
+
+
+def _client() -> OpenAI:
+    global _openai_client
+    if _openai_client is None:
+        _openai_client = OpenAI()
+    return _openai_client
+
+
+def run_llm(prompt: str, allow_web: bool = False, timeout: int = 900, max_attempts: int = 2) -> str:
+    """Call OpenAI. With allow_web=True uses the Responses API + web_search tool;
+    otherwise plain Chat Completions. Returns the model's text output."""
     last_err: Exception | None = None
     for attempt in range(1, max_attempts + 1):
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-            if result.returncode != 0:
-                raise RuntimeError(
-                    f"Claude CLI failed (exit {result.returncode}):\nSTDERR: {result.stderr[:600]}\nSTDOUT: {result.stdout[:400]}"
+            if allow_web:
+                resp = _client().responses.create(
+                    model=OPENAI_MODEL,
+                    input=prompt,
+                    tools=[{"type": "web_search"}],
+                    timeout=timeout,
                 )
-            return result.stdout.strip()
-        except (subprocess.TimeoutExpired, RuntimeError) as e:
+                text = (resp.output_text or "").strip()
+            else:
+                resp = _client().chat.completions.create(
+                    model=OPENAI_MODEL,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=16000,
+                    timeout=timeout,
+                )
+                text = (resp.choices[0].message.content or "").strip()
+            if not text:
+                raise RuntimeError("OpenAI returned empty output")
+            return text
+        except Exception as e:  # noqa: BLE001
             last_err = e
             if attempt < max_attempts:
-                print(f"  claude CLI failed (attempt {attempt}/{max_attempts}); retrying in 5s", flush=True)
+                print(f"  OpenAI call failed (attempt {attempt}/{max_attempts}): {e}; retrying in 5s", flush=True)
                 time.sleep(5)
-    raise RuntimeError(f"Claude CLI failed after {max_attempts} attempts: {last_err}")
+    raise RuntimeError(f"OpenAI failed after {max_attempts} attempts: {last_err}")
 
 
 def pick_category() -> tuple:
@@ -155,14 +164,14 @@ def research_topic(attempt: int = 1, category: tuple | None = None) -> dict:
 FOCUS CATEGORY FOR THIS POST: {cat_label}
 Scope: {cat_desc}
 
-Use WebSearch to find ONE trending, newsworthy story from the past 14 days within that category. Prefer specific, actionable angles (e.g. "How the new Core Web Vitals INP threshold changes React app design") over generic evergreens ("Why UX matters"). The topic must be concrete enough that an expert could write 1200+ words with named tools, numbers, and specific techniques.
+Use the web_search tool to find ONE trending, newsworthy story from the past 14 days within that category. Prefer specific, actionable angles (e.g. "How the new Core Web Vitals INP threshold changes React app design") over generic evergreens ("Why UX matters"). The topic must be concrete enough that an expert could write 1200+ words with named tools, numbers, and specific techniques.
 
 MUST NOT duplicate any of these existing slugs:
 {exclusions}{tries_hint}
 
 Output ONLY minified JSON (no markdown fences, no preamble). Schema:
 {{"slug":"kebab-case-slug-max-50-chars","title":"5-14 word title","tag":"{cat_tag}","excerpt":"1-2 sentences under 160 chars","keywords":["kw1","kw2","kw3","kw4","kw5","kw6"],"thumbnail_prompt":"detailed abstract visual description for a 1200x675 hero image - no text, no logos, no named brand references"}}"""
-    raw = run_claude(prompt, allow_web=True)
+    raw = run_llm(prompt, allow_web=True)
     match = re.search(r"\{.*\}", raw, re.DOTALL)
     if not match:
         raise ValueError(f"No JSON found in research output:\n{raw[:1000]}")
@@ -246,7 +255,7 @@ OUTPUT RULES — CRITICAL
 - Do NOT write files. Do NOT call any tools. Do NOT narrate.
 - Do NOT explain what you did. Do NOT add preamble, summary, or markdown fences.
 - Your entire response must be ONLY the raw HTML, starting with <!DOCTYPE html> and ending with </html>. Nothing before, nothing after."""
-    raw = run_claude(prompt, allow_web=False, timeout=900)
+    raw = run_llm(prompt, allow_web=False, timeout=900)
     # Tolerate stray markdown fences or narration; extract the HTML block directly
     m = re.search(r"<!DOCTYPE html.*?</html>", raw, re.IGNORECASE | re.DOTALL)
     if not m:
@@ -712,7 +721,7 @@ def _generate_validated_article_with_retry(topic: dict, max_attempts: int = 3) -
             continue
         except RuntimeError as e:
             last_err = e
-            print(f"  generation attempt {attempt}/{max_attempts}: CLI error: {e}; retrying", flush=True)
+            print(f"  generation attempt {attempt}/{max_attempts}: LLM error: {e}; retrying", flush=True)
             time.sleep(3)
             continue
 
@@ -749,7 +758,7 @@ def _generate_validated_article_with_retry(topic: dict, max_attempts: int = 3) -
 
 
 def main() -> None:
-    for var in ("ANTHROPIC_API_KEY", "GEMINI_API_KEY"):
+    for var in ("OPENAI_API_KEY", "GEMINI_API_KEY"):
         if not os.environ.get(var):
             sys.exit(f"Missing required env var: {var}")
 

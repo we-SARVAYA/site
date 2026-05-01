@@ -23,14 +23,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Setup Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
-
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -44,7 +36,7 @@ jobs:
       - name: Generate blog post
         id: gen
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/generate_blog.py
 
