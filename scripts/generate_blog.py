@@ -188,13 +188,16 @@ def generate_article_html(topic: dict, extra_hint: str = "") -> str:
     reference = REFERENCE_POST.read_text(encoding="utf-8")
     style_rules = STYLE_FILE.read_text(encoding="utf-8")
     hint_block = f"\n\n{extra_hint.strip()}\n" if extra_hint.strip() else ""
+    banlist_literal = ", ".join(f'"{w}"' for w in BANNED_PHRASES)
     banned_reminder = (
-        "BEFORE YOU WRITE A SINGLE WORD: scan the banned-vocabulary list inside WRITING_RULES below. "
-        "Common AI-slop words like pivotal, bespoke, seamless, robust, leverage, game-changer, "
-        "elevate, empower, harness, foster, plethora, myriad, crucial, vital, ecosystem, streamline, "
-        "transformative, revolutionize, cutting-edge, holistic, paradigm, synergy ARE BANNED. "
-        "If you reach for one of these mid-sentence, STOP and rewrite. The post will be rejected "
-        "automatically if any banned word appears anywhere in the article body."
+        "BEFORE YOU WRITE A SINGLE WORD: the article body is run through an automated reject filter. "
+        "ANY of the following words/phrases (case-insensitive substring match, including their tenses, "
+        "plurals, and -ing/-ed forms) appearing ANYWHERE in the <article class=\"blog-body\"> block "
+        f"will cause the post to be discarded:\n  {banlist_literal}\n"
+        "This is a hard automated check — not a stylistic preference. If you reach for one of these "
+        "mid-sentence, STOP and rewrite the sentence with a plain, specific alternative. Prefer concrete "
+        "verbs and named tools over abstract corporate vocabulary. Do not paraphrase the banned terms "
+        "with close synonyms either (e.g. 'frictionless' instead of 'seamless' is still slop)."
     )
     prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.
 
