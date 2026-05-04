@@ -16,7 +16,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,40 +27,33 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: scripts/requirements.txt
 
-      - name: Install Python deps
-        run: pip install -r scripts/requirements.txt
-
-      - name: Generate blog post
-        id: gen
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_MODEL: gpt-5
-        run: python scripts/generate_blog.py
+      - name: Publish next queued post
+        id: pub
+        run: python scripts/publish_next.py
 
       - name: Commit and push
         id: push
+        if: steps.pub.outputs.slug != ''
         env:
-          SLUG: ${{ steps.gen.outputs.slug }}
-          TITLE: ${{ steps.gen.outputs.title }}
+          SLUG: ${{ steps.pub.outputs.slug }}
+          TITLE: ${{ steps.pub.outputs.title }}
+          REMAINING: ${{ steps.pub.outputs.remaining }}
         run: |
           git config user.name "sarvaya-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add blog/ assets/images/blog/ blog.html index.html sitemap.xml llms.txt scripts/topics_log.json
+          git add blog/ assets/images/blog/ blog.html index.html sitemap.xml llms.txt scripts/topics_log.json scripts/post_queue/
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "blog: auto-publish ${SLUG}
+          git commit -m "blog: auto-publish ${SLUG} (${REMAINING} left in queue)
 
           ${TITLE}"
           git push
 
       - name: Notify on success
-        if: success() && steps.gen.outputs.slug != ''
+        if: success() && steps.pub.outputs.slug != ''
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -70,13 +63,34 @@ jobs:
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
           from: SARVAYA Auto-Blog <${{ secrets.GMAIL_USER }}>
           to: ${{ secrets.NOTIFY_EMAIL }}
-          subject: "✅ New blog published: ${{ steps.gen.outputs.title }}"
+          subject: "✅ New blog published: ${{ steps.pub.outputs.title }} (${{ steps.pub.outputs.remaining }} left)"
           body: |
             A new post just went live on sarvaya.in.
 
-            Title: ${{ steps.gen.outputs.title }}
-            Slug:  ${{ steps.gen.outputs.slug }}
-            URL:   https://sarvaya.in/blog/${{ steps.gen.outputs.slug }}.html
+            Title:     ${{ steps.pub.outputs.title }}
+            Slug:      ${{ steps.pub.outputs.slug }}
+            URL:       https://sarvaya.in/blog/${{ steps.pub.outputs.slug }}
+            Remaining: ${{ steps.pub.outputs.remaining }} post(s) in queue
+
+            Run log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          content_type: text/plain
+
+      - name: Notify on empty queue
+        if: success() && steps.pub.outputs.queue_empty == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          from: SARVAYA Auto-Blog <${{ secrets.GMAIL_USER }}>
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          subject: "⚠️ Blog queue is empty — refill needed"
+          body: |
+            The auto-blog publisher ran but the queue is empty. No post was published this cycle.
+
+            Refill the queue by running the /refill-blog-queue command in Claude Code, then commit and push.
 
             Run log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           content_type: text/plain

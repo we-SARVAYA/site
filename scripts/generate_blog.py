@@ -118,7 +118,7 @@ def run_llm(prompt: str, allow_web: bool = False, timeout: int = 900, max_attemp
                 resp = _client().chat.completions.create(
                     model=OPENAI_MODEL,
                     messages=[{"role": "user", "content": prompt}],
-                    max_tokens=16000,
+                    max_completion_tokens=16000,
                     timeout=timeout,
                 )
                 text = (resp.choices[0].message.content or "").strip()
