@@ -1,3 +1,158 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "slug": "llms-txt-explained-implementation-guide-2026",
+      "title": "llms.txt Explained - The 2026 Standard for AI Crawler Control",
+      "tag": "GEO",
+      "excerpt": "robots.txt was built for Google. llms.txt is being built for ChatGPT, Perplexity, and Claude. Here is the spec, the file format, and when you actually need one.",
+      "category": "AEO / GEO / AI search",
+      "thumbnail_prompt": "An abstract hand-drawn document icon with three small parallel lines representing text, sitting on a pure black background. To the right of the document, a single circular eye-like shape filled solid lime green watches the document. Small four-point sparkle dots scatter in the negative space. Warm off-white grainy lines, no text, no letters, flat 2D style.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "ai-citation-tracking-tools-comparison-2026",
+      "title": "AI Citation Tracking Tools - What Works in 2026",
+      "tag": "GEO",
+      "excerpt": "ChatGPT, Perplexity, and Google AI Overviews send traffic to a different shortlist than Google rankings. Here are the tools that show you who is being cited and what to do with that data.",
+      "category": "AEO / GEO / AI search",
+      "thumbnail_prompt": "An abstract magnifying glass shape rendered with grainy hand-drawn warm off-white lines, on a pure black background. Inside the magnifying glass lens, a single five-pointed star shape filled solid lime green. Around the magnifying glass, three small horizontal bar-chart bars in warm off-white. Tiny four-point sparkle dots scattered in negative space. Flat 2D, no text, no letters.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "schema-markup-ai-overviews-citation-priority",
+      "title": "Schema Markup That Drives AI Overview Citations in 2026",
+      "tag": "GEO",
+      "excerpt": "Most schema guides were written for Google's old rich-result era. AI Overviews and Perplexity treat structured data differently. Here are the schema types that actually move citation rates today.",
+      "category": "AEO / GEO / AI search",
+      "thumbnail_prompt": "Two abstract square brackets facing each other on a pure black background, drawn in warm off-white grainy hand-drawn lines. Between the brackets, a single solid lime green checkmark shape. Above the brackets, three small horizontal lines representing structured text. Small four-point sparkle dots around the composition. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "claude-skills-vs-mcp-when-to-use-which",
+      "title": "Claude Skills vs MCP - When to Use Which",
+      "tag": "AI",
+      "excerpt": "Skills run inside the model. MCP runs outside it. The decision between them is not about features. It is about who owns the data and who maintains the contract.",
+      "category": "Claude + AI tooling",
+      "thumbnail_prompt": "Two abstract puzzle-piece shapes facing each other on a pure black background, drawn in warm off-white grainy hand-drawn lines. The left puzzle piece is outlined only. The right puzzle piece is filled solid lime green. Between them, three small circular dots in warm off-white showing the snap points. Tiny four-point sparkles around the composition. Flat 2D, no text, no letters.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "claude-code-hooks-developer-automation-patterns",
+      "title": "Claude Code Hooks - 6 Automation Patterns Every Dev Should Know",
+      "tag": "AI",
+      "excerpt": "Hooks turn Claude Code from a chat tool into a build system. These six patterns cover most of the lifecycle automation we ship to clients.",
+      "category": "Claude + AI tooling",
+      "thumbnail_prompt": "Three vertical lines connected to three small circles arranged horizontally on a pure black background, drawn in warm off-white grainy hand-drawn lines. Each line ends with a small open hook curve at the bottom. The middle circle is filled solid lime green. The other two circles are outlined only. Tiny four-point sparkle dots scattered in negative space. Flat 2D, abstract minimal, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "inp-core-web-vitals-react-debugging-guide",
+      "title": "INP Replaced FID - Why Your React App Probably Fails Core Web Vitals",
+      "tag": "SEO",
+      "excerpt": "Interaction to Next Paint replaced First Input Delay in March 2024, and most React apps quietly stopped passing Core Web Vitals. Here is what changed and how to fix it.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract speedometer or gauge shape on a pure black background, drawn with grainy hand-drawn warm off-white lines. The needle of the gauge points at a threshold marker, and the danger-zone segment of the gauge dial is filled solid lime green. Below the gauge, three small horizontal dash marks. Tiny four-point sparkle dots in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "pillar-cluster-content-architecture-modern-seo",
+      "title": "Pillar-Cluster Content Architecture for Modern SEO",
+      "tag": "SEO",
+      "excerpt": "The pillar-cluster model is older than AI search but still the cleanest content architecture for ranking in 2026. Here is how to build one without falling into the SEO bait-and-switch trap.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract hub-and-spoke diagram on a pure black background, drawn in warm off-white grainy hand-drawn lines. A central circular hub connects via straight lines to six smaller circular spokes arranged around it. One of the spoke circles is filled solid lime green. The lines connecting hub to spokes are warm off-white. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "react-server-components-error-boundaries-workarounds",
+      "title": "React Server Components and Error Boundaries - The Workarounds You Need",
+      "tag": "Development",
+      "excerpt": "React Server Components changed how errors propagate. The classic Error Boundary still works, but only for client components. Here is the architecture that catches errors on both sides without leaking server internals.",
+      "category": "Web development",
+      "thumbnail_prompt": "An abstract bordered shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The border has one segment broken or jagged, indicating a fault. Inside the bordered area, a single solid lime green shield-like shape stands as protection. Tiny four-point sparkle dots in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "bun-1-3-vs-node-22-production-tradeoffs",
+      "title": "Bun 1.3 vs Node 22 - Production Tradeoffs in 2026",
+      "tag": "Development",
+      "excerpt": "Bun has caught up on compatibility. Node has caught up on speed. The 2026 decision is no longer about benchmarks. It is about which boring problems you can afford to hit.",
+      "category": "Web development",
+      "thumbnail_prompt": "Two abstract racing dial shapes side by side on a pure black background, drawn in warm off-white grainy hand-drawn lines. Each dial has a needle pointing to a different position. The left dial's segment is filled solid lime green. The right dial is outlined only. Above the dials, a small horizontal arrow connecting them. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "form-validation-ux-patterns-real-time-2026",
+      "title": "Form Validation UX - 7 Patterns That Actually Reduce Drop-off",
+      "tag": "Design",
+      "excerpt": "Form drop-off is rarely about the form length. It is about how the form behaves when users make mistakes. Seven validation patterns separate the forms that convert from the ones that frustrate.",
+      "category": "UI / UX design",
+      "thumbnail_prompt": "An abstract form-field outline shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. Inside the form-field shape, a single solid lime green checkmark. To the right of the form field, three small horizontal lines representing additional fields. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "audio-branding-sonic-logo-strategy-2026",
+      "title": "Sonic Logos and Audio Branding - The 2026 Identity Layer",
+      "tag": "Branding",
+      "excerpt": "Mastercard, Intel, and Netflix made audio branding a billion-dollar category. Smaller brands are now investing in sonic logos for a reason that has nothing to do with TV ads.",
+      "category": "Brand identity + storytelling",
+      "thumbnail_prompt": "An abstract sound wave shape on a pure black background, drawn in warm off-white grainy hand-drawn lines as a series of vertical bars of varying height. The center bar of the wave is filled solid lime green and is taller than the others. Around the wave, a few small four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "n8n-vs-make-vs-zapier-honest-comparison-2026",
+      "title": "n8n vs Make vs Zapier - Honest Comparison for 2026",
+      "tag": "Automation",
+      "excerpt": "Three automation platforms cover most of the no-code-to-low-code spectrum. The honest comparison is not about features. It is about who will pay your bill at scale.",
+      "category": "AI automation for business",
+      "thumbnail_prompt": "Three abstract circular nodes connected by lines on a pure black background, drawn in warm off-white grainy hand-drawn lines. The leftmost node is filled solid lime green. The other two nodes are outlined only. The connecting lines flow between them in a horizontal arrangement. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "agency-pricing-value-based-vs-retainer-models",
+      "title": "Value-Based Pricing vs Retainers - What Agencies Should Charge in 2026",
+      "tag": "Agency",
+      "excerpt": "Hourly billing is dying. Retainers print money but lock you to capacity. Value-based pricing is the holy grail and most agencies do it badly. Here is the honest tradeoff for 2026.",
+      "category": "Agency / white-label growth",
+      "thumbnail_prompt": "An abstract balance scale shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The two pans of the scale hold different shapes - one pan holds three small stacked rectangles, the other pan holds a single solid lime green coin or disk shape. The scale's beam is slightly tilted toward the green pan. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "google-business-profile-2026-local-seo-tactics",
+      "title": "Google Business Profile in 2026 - 9 Local SEO Tactics That Move the Needle",
+      "tag": "SEO",
+      "excerpt": "Google Business Profile is no longer just for the map pack. AI Overviews now pull GBP data directly into local answers. Here are the nine tactics that move local rankings in 2026.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract map pin or location marker shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The pin is shown from the front with a circular top and pointed bottom. The circular top of the pin is filled solid lime green. Around the pin, three small dots showing radiating distance markers. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-04T07:42:18.471288+00:00",
+      "published_at": null,
+      "status": "queued"
+    }
+  ]
 }

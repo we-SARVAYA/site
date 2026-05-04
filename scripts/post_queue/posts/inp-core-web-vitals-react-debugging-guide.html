@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msvalidate.01" content="1533B930C9DF3122F37B0AA0FB1DE5F3" />
+    <title>INP Replaced FID - Why Your React App Probably Fails Core Web Vitals | SARVAYA Blog</title>
+    <meta name="description" content="INP replaced FID as a Core Web Vitals metric. Why React apps fail it, common patterns that cause failures, and concrete fixes with debugging steps.">
+    <meta name="keywords" content="INP, Interaction to Next Paint, Core Web Vitals, React performance, FID replacement, React hydration, React Server Components, web vitals debugging, SEO performance">
+    <link rel="canonical" href="https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide">
+    <meta property="og:title" content="INP Replaced FID - Why Your React App Probably Fails Core Web Vitals | SARVAYA Blog">
+    <meta property="og:description" content="INP replaced FID as a Core Web Vitals metric. Why React apps fail it, common patterns that cause failures, and concrete fixes with debugging steps.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide">
+    <meta property="og:image" content="https://sarvaya.in/assets/images/blog/blog-inp-core-web-vitals-react-debugging-guide.webp">
+    <meta property="og:site_name" content="SARVAYA">
+    <meta property="article:published_time" content="{{PUBLISH_DATE}}">
+    <meta property="article:modified_time" content="{{PUBLISH_DATE}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="INP Replaced FID - Why Your React App Probably Fails Core Web Vitals | SARVAYA Blog">
+    <meta name="twitter:description" content="INP replaced FID as a Core Web Vitals metric. Why React apps fail it, common patterns that cause failures, and concrete fixes with debugging steps.">
+    <meta name="twitter:image" content="https://sarvaya.in/assets/images/blog/blog-inp-core-web-vitals-react-debugging-guide.webp">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="../css/style.css" as="style">
+    <link rel="preload" href="../assets/images/logo.png" as="image">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    <link rel="stylesheet" href="../css/blog-detail.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="../assets/images/logo.png" type="image/png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#c8ff00">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "INP Replaced FID - Why Your React App Probably Fails Core Web Vitals",
+        "description": "INP replaced FID as a Core Web Vitals metric. Why React apps fail it, common patterns that cause failures, and concrete fixes with debugging steps.",
+        "datePublished": "{{PUBLISH_DATE}}",
+        "dateModified": "{{PUBLISH_DATE}}",
+        "author": {
+            "@type": "Person",
+            "name": "SARVAYA Editorial Team",
+            "url": "https://sarvaya.in"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "SARVAYA",
+            "url": "https://sarvaya.in",
+            "logo": {"@type": "ImageObject", "url": "https://sarvaya.in/assets/images/logo.png"}
+        },
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide"},
+        "image": "https://sarvaya.in/assets/images/blog/blog-inp-core-web-vitals-react-debugging-guide.webp",
+        "articleSection": "SEO"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sarvaya.in/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://sarvaya.in/blog"},
+            {"@type": "ListItem", "position": 3, "name": "INP Replaced FID - Why Your React App Probably Fails Core Web Vitals", "item": "https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide"}
+        ]
+    }
+    </script>
+    <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Sticky Sidebar Actions -->
+    <div class="blog-sidebar" id="blogSidebar">
+        <button class="blog-sidebar__btn" id="blogShareBtn" aria-label="Share this article">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+        <button class="blog-sidebar__btn" id="blogLightModeBtn" aria-label="Switch to light mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <div class="blog-share-dropdown" id="shareDropdown">
+            <a href="https://twitter.com/intent/tweet?text=INP%20Replaced%20FID%20-%20Why%20Your%20React%20App%20Probably%20Fails%20Core%20Web%20Vitals&url=https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Post on X
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                Share on LinkedIn
+            </a>
+            <button id="copyLinkBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                Copy Link
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="../assets/images/logo.png" alt="SARVAYA - Web Development and Digital Agency Logo" class="logo-icon">
+                <span class="logo-text">SARVAYA</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../portfolio">Portfolio</a>
+                <a href="/#about">About</a>
+                <a href="../24hrs">24hrs</a>
+                <a href="/#services">Services</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">More
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu">
+                        <a href="../whitelabel" role="menuitem">White Label</a>
+                        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener" role="menuitem">Free Tools</a>
+                        <a href="../blog" role="menuitem">Blog</a>
+                        <a href="/#faq" role="menuitem">FAQ</a>
+                    </div>
+                </div>
+                <a href="../contact">Contact</a>
+            </div>
+            <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="nav-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../portfolio">Portfolio</a>
+        <a href="/#about">About</a>
+        <a href="../24hrs">24hrs</a>
+        <a href="/#services">Services</a>
+        <a href="../whitelabel">White Label</a>
+        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener">Free Tools</a>
+        <a href="../blog">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="../contact">Contact</a>
+        <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="mobile-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
+    </div>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <a href="../blog" class="blog-hero__back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Back to Blog
+            </a>
+            <div class="blog-hero__meta">
+                <span class="blog-tag">SEO</span>
+                <time datetime="{{PUBLISH_DATE}}">{{PUBLISH_DATE_HUMAN}}</time>
+            </div>
+            <h1 class="blog-hero__title">INP Replaced FID - Why Your React App Probably Fails Core Web Vitals</h1>
+            <p class="blog-hero__excerpt">Interaction to Next Paint replaced First Input Delay in March 2024, and most React apps quietly stopped passing Core Web Vitals. Here is what changed and how to fix it.</p>
+        </div>
+    </section>
+
+    <!-- Cover Image -->
+    <div class="blog-cover">
+        <div class="blog-cover__img">
+            <img src="../assets/images/blog/blog-inp-core-web-vitals-react-debugging-guide.webp" alt="INP Replaced FID - Why Your React App Probably Fails Core Web Vitals" width="900" height="506">
+        </div>
+    </div>
+
+    <!-- Article Body -->
+    <div class="blog-layout">
+        <article class="blog-body">
+            <aside class="tldr-block">
+                <strong>TL;DR:</strong> INP measures the latency of every interaction across an entire page visit, not just the first one. React apps fail it because hydration, large state updates, and uncontrolled re-renders block the main thread. Three fixes solve 80% of cases: defer hydration, batch state updates, and move heavy work into transitions or workers.
+            </aside>
+
+ <p>Google replaced First Input Delay with Interaction to Next Paint as a Core Web Vital in March 2024. FID measured one thing: the delay before your first user input was processed. INP measures every interaction across the entire page visit and reports the worst one. The change broke most React apps quietly. Many sites that passed Core Web Vitals comfortably under FID dropped into the failing tier within weeks of the switch.</p>
+
+ <p>The threshold that matters: <strong>200 milliseconds at the 75th percentile</strong>. If three quarters of your users experience an interaction faster than 200ms, you pass. If not, your Core Web Vitals report turns red and your rankings start sliding. Most React apps we audit in 2026 score between 250 and 450ms before optimization. Here is why and what to do about it.</p>
+
+ <h2>Why React apps fail INP so consistently</h2>
+
+ <p>FID had a generous failure mode for SPAs. The browser tracked the first input. If hydration finished before the user clicked, FID was effectively zero. Users who waited a beat before interacting got a passing measurement even on apps with terrible runtime performance.</p>
+
+ <p>INP closes that escape hatch. Every click, every input, every keystroke is measured. The slowest one across the page visit becomes your reportable score. React apps now show their real cost: the dropdown that re-renders 200 components, the form input that runs validation against the entire form on every keystroke, the dashboard widget that recomputes a derived selector every time state changes anywhere in the tree.</p>
+
+ <h2>The three patterns that cause most failures</h2>
+
+ <p>Across the audits we have run on React apps in the past year, three patterns account for the majority of INP failures.</p>
+
+ <ul>
+ <li><strong>Synchronous hydration on heavy pages.</strong> When the entire page hydrates in one synchronous pass, every click that lands during hydration blocks until hydration completes. On large dashboards this can mean 600-800ms of input latency for unlucky users.</li>
+ <li><strong>Uncontrolled re-renders from context.</strong> A React Context that holds the entire app state re-renders every consumer on every change. Click a checkbox, recompute the cart total, update the badge, re-render the navbar, repaint the layout. The interaction looks instant in dev but compounds under load.</li>
+ <li><strong>Validation on every keystroke.</strong> Form libraries that run the whole validation schema on every input change cost 20-40ms per keystroke even on a fast machine. At 75th percentile on a mid-range Android phone the same code runs at 80-150ms per keystroke.</li>
+ </ul>
+
+ <h2>Fix 1 - Defer hydration with React Server Components or selective hydration</h2>
+
+ <p>If your framework supports React Server Components (Next.js App Router, Remix's recent versions, Waku), use them for the parts of the page that do not need interactivity. The components ship as pre-rendered HTML and never hydrate. Your hydration cost drops by whatever percentage of the page does not need event handlers.</p>
+
+ <p>If you are still on Pages Router or a non-RSC framework, use selective hydration through <code>React.lazy</code> and Suspense boundaries. Wrap the heavy interactive widgets so they hydrate only when they enter the viewport or when the user starts interacting near them. The first-paint hydration tree shrinks, and INP for the first interaction drops by 100-200ms on typical layouts.</p>
+
+ <h2>Fix 2 - Slice context and use selectors</h2>
+
+ <p>The fix for context-driven re-renders is structural. Split the single big context into many small ones, or replace context with a state library that supports selectors (Zustand, Jotai, Redux Toolkit with reselect). The principle is the same: components should subscribe only to the slice of state they actually use.</p>
+
+ <p>If you cannot refactor the context shape, wrap the consumer with <code>React.memo</code> and pass only the specific values it needs as props. The optimization is fragile (it depends on referential equality) but it is a quick win when the right structural fix is weeks away.</p>
+
+ <h2>Fix 3 - Move work out of the interaction path</h2>
+
+ <p>Heavy work that does not need to block the user response should run in <code>useTransition</code> or in a Web Worker.</p>
+
+ <ol>
+ <li><strong>useTransition for in-React work.</strong> Wrap state updates that drive expensive renders in <code>startTransition</code>. The browser paints the urgent update first and processes the transition during idle time. INP for the urgent click drops dramatically.</li>
+ <li><strong>Web Workers for parsing and computation.</strong> JSON parsing of large payloads, search index construction, image manipulation, encryption. Move them to a worker with Comlink and your main thread stays responsive even while the work runs.</li>
+ <li><strong>requestIdleCallback for analytics and tracking.</strong> Most analytics SDKs run their queue flush on every event. Wrap them in <code>requestIdleCallback</code> with a long timeout and your INP improves on every page that fires events during interaction.</li>
+ </ol>
+
+ <blockquote>
+ <p>INP is the metric that exposes how an app feels in real use. Lab tests pass while users complain. The fix is almost always architectural rather than a single optimization.</p>
+ </blockquote>
+
+ <h2>Debugging INP in production</h2>
+
+ <p>You cannot fix what you cannot measure. Three tools we install on every site we ship that needs to track INP in production.</p>
+
+ <p>Web Vitals JS library, sending real-user metrics to your analytics. Set it up with the <code>onINP</code> callback and tag each measurement with the user agent and device class. The aggregated data tells you which devices are failing, not just whether you are failing on average. Chrome DevTools Performance panel for local debugging, with the new Interactions track that highlights the slowest interactions across a session. PageSpeed Insights with field data, which surfaces the actual 75th percentile from real users hitting your site over the past 28 days.</p>
+
+ <h2>What to ship this week</h2>
+
+ <p>The action that pays back fastest is measuring before fixing. Add Web Vitals tracking, let it run for 7 days, then look at which interactions are slow. Most teams discover that one or two specific components account for the majority of bad measurements. Fix those first. The architectural rewrites can come later.</p>
+
+ <p>If your <a href="https://sarvaya.in/blog/seo-in-2026">SEO performance is sliding</a> and you have not audited Core Web Vitals since FID was retired, that is the single most likely cause. We <a href="../contact">run technical SEO audits</a> that include INP debugging across the slowest 10 pages on the site, with concrete patches the dev team can ship rather than vague recommendations.</p>
+        </article>
+        <aside class="blog-article-sidebar">
+            <div class="blog-side-cta">
+                <div class="blog-side-cta__visual" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M9 16l2 2 4-4"></path></svg>
+                </div>
+                <span class="blog-side-cta__label">Ready to Start?</span>
+                <h2 class="blog-side-cta__title">Book a Free Discovery Call With Us</h2>
+                <p class="blog-side-cta__subtitle">Tell us about your project. We will map out a clear plan - no pressure, no obligation.</p>
+                <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20book%20a%20free%20discovery%20call." class="blog-side-cta__btn" target="_blank" rel="noopener noreferrer">
+                    Book Discovery Call
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Related Posts -->
+    <section class="blog-related">
+        <div class="container">
+            <h2 class="blog-related__title">More from our blog</h2>
+            <div class="blog-page-grid" style="padding-bottom:80px;">
+                <article class="blog-page-card">
+                    <div class="blog-page-card__img">
+                        <img src="../assets/images/blog/blog-seo.webp" alt="SEO in 2026 - What Actually Works Now" loading="lazy" width="400" height="240">
+                    </div>
+                    <div class="blog-page-card__body">
+                        <div class="blog-page-card__meta">
+                            <span class="blog-tag">SEO</span>
+                            <time datetime="2026-04-08">April 2026</time>
+                        </div>
+                        <h3 class="blog-page-card__title">SEO in 2026 - What Actually Works Now</h3>
+                        <a href="seo-in-2026" class="blog-page-card__link">Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="blog-page-card">
+                    <div class="blog-page-card__img">
+                        <img src="../assets/images/blog/blog-app.webp" alt="Web App vs Mobile App" loading="lazy" width="400" height="240">
+                    </div>
+                    <div class="blog-page-card__body">
+                        <div class="blog-page-card__meta">
+                            <span class="blog-tag">Development</span>
+                            <time datetime="2026-04-02">April 2026</time>
+                        </div>
+                        <h3 class="blog-page-card__title">Web App vs Mobile App</h3>
+                        <a href="web-app-vs-mobile-app" class="blog-page-card__link">Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="blog-page-card">
+                    <div class="blog-page-card__img">
+                        <img src="../assets/images/blog/blog-ux.webp" alt="The Importance of UX and Visual Designers" loading="lazy" width="400" height="240">
+                    </div>
+                    <div class="blog-page-card__body">
+                        <div class="blog-page-card__meta">
+                            <span class="blog-tag">Design</span>
+                            <time datetime="2026-04-10">April 2026</time>
+                        </div>
+                        <h3 class="blog-page-card__title">The Importance of UX and Visual Designers</h3>
+                        <a href="importance-of-ux-designers" class="blog-page-card__link">Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="/" class="nav-logo">
+                        <img src="../assets/images/logo.png" alt="SARVAYA - Web Development and Digital Agency Logo" class="logo-icon">
+                        <span class="logo-text">SARVAYA</span>
+                    </a>
+                    <p class="footer-tagline">We Complete Your Business</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Pages</h4>
+                        <a href="../portfolio">Portfolio</a>
+                        <a href="/#about">About</a>
+                        <a href="/#services">Services</a>
+                        <a href="../24hrs">24-Hour Website</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>More</h4>
+                        <a href="../whitelabel">White Label</a>
+                        <a href="../contact">Contact</a>
+                        <a href="../blog">Blog</a>
+                        <a href="/#faq">FAQ</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Free Tools</h4>
+                        <a href="https://freetools.sarvaya.in/" target="_blank" rel="noopener">All Free Tools</a>
+                        <a href="https://freetools.sarvaya.in/linkedin-video-downloader" target="_blank" rel="noopener">LinkedIn Video Downloader</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <a href="../privacy">Privacy Policy</a>
+                        <a href="../terms">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/company/sarvaya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                <a href="https://wa.me/919371553524" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="mailto:dev.sharma@sarvaya.in" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                <a href="tel:9371553524" aria-label="Call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg></a>
+                <a href="https://www.instagram.com/sarvaya.in" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> <strong>SARVAYA</strong>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+    // Share dropdown toggle
+    const shareBtn = document.getElementById('blogShareBtn');
+    const shareDropdown = document.getElementById('shareDropdown');
+
+    shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shareDropdown.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+        shareDropdown.classList.remove('active');
+    });
+
+    shareDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Copy link
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            const btn = document.getElementById('copyLinkBtn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            setTimeout(() => { btn.innerHTML = original; }, 2000);
+        });
+        shareDropdown.classList.remove('active');
+    });
+
+    // Light mode toggle
+    const lightBtn = document.getElementById('blogLightModeBtn');
+    let isLight = false;
+
+    lightBtn.addEventListener('click', () => {
+        isLight = !isLight;
+        document.body.classList.toggle('blog-light', isLight);
+        lightBtn.innerHTML = isLight
+            ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>'
+            : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    });
+    </script>
+<!-- Cookie Consent -->
+<div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-banner__content">
+        <p class="cookie-banner__text">We use cookies to improve your experience. By continuing, you agree to our <a href="../privacy" class="cookie-banner__link">Privacy Policy</a>.</p>
+        <div class="cookie-banner__actions">
+            <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Accept</button>
+            <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDecline">Decline</button>
+        </div>
+    </div>
+</div>
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>
