@@ -210,4 +210,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://sarvaya.in/blog/schema-markup-ai-overviews-citation-priority</loc>
+        <lastmod>2026-05-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
