@@ -93,6 +93,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Vercel Workflows Goes GA: Durable Execution Reshapes Next.js Backend Design](https://sarvaya.in/blog/vercel-workflows-ga-durable-nextjs-architecture)
 - [Productized Outcome‑Driven White‑Label Packages Take Off](https://sarvaya.in/blog/productized-outcome-packages-white-label)
 - [llms.txt Explained - The 2026 Standard for AI Crawler Control](https://sarvaya.in/blog/llms-txt-explained-implementation-guide-2026)
+- [AI Citation Tracking Tools - What Works in 2026](https://sarvaya.in/blog/ai-citation-tracking-tools-comparison-2026)
 
 ## License
 
