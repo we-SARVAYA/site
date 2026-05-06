@@ -1,17 +1,17 @@
-# SARVAYA — We Complete Your Business
+# SARVAYA - We Complete Your Business
 
 > SARVAYA is a digital agency and white-label partner providing web development, app development, UI/UX design, SEO, AEO, GEO, AI automation, brand identity, and business consulting services.
 
 ## About
 
-SARVAYA helps businesses, agencies, and product companies deliver high-quality digital solutions under their own brand. We operate as an invisible growth partner — your clients see your brand, while we deliver the results.
+SARVAYA helps businesses, agencies, and product companies deliver high-quality digital solutions under their own brand. We operate as an invisible growth partner - your clients see your brand, while we deliver the results.
 
 Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaround, premium quality, and complete confidentiality.
 
 ## Services
 
-- **Web Development**: Robust, scalable websites using latest technologies
-- **App Development**: Next-gen mobile and web applications
+- **Web Development**: Fast, scalable websites using latest technologies
+- **App Development**: Modern mobile and web applications
 - **UI/UX Design**: Intuitive interfaces for web and mobile
 - **SEO**: Data-driven search engine optimization
 - **AEO & GEO**: AI Engine Optimization and Generative Engine Optimization for AI search visibility
@@ -26,7 +26,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 - **Headquarters**: Jaipur, Rajasthan, India
 - **Regions served**: India, United States, United Kingdom, European Union, UAE, Australia
-- **Time-zone coverage**: Daily live overlap with US East, UK, Europe, Gulf, and APAC (09:00–23:00 IST; emergency on-call 24/7)
+- **Time-zone coverage**: Daily live overlap with US East, UK, Europe, Gulf, and APAC (09:00-23:00 IST; emergency on-call 24/7)
 - **Communication SLA**: First response within 4 business hours
 - **Uptime SLA**: 99.9% on production hosting (Vercel + Cloudflare edge)
 - **Contracts**: Mutual NDA on day one; DPA aligned with GDPR, UK GDPR, and India's DPDP Act
@@ -42,7 +42,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 ## Leadership
 
-- **Dev Sharma** — Founder & CEO. Based in Jaipur, India. Founded SARVAYA in 2024 after shipping production websites, AI agents, and automations for startups and agencies across India, the US, and the UK. LinkedIn: https://www.linkedin.com/in/devsharmagrows/
+- **Dev Sharma** - Founder & CEO. Based in Jaipur, India. Founded SARVAYA in 2024 after shipping production websites, AI agents, and automations for startups and agencies across India, the US, and the UK. LinkedIn: https://www.linkedin.com/in/devsharmagrows/
 
 ## Contact
 
@@ -55,9 +55,9 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 ## Service Pages
 
-- [Website Development](https://sarvaya.in/services/web-development) — Custom, fast, AI-ready websites engineered for conversion and search visibility (marketing sites, SaaS, portfolios, e-commerce).
-- [AI Automation](https://sarvaya.in/services/ai-automation) — Custom AI agents and workflows: lead qualifiers, RAG chatbots, content engines, inbox triage, research agents on OpenAI, Claude, Gemini, n8n, Make.
-- [SEO, AEO &amp; GEO](https://sarvaya.in/services/seo-geo) — Combined SEO + Answer Engine + Generative Engine Optimization. Rank in Google AND get cited by AI Overviews, ChatGPT, Perplexity, Bing Copilot.
+- [Website Development](https://sarvaya.in/services/web-development) - Custom, fast, AI-ready websites engineered for conversion and search visibility (marketing sites, SaaS, portfolios, e-commerce).
+- [AI Automation](https://sarvaya.in/services/ai-automation) - Custom AI agents and workflows: lead qualifiers, RAG chatbots, content engines, inbox triage, research agents on OpenAI, Claude, Gemini, n8n, Make.
+- [SEO, AEO &amp; GEO](https://sarvaya.in/services/seo-geo) - Combined SEO + Answer Engine + Generative Engine Optimization. Rank in Google AND get cited by AI Overviews, ChatGPT, Perplexity, Bing Copilot.
 
 ## Pages
 
@@ -76,10 +76,10 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Why Your Business Needs a Website Today](https://sarvaya.in/blog/why-your-business-needs-a-website)
 - [The Power of Storytelling in Branding](https://sarvaya.in/blog/storytelling-in-branding)
 - [The Importance of UX and Visual Designers in Successful Projects](https://sarvaya.in/blog/importance-of-ux-designers)
-- [SEO in 2026 — What Actually Works Now](https://sarvaya.in/blog/seo-in-2026)
-- [White Label Services — The Growth Hack for Agencies](https://sarvaya.in/blog/white-label-growth-hack)
-- [AI Automation for Small Businesses — Where to Start](https://sarvaya.in/blog/ai-automation-small-business)
-- [Web App vs Mobile App — Which One Does Your Business Need?](https://sarvaya.in/blog/web-app-vs-mobile-app)
+- [SEO in 2026 - What Actually Works Now](https://sarvaya.in/blog/seo-in-2026)
+- [White Label Services - The Growth Hack for Agencies](https://sarvaya.in/blog/white-label-growth-hack)
+- [AI Automation for Small Businesses - Where to Start](https://sarvaya.in/blog/ai-automation-small-business)
+- [Web App vs Mobile App - Which One Does Your Business Need?](https://sarvaya.in/blog/web-app-vs-mobile-app)
 - [Why AI Search Engines Ignore Your Top-Ranked Google Pages](https://sarvaya.in/blog/ai-citations-vs-google-rankings-geo-strategy)
 - [Why ChatGPT, Perplexity, and Google AI Cite Completely Different Sources](https://sarvaya.in/blog/ai-citation-divergence-chatgpt-perplexity-google)
 - [Google AI Overviews Is Now the #2 Referral: GEO Tactics That Win](https://sarvaya.in/blog/google-ai-overviews-second-referral-geo-playbook)
@@ -90,7 +90,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [Why Top Brands Are Abandoning Social Feeds for Substack and Reddit](https://sarvaya.in/blog/brand-storytelling-substack-reddit-2026)
 - [Google Play's April 2026 Permissions Crackdown: What Developers Must Do Now](https://sarvaya.in/blog/google-play-april-2026-permissions-policy)
 - [Claude Agent SDK for Python: Build Autonomous AI Agents in 2026](https://sarvaya.in/blog/claude-agent-sdk-python-launch-2026)
-- [87% of Agency Pros Say the Model Is Broken—Here's the Pivot](https://sarvaya.in/blog/agency-model-broken-productized-pivot-2026)
+- [87% of Agency Pros Say the Model Is Broken - Here's the Pivot](https://sarvaya.in/blog/agency-model-broken-productized-pivot-2026)
 - [The Storyteller Gold Rush: Why Brands Are Hiring Like Media Companies](https://sarvaya.in/blog/brands-hiring-storytelling-teams-media-brand-2026)
 - [iOS 26 SDK Deadline: How React Native and Flutter Teams Must Migrate Now](https://sarvaya.in/blog/ios26-sdk-deadline-react-native-flutter-migration)
 - [Google Workspace Studio: Build No-Code AI Agents Across Gmail and Docs](https://sarvaya.in/blog/google-workspace-studio-no-code-ai-agents)
