@@ -41,8 +41,8 @@
       "category": "Claude + AI tooling",
       "thumbnail_prompt": "Two abstract puzzle-piece shapes facing each other on a pure black background, drawn in warm off-white grainy hand-drawn lines. The left puzzle piece is outlined only. The right puzzle piece is filled solid lime green. Between them, three small circular dots in warm off-white showing the snap points. Tiny four-point sparkles around the composition. Flat 2D, no text, no letters.",
       "queued_at": "2026-05-04T07:42:18.471288+00:00",
-      "published_at": null,
-      "status": "queued"
+      "published_at": "2026-05-06T06:24:44.252667+00:00",
+      "status": "published"
     },
     {
       "slug": "claude-code-hooks-developer-automation-patterns",
