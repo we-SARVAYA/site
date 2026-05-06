@@ -28,11 +28,18 @@ npm-debug.log*
 __pycache__/
 *.pyc
 
-# Claude notify signals (local agent files)
-C:UsersClaude.claudeclaude-notify-signalsnotification
-C:UsersClaude.claudeclaude-notify-signalsstop
-C:UsersClaude.claudeclaude-notify-signalspermission
+# Local dev/audit scripts (not part of the deployed site)
+responsive_check.py
+responsive_focus.py
+responsive_screenshots/
+mobile_audit.py
+gen_og_default.py
+gen_claude_design_thumbnail.py
+assets/images/mockups/
+
+# Claude notify signals (local agent files — orphan artifacts in any folder)
+*claude-notify-signals*
+**/C\:UsersClaude*
 
 # Claude agent runtime artifacts
 .claude/
-C:UsersClaude.claudeclaude-notify-signals*

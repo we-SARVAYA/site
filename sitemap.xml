@@ -25,6 +25,24 @@
         <priority>0.9</priority>
     </url>
     <url>
+        <loc>https://sarvaya.in/services/web-development</loc>
+        <lastmod>2026-05-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/services/ai-automation</loc>
+        <lastmod>2026-05-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/services/seo-geo</loc>
+        <lastmod>2026-05-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
         <loc>https://sarvaya.in/contact</loc>
         <lastmod>2026-04-19</lastmod>
         <changefreq>monthly</changefreq>
@@ -89,6 +107,12 @@
         <lastmod>2026-04-19</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/security</loc>
+        <lastmod>2026-04-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://sarvaya.in/blog/ai-citations-vs-google-rankings-geo-strategy</loc>

@@ -589,3 +589,369 @@
         gap: 12px;
     }
 }
+
+/* Security page: subprocessor table */
+.sec-table-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    border-radius: 12px;
+}
+.sec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #f0f0f0;
+    min-width: 560px;
+}
+.sec-table thead {
+    background: rgba(200, 255, 0, 0.04);
+}
+.sec-table th {
+    text-align: left;
+    font-family: var(--font-display, 'Syne', sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #c8ff00;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.1);
+}
+.sec-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.06);
+    vertical-align: top;
+    line-height: 1.5;
+}
+.sec-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.sec-table tbody tr:hover {
+    background: rgba(200, 255, 0, 0.02);
+}
+@media (max-width: 768px) {
+    .sec-table th,
+    .sec-table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===== Service page extras ===== */
+.deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+}
+.deliverable-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 24px;
+    background: #111111;
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    border-radius: 14px;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.deliverable-row:hover {
+    border-color: rgba(200, 255, 0, 0.4);
+    transform: translateY(-3px);
+}
+.deliverable-row__check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(200, 255, 0, 0.12);
+    color: #c8ff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.deliverable-row__text {
+    line-height: 1.55;
+    font-size: 15px;
+    color: rgba(240, 240, 240, 0.86);
+}
+.deliverable-row__text strong {
+    color: #f0f0f0;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ===== Answer block (TL;DR for AEO/GEO) ===== */
+.answer-block {
+    padding: 0 0 60px;
+}
+.answer-block__card {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #0c0c0c;
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    border-left: 3px solid #c8ff00;
+    border-radius: 14px;
+    padding: 32px 36px;
+}
+.answer-block__lead {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #f0f0f0;
+    margin: 0 0 12px;
+    font-weight: 500;
+}
+.answer-block__lead strong {
+    color: #c8ff00;
+    font-weight: 600;
+}
+.answer-block__body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(240, 240, 240, 0.78);
+    margin: 0;
+}
+@media (max-width: 600px) {
+    .answer-block__card {
+        padding: 24px 22px;
+    }
+    .answer-block__lead {
+        font-size: 16px;
+    }
+}
+
+/* ===== Compare table (SEO vs AEO vs GEO etc.) ===== */
+.compare-table-wrap {
+    position: relative;
+    margin-top: 48px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    background: #0c0c0c;
+}
+.compare-table-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #0c0c0c 80%);
+    pointer-events: none;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.compare-table-hint {
+    display: none;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(240, 240, 240, 0.5);
+    letter-spacing: 0.04em;
+}
+@media (max-width: 760px) {
+    .compare-table-hint {
+        display: block;
+    }
+}
+@media (min-width: 900px) {
+    .compare-table-wrap::after {
+        display: none;
+    }
+}
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+.compare-table th,
+.compare-table td {
+    padding: 18px 22px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.06);
+    font-size: 14px;
+    line-height: 1.55;
+}
+.compare-table thead th {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #f0f0f0;
+    background: #111111;
+    border-bottom: 1px solid rgba(200, 255, 0, 0.2);
+}
+.compare-table thead th:first-child {
+    color: rgba(240, 240, 240, 0.5);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.compare-table tbody th {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    color: #f0f0f0;
+    background: rgba(240, 240, 240, 0.02);
+    width: 180px;
+}
+.compare-table tbody td {
+    color: rgba(240, 240, 240, 0.82);
+}
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.compare-table tbody tr:hover td,
+.compare-table tbody tr:hover th {
+    background: rgba(200, 255, 0, 0.02);
+}
+
+/* ===== Trust strip ===== */
+.trust-strip {
+    padding: 60px 0 80px;
+    background: #060606;
+    border-top: 1px solid rgba(240, 240, 240, 0.06);
+}
+.trust-strip__label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 240, 0.45);
+    margin-bottom: 28px;
+}
+.trust-strip__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+.trust-badge {
+    background: #111111;
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    border-radius: 12px;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    min-width: 0;
+}
+.trust-badge:hover {
+    border-color: rgba(200, 255, 0, 0.35);
+    transform: translateY(-3px);
+}
+.trust-badge > a,
+.trust-badge > .trust-badge__inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+.trust-badge__icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(200, 255, 0, 0.08);
+    color: #c8ff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.trust-badge__icon svg {
+    width: 18px;
+    height: 18px;
+}
+.trust-badge--google .trust-badge__icon {
+    background: #ffffff;
+    color: inherit;
+}
+.trust-badge--trustpilot .trust-badge__icon {
+    background: #00b67a;
+    color: #ffffff;
+}
+.trust-badge--clutch .trust-badge__icon {
+    background: #ff3d2e;
+    color: #ffffff;
+}
+.trust-badge__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.25;
+    min-width: 0;
+}
+.trust-badge__title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+.trust-badge__sub {
+    font-size: 11px;
+    color: rgba(240, 240, 240, 0.55);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.trust-badge__stars {
+    color: #facc15;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 1100px) {
+    .trust-strip__list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 700px) {
+    .trust-strip__list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 420px) {
+    .trust-strip__list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Breadcrumb (used on service pages) */
+.breadcrumb {
+    padding: 110px 0 0;
+}
+.breadcrumb__list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: rgba(240, 240, 240, 0.55);
+}
+.breadcrumb__list a {
+    color: rgba(240, 240, 240, 0.65);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.breadcrumb__list a:hover {
+    color: #c8ff00;
+}
+.breadcrumb__sep {
+    opacity: 0.4;
+}
+.breadcrumb__list [aria-current="page"] {
+    color: #c8ff00;
+}

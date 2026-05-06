@@ -85,6 +85,111 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#kabstech",
+                "name": "Kabs Tech - USA SaaS Marketing Site",
+                "url": "https://kabstech.com/",
+                "image": "https://sarvaya.in/assets/images/kabstech.png",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "creator": {"@id": "https://sarvaya.in/#organization"},
+                "about": "B2B SaaS marketing website for a US-based tech company - positioning, core product narrative, conversion paths, and lead capture.",
+                "keywords": "SaaS website, B2B marketing site, US client, conversion-focused",
+                "inLanguage": "en-US",
+                "dateCreated": "2025",
+                "audience": {"@type": "Audience", "audienceType": "US B2B SaaS"}
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#kbglobalpartners",
+                "name": "KB Global Partners - SaaS Website",
+                "url": "https://kbglobalpartners.com",
+                "image": "https://sarvaya.in/assets/images/kbglobalpartner.png",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "Enterprise-focused SaaS marketing site with structured lead capture, trust signals, and SEO-ready information architecture.",
+                "keywords": "SaaS, B2B, enterprise, marketing site",
+                "inLanguage": "en-US",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#recell",
+                "name": "Recell - Battery Recycling Platform",
+                "url": "https://www.recell.in",
+                "image": "https://sarvaya.in/assets/images/recell.svg",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "Production website for a lithium-ion battery recycling operator - content architecture for buyer, supplier, and regulator audiences.",
+                "keywords": "sustainability, recycling, multi-audience, content site",
+                "inLanguage": "en-IN",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#vishwasgirdher",
+                "name": "VishwasGirdher - Personal Portfolio",
+                "url": "https://vishwasgirdher.com/",
+                "image": "https://sarvaya.in/assets/images/vishwasgirdher.png",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "High-performance personal portfolio with motion design, dark-mode-first layout, and Core Web Vitals-optimized asset delivery.",
+                "keywords": "portfolio, motion design, Core Web Vitals, personal brand",
+                "inLanguage": "en",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#adbuildestate",
+                "name": "ADBuild Estate - Broker Showcase Site",
+                "url": "https://adbuildestate.com/",
+                "image": "https://sarvaya.in/assets/images/adbuildestate-laptop-mockup.jpg",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "Real-estate broker showcase with structured property data, inquiry capture, and local-SEO-ready schema markup.",
+                "keywords": "real estate, local SEO, lead capture, brokerage",
+                "inLanguage": "en-IN",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#orderpulse",
+                "name": "OrderPulse - Restaurant POS",
+                "url": "https://iamdevsharma.tech/orderpulse",
+                "image": "https://sarvaya.in/assets/images/orderpulse.png",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "POS product marketing site for restaurants, cafes, and bakeries - features, pricing, and onboarding flow.",
+                "keywords": "SaaS product site, restaurant tech, POS",
+                "inLanguage": "en",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#juspace",
+                "name": "JuSpace - ED-Tech Platform",
+                "url": "https://www.juhunt.tech",
+                "image": "https://sarvaya.in/assets/images/juspace.svg",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "ED-Tech marketing platform with course discovery, educator profiles, and enrollment-optimized funnels.",
+                "keywords": "ED-Tech, education platform, enrollment funnel",
+                "inLanguage": "en",
+                "dateCreated": "2025"
+            },
+            {
+                "@type": "CreativeWork",
+                "@id": "https://sarvaya.in/portfolio#mlco",
+                "name": "MLCO.ai - AI-Powered Learning",
+                "url": "https://mlco.ai/",
+                "image": "https://sarvaya.in/assets/images/mlco.png",
+                "author": {"@id": "https://sarvaya.in/#organization"},
+                "about": "AI-powered learning platform marketing site - narrative positioning against legacy ED-Tech, conversion-optimized hero and pricing.",
+                "keywords": "AI learning, ED-Tech, SaaS marketing",
+                "inLanguage": "en",
+                "dateCreated": "2025"
+            }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -109,7 +214,17 @@
                 <a href="portfolio">Portfolio</a>
                 <a href="/#about">About</a>
                 <a href="24hrs">24hrs</a>
-                <a href="/#services">Services</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu">
+                        <a href="/services/web-development" role="menuitem">Web Development</a>
+                        <a href="/services/ai-automation" role="menuitem">AI Automation</a>
+                        <a href="/services/seo-geo" role="menuitem">SEO &amp; GEO</a>
+                        <a href="/#services" role="menuitem">All Services</a>
+                    </div>
+                </div>
                 <div class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">More
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -138,6 +253,9 @@
         <a href="/#about">About</a>
         <a href="24hrs">24hrs</a>
         <a href="/#services">Services</a>
+        <a href="/services/web-development" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; Web Development</a>
+        <a href="/services/ai-automation" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; AI Automation</a>
+        <a href="/services/seo-geo" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; SEO &amp; GEO</a>
         <a href="whitelabel">White Label</a>
         <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener">Free Tools</a>
         <a href="blog">Blog</a>
@@ -153,6 +271,50 @@
             <div class="portfolio-hero__label">Our Work</div>
             <h1 class="portfolio-hero__title">Portfolio</h1>
             <p class="portfolio-hero__desc">What you see is only a fraction of our work. The rest lives under NDAs, protected by client confidentiality. Want the full picture? <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%27d%20like%20to%20see%20more%20of%20your%20work." target="_blank" rel="noopener noreferrer" class="inline-link">Get on a call</a> with us and we&rsquo;ll walk you through it.</p>
+        </div>
+    </section>
+
+    <!-- Case Study Framework -->
+    <section class="casestudy-framework" aria-label="How SARVAYA structures a case study">
+        <div class="container">
+            <div class="casestudy-framework__inner">
+                <div class="casestudy-framework__head">
+                    <span class="casestudy-framework__label">Case Study Framework</span>
+                    <h2 class="casestudy-framework__title">Every engagement is documented against the same five dimensions.</h2>
+                    <p class="casestudy-framework__desc">Client-verified metrics and full architecture diagrams are shared under mutual NDA on a discovery call. The visible work below is the surface - the receipts are the structured debrief behind each one.</p>
+                </div>
+                <ol class="casestudy-framework__grid">
+                    <li class="cf-item">
+                        <span class="cf-item__step">01</span>
+                        <h3 class="cf-item__title">Scoped Problem</h3>
+                        <p class="cf-item__desc">The exact business question the work had to answer - not a brief, a decision.</p>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__step">02</span>
+                        <h3 class="cf-item__title">Architecture</h3>
+                        <p class="cf-item__desc">Stack, data flow, AI/automation graph, deployment surface, observability.</p>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__step">03</span>
+                        <h3 class="cf-item__title">Metrics</h3>
+                        <p class="cf-item__desc">Shipped outcomes - conversion, cycle time, uptime, Core Web Vitals - baseline vs. delivered.</p>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__step">04</span>
+                        <h3 class="cf-item__title">Timeline</h3>
+                        <p class="cf-item__desc">From kickoff to live, with the critical path and anything we killed or re-scoped.</p>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__step">05</span>
+                        <h3 class="cf-item__title">Client Verification</h3>
+                        <p class="cf-item__desc">Named reference, written permission, and - where allowed - a link to the client&rsquo;s own attestation.</p>
+                    </li>
+                </ol>
+                <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%27d%20like%20the%20full%20case%20study%20brief%20for%20a%20project%20under%20NDA." target="_blank" rel="noopener noreferrer" class="casestudy-framework__cta">
+                    Request a Full Case Study Under NDA
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -461,6 +623,7 @@
                         <h4>Legal</h4>
                         <a href="privacy">Privacy Policy</a>
                         <a href="terms">Terms of Service</a>
+                        <a href="security">Security &amp; DPA</a>
                     </div>
                 </div>
             </div>

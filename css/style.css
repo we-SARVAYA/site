@@ -1178,6 +1178,9 @@ body:has(.mobile-menu.active) .navbar {
     transition: all var(--transition);
     cursor: pointer;
     overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 .service-card::before {
@@ -2446,6 +2449,14 @@ body:has(.mobile-menu.active) .navbar {
     .testimonial-card {
         flex: 0 0 300px;
         padding: 24px;
+        transform: translateZ(0);
+    }
+
+    .testimonials-track {
+        animation-duration: 80s;
+        will-change: auto;
+        -webkit-backface-visibility: visible;
+        backface-visibility: visible;
     }
 
     .footer-top {
@@ -2763,3 +2774,4 @@ body:has(.mobile-menu.active) .navbar {
         font-size: 13px;
     }
 }
+

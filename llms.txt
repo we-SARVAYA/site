@@ -53,6 +53,12 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - Instagram: https://www.instagram.com/sarvaya.in
 - LinkedIn: https://www.linkedin.com/company/sarvaya
 
+## Service Pages
+
+- [Website Development](https://sarvaya.in/services/web-development) — Custom, fast, AI-ready websites engineered for conversion and search visibility (marketing sites, SaaS, portfolios, e-commerce).
+- [AI Automation](https://sarvaya.in/services/ai-automation) — Custom AI agents and workflows: lead qualifiers, RAG chatbots, content engines, inbox triage, research agents on OpenAI, Claude, Gemini, n8n, Make.
+- [SEO, AEO &amp; GEO](https://sarvaya.in/services/seo-geo) — Combined SEO + Answer Engine + Generative Engine Optimization. Rank in Google AND get cited by AI Overviews, ChatGPT, Perplexity, Bing Copilot.
+
 ## Pages
 
 - [Home](https://sarvaya.in/)
