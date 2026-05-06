@@ -222,4 +222,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://sarvaya.in/blog/claude-code-hooks-developer-automation-patterns</loc>
+        <lastmod>2026-05-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>

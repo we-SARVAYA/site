@@ -96,6 +96,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [AI Citation Tracking Tools - What Works in 2026](https://sarvaya.in/blog/ai-citation-tracking-tools-comparison-2026)
 - [Schema Markup That Drives AI Overview Citations in 2026](https://sarvaya.in/blog/schema-markup-ai-overviews-citation-priority)
 - [Claude Skills vs MCP - When to Use Which](https://sarvaya.in/blog/claude-skills-vs-mcp-when-to-use-which)
+- [Claude Code Hooks - 6 Automation Patterns Every Dev Should Know](https://sarvaya.in/blog/claude-code-hooks-developer-automation-patterns)
 
 ## License
 
