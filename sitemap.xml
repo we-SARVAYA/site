@@ -222,4 +222,34 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://sarvaya.in/blog/llms-txt-explained-implementation-guide-2026</loc>
+        <lastmod>2026-05-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/blog/ai-citation-tracking-tools-comparison-2026</loc>
+        <lastmod>2026-05-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/blog/schema-markup-ai-overviews-citation-priority</loc>
+        <lastmod>2026-05-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/blog/claude-skills-vs-mcp-when-to-use-which</loc>
+        <lastmod>2026-05-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://sarvaya.in/blog/claude-code-hooks-developer-automation-patterns</loc>
+        <lastmod>2026-05-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
