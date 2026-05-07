@@ -74,8 +74,8 @@
       "category": "Traditional SEO",
       "thumbnail_prompt": "An abstract hub-and-spoke diagram on a pure black background, drawn in warm off-white grainy hand-drawn lines. A central circular hub connects via straight lines to six smaller circular spokes arranged around it. One of the spoke circles is filled solid lime green. The lines connecting hub to spokes are warm off-white. Tiny four-point sparkle dots in negative space. Flat 2D, no text, no letters anywhere.",
       "queued_at": "2026-05-04T07:42:18.471288+00:00",
-      "published_at": null,
-      "status": "queued"
+      "published_at": "2026-05-07T17:41:59.495565+00:00",
+      "status": "published"
     },
     {
       "slug": "react-server-components-error-boundaries-workarounds",
