@@ -247,7 +247,10 @@ CONTENT REQUIREMENTS
       (/services/web-development, /services/ai-automation, /services/seo-geo,
       /whitelabel, /24hrs) or a related blog post
     * Use semantic <details>/<summary> with classes blog-faq__item,
-      blog-faq__q, blog-faq__a
+      blog-faq__q, blog-faq__a. The question text MUST be wrapped in
+      <span class="blog-faq__q-text"> inside the summary tag (so the
+      flex layout handles long questions correctly with the prefix
+      number and suffix icon).
 - **MANDATORY FAQPage JSON-LD schema** in <head> immediately after the
   BreadcrumbList script. Questions and answers must MATCH the visible FAQ
   section verbatim (plain text, no HTML in schema answers). See reference

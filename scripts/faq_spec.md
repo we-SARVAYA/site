@@ -68,7 +68,7 @@ Use semantic `<details>/<summary>` for native accordion (zero JS dependency). Th
         <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
         <div class="blog-faq__list">
             <details class="blog-faq__item">
-                <summary class="blog-faq__q">Question text</summary>
+                <summary class="blog-faq__q"><span class="blog-faq__q-text">Question text</span></summary>
                 <div class="blog-faq__a">
                     <p>Answer text.</p>
                 </div>
