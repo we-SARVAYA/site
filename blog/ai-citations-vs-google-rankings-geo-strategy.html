@@ -70,6 +70,54 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is GEO and how is it different from SEO?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "GEO (Generative Engine Optimization) is the practice of structuring content so that AI search engines like ChatGPT, Perplexity, and Google AI Overviews cite it inside their generated answers. SEO targets traditional Google rankings (the ten blue links). GEO targets brand citations inside AI-generated responses. The two systems select content using different signals, so a page can rank #1 on Google and never get cited by ChatGPT, or vice versa."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why do AI engines cite different sources than Google?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AI engines optimize for content that can be confidently extracted, synthesized, and attributed - closer to academic citation than search ranking. They reward citation density (how often a source is referenced across the open web), claim clarity (specific numbers and dates over vague language), structural legibility (clean lists and short passages), and authorial authority signals. Google rewards behavioral and link-based signals accumulated over years. The criteria are structurally different, so the winners are too."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I optimize my content for AI citations?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Five things move the needle. (1) Add comprehensive Schema.org markup - Article, FAQ, HowTo, BreadcrumbList. (2) Write in self-contained passages with one claim per paragraph that can be lifted as a citation. (3) Include specific numbers, dates, and named sources instead of vague phrasing. (4) Build entity-level brand mentions across the open web so AI training data sees your brand. (5) Maintain an llms.txt file so AI crawlers can discover your most important pages."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does ranking on Google improve my chances of being cited by ChatGPT?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Modestly. Research analyzing AI engine behavior in early 2026 found only 12% overlap between URLs cited by major AI engines and URLs ranking in Google's Top 10 for the same query. High Google rankings indicate authority that some AI engines weight, but the bulk of AI citations come from sources Google ranks lower or not at all. Treat AI search visibility as a separate workstream, not a Google byproduct."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What schema markup helps AI engines cite my content?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Article schema (with author, datePublished, dateModified) is the foundation. FAQPage schema is the highest-leverage addition because it explicitly maps Q to A pairs that AI engines can lift directly. HowTo schema helps for step-by-step content. BreadcrumbList helps engines understand site hierarchy. Organization and Person schema build the entity relationships AI uses to attribute authority. All schema should be validated using Google's Rich Results Test before deployment."
+                }
+            }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -267,6 +315,51 @@
             </div>
         </aside>
     </div>
+
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q">What is GEO and how is it different from SEO?</summary>
+                    <div class="blog-faq__a">
+                        <p>GEO (Generative Engine Optimization) is the practice of structuring content so AI search engines like ChatGPT, Perplexity, and Google AI Overviews cite it inside their generated answers. SEO targets traditional Google rankings (the ten blue links). GEO targets brand citations inside AI-generated responses.</p>
+                        <p>The two systems select content using different signals, so a page can rank #1 on Google and never get cited by ChatGPT, or vice versa. Treat them as separate workstreams that share a technical foundation.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q">Why do AI engines cite different sources than Google?</summary>
+                    <div class="blog-faq__a">
+                        <p>AI engines optimize for content that can be confidently extracted, synthesized, and attributed - closer to academic citation than search ranking. They reward citation density (how often a source is referenced across the open web), claim clarity (specific numbers and dates over vague language), structural legibility (clean lists and short passages), and authorial authority signals.</p>
+                        <p>Google rewards behavioral and link-based signals accumulated over years. The criteria are structurally different, so the winners are too.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q">How can I optimize my content for AI citations?</summary>
+                    <div class="blog-faq__a">
+                        <p>Five things move the needle:</p>
+                        <p>(1) Add full Schema.org markup - Article, FAQ, HowTo, BreadcrumbList. (2) Write in self-contained passages with one claim per paragraph that can be lifted as a citation. (3) Include specific numbers, dates, and named sources instead of vague phrasing. (4) Build entity-level brand mentions across the open web so AI training data sees your brand. (5) Maintain an <a href="/llms.txt">llms.txt</a> file so AI crawlers can discover your most important pages.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q">Does ranking on Google improve my chances of being cited by ChatGPT?</summary>
+                    <div class="blog-faq__a">
+                        <p>Modestly. Research analyzing AI engine behavior in early 2026 found only 12% overlap between URLs cited by major AI engines and URLs ranking in Google's Top 10 for the same query.</p>
+                        <p>High Google rankings indicate authority that some AI engines weight, but the bulk of AI citations come from sources Google ranks lower or not at all. Treat AI search visibility as a separate workstream, not a Google byproduct.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q">What schema markup helps AI engines cite my content?</summary>
+                    <div class="blog-faq__a">
+                        <p>Article schema (with author, datePublished, dateModified) is the foundation. FAQPage schema is the highest-leverage addition because it explicitly maps Q to A pairs that AI engines can lift directly. HowTo schema helps for step-by-step content. BreadcrumbList helps engines understand site hierarchy. Organization and Person schema build the entity relationships AI uses to attribute authority.</p>
+                        <p>Validate everything with Google's <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">Rich Results Test</a> before deployment. See our <a href="/services/seo-geo">SEO &amp; GEO service</a> for a full implementation walkthrough.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Posts -->
     <section class="blog-related">

@@ -55,6 +55,19 @@ delve, delving, leverage, leveraging, utilize, utilise, landscape (as metaphor),
 - One external link to a high-authority source (Google, Anthropic, research study) when citing a fact, with `rel="noopener noreferrer"` if `target="_blank"`.
 - Alt text on every image describes the image, includes the primary keyword naturally.
 
+## FAQ requirements (non-negotiable - see faq_spec.md for full rules)
+
+Every post MUST end with an FAQ section between the article body and the "More from our blog" section. The FAQ section must include:
+
+- **3-5 questions** (5 is the sweet spot, never more).
+- Questions phrased as a real user would type into Google or ChatGPT (not paraphrased H2s from the article body).
+- **40-100 word answers**, first sentence directly answering the question.
+- At least one answer with an internal link to a SARVAYA service page or related blog post.
+- A matching `FAQPage` JSON-LD schema block in `<head>` whose questions and answers exactly match the visible FAQ.
+- Visible markup uses `<details>/<summary>` with `.blog-faq__item / .blog-faq__q / .blog-faq__a` classes.
+
+**The FAQ is structurally mandatory** - posts without it will be rejected by the build validator. Copy the FAQ structure from the reference post (`seo-in-2026.html`) and replace only the question/answer content with topic-specific copy.
+
 ## Examples
 
 **Bad:** "In today's rapidly evolving digital landscape, it's more crucial than ever to leverage cutting-edge AI tools to unlock the full potential of your business."

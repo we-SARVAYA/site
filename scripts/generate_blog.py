@@ -228,7 +228,7 @@ NEW POST METADATA
 - og:image full URL: https://sarvaya.in/assets/images/blog/blog-{topic['slug']}.webp
 
 CONTENT REQUIREMENTS
-- Write a 1200–1600 word expert article body
+- Write a 1200-1600 word expert article body
 - Mirror the reference's heading hierarchy (h2/h3), TL;DR aside, blockquote,
   unordered lists, ordered lists, and <strong> emphasis patterns
 - Confident first-person-plural voice, no filler, no "in this article we will"
@@ -236,6 +236,22 @@ CONTENT REQUIREMENTS
 - Update every meta tag, og:, twitter:, canonical, JSON-LD BlogPosting,
   JSON-LD BreadcrumbList, article:published_time, article:modified_time,
   title tag, meta description, meta keywords
+- **MANDATORY FAQ SECTION** between </div> closing .blog-layout and the
+  <section class="blog-related"> block. Copy the EXACT structure from the
+  reference post's <section class="blog-faq"> element. Requirements:
+    * 3-5 questions, 5 is ideal
+    * Questions are real long-tail queries someone would type, NOT paraphrased
+      versions of the article H2s
+    * 40-100 word answers, first sentence directly answers the question
+    * At least one answer contains an internal link to a service page
+      (/services/web-development, /services/ai-automation, /services/seo-geo,
+      /whitelabel, /24hrs) or a related blog post
+    * Use semantic <details>/<summary> with classes blog-faq__item,
+      blog-faq__q, blog-faq__a
+- **MANDATORY FAQPage JSON-LD schema** in <head> immediately after the
+  BreadcrumbList script. Questions and answers must MATCH the visible FAQ
+  section verbatim (plain text, no HTML in schema answers). See reference
+  post for the exact structure.
 - The cover image <img src> must be ../assets/images/blog/blog-{topic['slug']}.webp
 - For the "More from our blog" related section, pick any 3 DIFFERENT posts
   from this MANDATORY mapping. Use the image filename and title EXACTLY as
@@ -763,6 +779,24 @@ def _generate_validated_article_with_retry(topic: dict, max_attempts: int = 3) -
             banned_history.extend(hits)
             last_err = RuntimeError(f"banned phrases {hits}")
             print(f"  generation attempt {attempt}/{max_attempts}: banned phrases {hits}, retrying", flush=True)
+            continue
+
+        # FAQ structural validation (see scripts/faq_spec.md)
+        faq_section_present = '<section class="blog-faq"' in article_html
+        faq_schema_present = '"@type": "FAQPage"' in article_html or '"@type":"FAQPage"' in article_html
+        faq_item_count = len(re.findall(r'<details class="blog-faq__item"', article_html))
+        faq_problems = []
+        if not faq_section_present:
+            faq_problems.append("missing <section class=\"blog-faq\">")
+        if not faq_schema_present:
+            faq_problems.append("missing FAQPage JSON-LD schema")
+        if faq_item_count < 3:
+            faq_problems.append(f"only {faq_item_count} FAQ items (need 3-5)")
+        elif faq_item_count > 5:
+            faq_problems.append(f"{faq_item_count} FAQ items (max 5)")
+        if faq_problems:
+            last_err = RuntimeError(f"FAQ validation failed: {faq_problems}")
+            print(f"  generation attempt {attempt}/{max_attempts}: FAQ {faq_problems}, retrying", flush=True)
             continue
 
         return article_html
