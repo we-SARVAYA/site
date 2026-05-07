@@ -168,5 +168,11 @@
     "title": "Claude Code Hooks - 6 Automation Patterns Every Dev Should Know",
     "date": "2026-05-06",
     "tag": "AI"
+  },
+  {
+    "slug": "inp-core-web-vitals-react-debugging-guide",
+    "title": "INP Replaced FID - Why Your React App Probably Fails Core Web Vitals",
+    "date": "2026-05-07",
+    "tag": "SEO"
   }
 ]
