@@ -2,6 +2,8 @@
 
 Every blog post on sarvaya.in must include an FAQ section between the article body and the "More from our blog" related-posts section. This document defines the rules. Edit here to change behavior without touching Python.
 
+> **This is a sub-spec.** The master spec covering ALL post-level requirements (every required schema, internal/external linking, AEO/GEO patterns, meta tags, sitemap rules) lives in `scripts/blog_post_spec.md`. Read that first.
+
 ## Why FAQs ship on every post
 
 - **GEO (★★★★★)**: AI engines (Google AI Overviews, ChatGPT, Perplexity, Bing Copilot) preferentially cite self-contained Q→A passages. FAQPage schema is one of the strongest GEO signals.

@@ -38,6 +38,7 @@ SITEMAP = ROOT / "sitemap.xml"
 LLMS = ROOT / "llms.txt"
 TOPICS_LOG = Path(__file__).resolve().parent / "topics_log.json"
 STYLE_FILE = Path(__file__).resolve().parent / "writing_style.md"
+SPEC_FILE = Path(__file__).resolve().parent / "blog_post_spec.md"
 REFERENCE_POST = BLOG_DIR / "seo-in-2026.html"
 
 TODAY = datetime.now(timezone.utc).date().isoformat()
@@ -187,6 +188,7 @@ Output ONLY minified JSON (no markdown fences, no preamble). Schema:
 def generate_article_html(topic: dict, extra_hint: str = "") -> str:
     reference = REFERENCE_POST.read_text(encoding="utf-8")
     style_rules = STYLE_FILE.read_text(encoding="utf-8")
+    master_spec = SPEC_FILE.read_text(encoding="utf-8") if SPEC_FILE.exists() else ""
     hint_block = f"\n\n{extra_hint.strip()}\n" if extra_hint.strip() else ""
     banlist_literal = ", ".join(f'"{w}"' for w in BANNED_PHRASES)
     banned_reminder = (
@@ -202,6 +204,10 @@ def generate_article_html(topic: dict, extra_hint: str = "") -> str:
     prompt = f"""Produce a complete standalone HTML blog post for sarvaya.in.
 
 {banned_reminder}{hint_block}
+
+<<<MASTER_SPEC (every rule below is mandatory; violation = post rejected)
+{master_spec}
+MASTER_SPEC
 
 <<<WRITING_RULES (follow EVERY rule; violation = failure)
 {style_rules}
@@ -800,6 +806,32 @@ def _generate_validated_article_with_retry(topic: dict, max_attempts: int = 3) -
         if faq_problems:
             last_err = RuntimeError(f"FAQ validation failed: {faq_problems}")
             print(f"  generation attempt {attempt}/{max_attempts}: FAQ {faq_problems}, retrying", flush=True)
+            continue
+
+        # Schema + linking validation (see scripts/blog_post_spec.md)
+        spec_problems = []
+        if '"@type": "BlogPosting"' not in article_html:
+            spec_problems.append("missing BlogPosting JSON-LD")
+        if '"@type": "BreadcrumbList"' not in article_html:
+            spec_problems.append("missing BreadcrumbList JSON-LD")
+
+        # In-body links: count anchors inside <article ...> that point to SARVAYA pages.
+        article_match = re.search(r'<article[^>]*class="[^"]*blog-article[^"]*"[^>]*>([\s\S]*?)</article>', article_html)
+        article_inner = article_match.group(1) if article_match else ""
+        internal_link_pattern = r'<a\s+[^>]*href="(?:/(?:services/|24hrs|whitelabel|portfolio|contact|blog/)|https://sarvaya\.in/|https://freetools\.sarvaya\.in)[^"]*"'
+        internal_count = len(re.findall(internal_link_pattern, article_inner))
+        if internal_count < 3:
+            spec_problems.append(f"only {internal_count} in-body internal links (need >= 3)")
+
+        # Outbound authority links: count anchors with target=_blank and external href in body.
+        outbound_pattern = r'<a\s+[^>]*href="https?://(?!sarvaya\.in|freetools\.sarvaya\.in|wa\.me|twitter\.com|linkedin\.com)[^"]+"[^>]*target="_blank"'
+        outbound_count = len(re.findall(outbound_pattern, article_inner))
+        if outbound_count < 2:
+            spec_problems.append(f"only {outbound_count} outbound authority links (need >= 2)")
+
+        if spec_problems:
+            last_err = RuntimeError(f"Spec validation failed: {spec_problems}")
+            print(f"  generation attempt {attempt}/{max_attempts}: spec {spec_problems}, retrying", flush=True)
             continue
 
         return article_html
