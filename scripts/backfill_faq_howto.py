@@ -340,7 +340,7 @@ def inject(html: str, faq_html: str, faq_schema: str, howto_schema: str | None) 
 
 # ----------------------------------------------------------------------- main
 
-def process(path: Path, dry_run: bool, howto_add_only: bool = False) -> str:
+def process(path: Path, dry_run: bool, howto_add_only: bool = False, faq_only: bool = False) -> str:
     html = path.read_text(encoding="utf-8")
 
     # Mode: only inject HowTo schema (skip FAQ generation entirely).
@@ -381,7 +381,7 @@ def process(path: Path, dry_run: bool, howto_add_only: bool = False) -> str:
     faq_schema = render_faq_schema(faqs)
 
     howto_schema = None
-    if path.stem in HOWTO_TARGETS:
+    if not faq_only and path.stem in HOWTO_TARGETS and '"@type": "HowTo"' not in html:
         print(f"  generating HowTo for {path.stem} ...", flush=True)
         howto = gen_howto(title, body)
         howto_schema = render_howto_schema(howto)
@@ -400,6 +400,7 @@ def main() -> int:
     ap.add_argument("--only", default=None, help="single post slug to process")
     ap.add_argument("--howto-only", action="store_true", help="only run on HOWTO_TARGETS posts")
     ap.add_argument("--howto-add", action="store_true", help="add HowTo schema to HOWTO_TARGETS posts that already have FAQ but no HowTo")
+    ap.add_argument("--faq-only", action="store_true", help="only inject FAQ + FAQPage schema; skip HowTo even on HOWTO_TARGETS posts")
     args = ap.parse_args()
 
     load_env()
@@ -417,7 +418,7 @@ def main() -> int:
     results: dict[str, str] = {}
     for p in posts:
         try:
-            r = process(p, args.dry_run, howto_add_only=args.howto_add)
+            r = process(p, args.dry_run, howto_add_only=args.howto_add, faq_only=args.faq_only)
         except Exception as e:  # noqa: BLE001
             r = f"ERROR: {e}"
         results[p.stem] = r

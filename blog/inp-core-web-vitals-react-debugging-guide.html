@@ -111,6 +111,46 @@
         "totalTime": "PT8H"
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How does Interaction to Next Paint (INP) differ from First Input Delay (FID) and why did it replace it as a Core Web Vital?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "INP measures the latency of every user interaction across an entire page visit, reporting the slowest one, whereas FID only measured the delay of the *first* input. Google replaced FID with INP in March 2024 because FID offered a \"generous failure mode\" for Single Page Applications (SPAs), often showing zero delay if hydration completed before the first click. INP provides a more accurate picture of real-world user experience by tracking all interactions, exposing performance issues like slow re-renders that FID missed."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the target INP score for a React application to pass Core Web Vitals, and what happens if it consistently fails?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A React application needs an INP score of 200 milliseconds or less at the 75th percentile to pass Core Web Vitals. If three-quarters of your users experience interactions faster than 200ms, your site passes. Consistently failing this threshold means your Core Web Vitals report will turn red, potentially leading to lower search engine rankings and a degraded user experience. Many React apps audited in 2026 score between 250-450ms before optimization, indicating a common challenge for modern web development."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What immediate steps can a development team take to improve INP scores for an existing React application?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The fastest immediate step to improve INP is to first measure which specific interactions are slow using real-user monitoring tools. After identifying the slowest components or interactions, teams can apply targeted fixes like deferring hydration with `React.lazy` and Suspense boundaries for heavy widgets, or refactoring large contexts into smaller ones. For quick wins, consider wrapping context consumers with `React.memo` and passing specific props to reduce uncontrolled re-renders. This often accounts for the majority of bad measurements. If your SEO performance is sliding, a technical SEO audit including INP debugging is highly recommended."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "When should I use `useTransition` or Web Workers to optimize expensive operations for better INP in React?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You should use `useTransition` for in-React work that can be deferred, and Web Workers for heavy computations that would otherwise block the main thread. Wrap state updates that drive expensive renders in `startTransition` to prioritize urgent UI updates, allowing the browser to paint first and process the transition during idle time. For tasks like JSON parsing of large payloads, search index construction, or image manipulation, move them to a Web Worker using libraries like Comlink to keep your main thread responsive. This significantly improves INP by moving work out of the critical interaction path."
+                }
+            }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -290,6 +330,40 @@
             </div>
         </aside>
     </div>
+
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How does Interaction to Next Paint (INP) differ from First Input Delay (FID) and why did it replace it as a Core Web Vital?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>INP measures the latency of every user interaction across an entire page visit, reporting the slowest one, whereas FID only measured the delay of the *first* input. Google replaced FID with INP in March 2024 because FID offered a "generous failure mode" for Single Page Applications (SPAs), often showing zero delay if hydration completed before the first click. INP provides a more accurate picture of real-world user experience by tracking all interactions, exposing performance issues like slow re-renders that FID missed.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What is the target INP score for a React application to pass Core Web Vitals, and what happens if it consistently fails?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>A React application needs an INP score of 200 milliseconds or less at the 75th percentile to pass Core Web Vitals. If three-quarters of your users experience interactions faster than 200ms, your site passes. Consistently failing this threshold means your Core Web Vitals report will turn red, potentially leading to lower search engine rankings and a degraded user experience. Many React apps audited in 2026 score between 250-450ms before optimization, indicating a common challenge for modern web development.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What immediate steps can a development team take to improve INP scores for an existing React application?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>The fastest immediate step to improve INP is to first measure which specific interactions are slow using real-user monitoring tools. After identifying the slowest components or interactions, teams can apply targeted fixes like deferring hydration with `React.lazy` and Suspense boundaries for heavy widgets, or refactoring large contexts into smaller ones. For quick wins, consider wrapping context consumers with `React.memo` and passing specific props to reduce uncontrolled re-renders. This often accounts for the majority of bad measurements. If your SEO performance is sliding, a <a href="/services/seo-geo">technical SEO audit</a> including INP debugging is highly recommended.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">When should I use `useTransition` or Web Workers to optimize expensive operations for better INP in React?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>You should use `useTransition` for in-React work that can be deferred, and Web Workers for heavy computations that would otherwise block the main thread. Wrap state updates that drive expensive renders in `startTransition` to prioritize urgent UI updates, allowing the browser to paint first and process the transition during idle time. For tasks like JSON parsing of large payloads, search index construction, or image manipulation, move them to a Web Worker using libraries like Comlink to keep your main thread responsive. This significantly improves INP by moving work out of the critical interaction path.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Posts -->
     <section class="blog-related">
