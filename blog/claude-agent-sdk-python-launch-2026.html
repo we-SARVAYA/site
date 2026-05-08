@@ -110,6 +110,41 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Build Autonomous AI Agents with the Claude Agent SDK for Python",
+        "description": "Learn to set up and deploy autonomous AI agents using Anthropic's Claude Agent SDK for Python. This guide covers the essential steps from installation to running your first agent.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Install the Claude Agent SDK",
+                "text": "Install the 'anthropic' Python SDK using pip. This package now includes the necessary agent primitives for building your AI agents, eliminating the need for any separate installations. Ensure your Python environment is ready for new packages."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Define Your Agent's Tools",
+                "text": "Define your agent's tools as standard Python functions. Decorate these functions with '@tool' and use type annotations; these will automatically generate the JSON schema that Claude uses to understand and interact with your tools, removing manual schema writing."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Set a Permission Policy",
+                "text": "Establish a permission policy for your agent's tool calls. Implement this by passing a 'PermissionHandler' subclass or a simple callback function. Every tool invocation will automatically route through this policy for validation before execution, enhancing safety."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Run the Agent Loop",
+                "text": "Execute your agent by calling 'agent.run(prompt)' and awaiting the result. The SDK takes care of internal processes such as turn management, token counting, and efficient tool dispatch, allowing your agent to operate autonomously without manual intervention."
+            }
+        ],
+        "totalTime": "PT30M"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

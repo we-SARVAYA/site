@@ -70,6 +70,47 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Fix React App Core Web Vitals (INP)",
+        "description": "Learn to identify and resolve common Interaction to Next Paint (INP) performance bottlenecks in React applications, improving Core Web Vitals scores and user experience.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Measure Interaction to Next Paint (INP) performance",
+                "text": "Implement the Web Vitals JS library to send real-user metrics to your analytics. Configure it with the onINP callback and tag measurements with user agent and device class. This helps identify failing devices and specific slow interactions across your application."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Defer hydration for non-critical components",
+                "text": "Utilize React Server Components for non-interactive page sections to eliminate their hydration cost. For non-RSC frameworks, apply selective hydration using React.lazy and Suspense boundaries. Hydrate heavy widgets only when they enter the viewport or are actively interacted with by the user."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Refactor state management to reduce re-renders",
+                "text": "Split large React Contexts into smaller, more focused ones, or replace context with state libraries like Zustand or Jotai that support selectors. This ensures components subscribe only to the specific state slices they actively use, preventing unnecessary re-renders and improving performance."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Offload heavy computations from the main thread",
+                "text": "Wrap state updates driving expensive renders in startTransition using useTransition to prioritize urgent UI updates. Move intensive tasks such as JSON parsing, search index construction, or image manipulation to Web Workers. This keeps the main thread responsive during heavy processing."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Optimize analytics and tracking event processing",
+                "text": "Encapsulate analytics SDK queue flushes and other non-critical event processing within requestIdleCallback with a long timeout. This ensures these operations run during browser idle time, preventing them from blocking user interactions. Your INP scores will improve on pages firing events."
+            }
+        ],
+        "totalTime": "PT8H"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

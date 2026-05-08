@@ -70,6 +70,53 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Set Up Error Boundaries for React Server Components",
+        "description": "Learn to catch errors effectively in both React Server Components and client components within an RSC-heavy application using a hybrid error boundary pattern.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Understand RSC Error Propagation",
+                "text": "Recognize that traditional React Error Boundaries, being client constructs, cannot catch errors thrown directly within React Server Components. Server errors are serialized and streamed, not caught in the client render cycle."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Implement error.tsx for Server Component Errors",
+                "text": "Place error.tsx files in relevant Next.js route segments to catch errors originating from Server Components within those segments. Mark this component \"use client\" as it receives interactive props like reset."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Add Client-Side Error Boundaries",
+                "text": "Integrate classic React Error Boundaries (using componentDidCatch or getDerivedStateFromError) around interactive client component trees. This catches errors during client-side renders, state updates, and event handlers."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Log Server Errors on the Server",
+                "text": "Ensure full server error details and stack traces are logged on the server, before the framework sanitizes them for client consumption. Use instrumentation files or explicit try-catch blocks with logger calls."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Understand the reset Function's Scope",
+                "text": "Recognize that the reset function provided to error.tsx only re-mounts the React tree with cached data, not a fresh data fetch. For real recovery, invalidate the cache or use router.refresh()."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Test All Three Failure Modes",
+                "text": "Explicitly test for server-side throws in Server Components, client-side throws in hydrated components, and network failures during streaming. Confirm appropriate error display and logging for each scenario."
+            }
+        ],
+        "totalTime": "PT2H"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

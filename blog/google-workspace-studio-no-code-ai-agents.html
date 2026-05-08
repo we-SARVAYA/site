@@ -110,6 +110,53 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Build No-Code AI Agents in Google Workspace Studio",
+        "description": "Learn how to create multi-step AI agents across Google Workspace apps like Gmail and Docs without writing any code. Automate repetitive tasks and streamline workflows quickly.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Access Workspace Studio",
+                "text": "Open Google Workspace Studio directly from your app launcher. It is available for Google Workspace Business or Enterprise accounts, appearing alongside your other familiar Google applications without requiring any separate installation."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Select an Agent Trigger",
+                "text": "Choose the event that will initiate your AI agent. Options include new emails matching specific criteria, form submissions, calendar events, updates in Google Sheets, a scheduled time, or a webhook from an external application to start the process."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Define Agent's Task",
+                "text": "Clearly describe what you want the agent to accomplish using plain language. Gemini 2.0 will convert your description into a structured workflow. Review the proposed steps and make any necessary adjustments to ensure they align with your intended outcome."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Connect Necessary Applications",
+                "text": "Integrate the applications your agent needs to interact with. Studio manages OAuth authorization for Google services. For third-party apps, select from the connector library and authenticate each service once to grant the agent access to perform its tasks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Set Permissions and Test",
+                "text": "Configure the agent's permissions, deciding if it can send emails autonomously, require approval, or only draft responses. Run a test against a sandbox copy of your data to verify its functionality and ensure it operates as expected before deployment."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Activate and Monitor Agent",
+                "text": "Activate your agent to begin automating tasks. Monitor its performance through the Studio dashboard, which displays run history, task counts, and any instances requiring human intervention. This allows you to track efficiency and make further refinements."
+            }
+        ],
+        "totalTime": "PT30M"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

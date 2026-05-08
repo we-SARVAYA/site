@@ -110,6 +110,47 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Integrate Vercel Workflows into Next.js",
+        "description": "Learn to incorporate Vercel Workflows into your Next.js App Router project for durable execution of long-running backend tasks. This guide outlines defining, structuring, and triggering workflows to enhance application reliability and user experience.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Install Vercel Workflows Package",
+                "text": "Begin by integrating the @vercel/workflows package into your Next.js project. This package provides the necessary tools and APIs to define and manage durable workflows within your application's backend logic."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Define Workflow Function",
+                "text": "Create an asynchronous function to serve as your workflow definition. This function will encapsulate a series of operations that require durable execution, ensuring reliability for multi-step processes in your Next.js application."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Structure Workflow Steps",
+                "text": "Within your defined workflow function, break down the long-running process into distinct, named steps using the workflow.step() method. Each step represents an independent, retryable operation, preventing data loss and ensuring progress."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Trigger Workflows",
+                "text": "Initiate your defined workflows from Next.js Server Actions, Route Handlers, or even other workflows. This allows you to offload long-running tasks from user-facing requests, improving responsiveness and user experience."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Implement Optimistic UI",
+                "text": "Pair workflow triggers with optimistic UI updates on the client side. This provides immediate feedback to the user, confirming their action while the durable workflow processes in the background, enhancing perceived application speed."
+            }
+        ],
+        "totalTime": "PT30M"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

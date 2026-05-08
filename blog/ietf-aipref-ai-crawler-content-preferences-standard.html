@@ -110,6 +110,53 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Control AI Crawlers with IETF Standards",
+        "description": "Learn to implement current best practices and prepare for upcoming IETF standards to manage how AI systems crawl, train on, and cite your content.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Add llms.txt to your root domain",
+                "text": "Create an llms.txt markdown file at yourdomain.com/llms.txt. Describe your site's purpose, specify important pages, and define content permissions for AI agents. This provides immediate, voluntary guidance to compliant crawlers."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Monitor IETF AIPREF draft stabilization",
+                "text": "Stay informed about the progress of the IETF AIPREF working group. Track when the HTTP header, robots.txt extension, and JSON-LD schema drafts advance to RFC ratification, signaling industry expectation for compliance."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Prepare for HTTP response header implementation",
+                "text": "Familiarize yourself with the Ai-Preference and Ai-Preference-Policy HTTP headers. Plan how to declare per-resource permissions for indexing, training, and summarization, ensuring compliant crawlers read preferences on the first request."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Plan robots.txt extensions for granular control",
+                "text": "Review the proposed robots.txt extensions, including directives like AI-Training: disallow and AI-Summarization: allow. Consider how to apply path-level granularity to manage AI access to different content types on your site."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Anticipate JSON-LD schema integration",
+                "text": "Understand the contentPreference property for schema.org's CreativeWork type. Prepare to embed AI permissions directly into your existing structured data, communicating preferences without requiring server configuration changes."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Define specific AI content preferences",
+                "text": "Clearly articulate your preferences for AI systems, such as allowing summarization but disallowing training, requiring attribution metadata, or targeting specific crawlers. This strategic planning will guide your implementation across all new standards."
+            }
+        ],
+        "totalTime": "PT2H"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>

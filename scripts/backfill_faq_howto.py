@@ -30,6 +30,7 @@ ENV_FILE = ROOT / ".env"
 
 # Posts that should also receive a HowTo JSON-LD block.
 HOWTO_TARGETS = {
+    # Round 1 - already shipped
     "llms-txt-explained-implementation-guide-2026",
     "remix-3-drops-react-preact-migration-guide",
     "ios26-sdk-deadline-react-native-flutter-migration",
@@ -38,6 +39,23 @@ HOWTO_TARGETS = {
     "claude-code-hooks-developer-automation-patterns",
     "ai-automation-small-business",
     "white-label-growth-hack",
+    # Round 2 - additional genuine step-style posts
+    "ios26-liquid-glass-wcag-contrast-ux-fix",          # contrast fix steps
+    "figma-weave-ai-workflows-creative-production-2026", # workflow setup
+    "google-workspace-studio-no-code-ai-agents",        # building agents
+    "ietf-aipref-ai-crawler-content-preferences-standard", # implementation
+    "zapier-mcp-ai-agents-9000-apps-automation",        # connecting Zapier MCP
+    "vercel-workflows-ga-durable-nextjs-architecture",  # adopting Workflows
+    "ai-citations-vs-google-rankings-geo-strategy",     # GEO strategy execution
+    "seo-in-2026",                                      # SEO playbook
+    "claude-agent-sdk-python-launch-2026",              # SDK getting started
+    "productized-outcome-packages-white-label",         # productizing process
+    "agency-model-broken-productized-pivot-2026",       # pivot process
+    "brand-storytelling-substack-reddit-2026",          # storytelling execution
+    # Round 3 - newly-published posts from auto-queue
+    "inp-core-web-vitals-react-debugging-guide",        # INP debugging steps
+    "pillar-cluster-content-architecture-modern-seo",   # content architecture
+    "react-server-components-error-boundaries-workarounds",  # error boundary workaround steps
 }
 
 GEMINI_TEXT_MODEL = "gemini-2.5-flash"
@@ -322,8 +340,31 @@ def inject(html: str, faq_html: str, faq_schema: str, howto_schema: str | None) 
 
 # ----------------------------------------------------------------------- main
 
-def process(path: Path, dry_run: bool) -> str:
+def process(path: Path, dry_run: bool, howto_add_only: bool = False) -> str:
     html = path.read_text(encoding="utf-8")
+
+    # Mode: only inject HowTo schema (skip FAQ generation entirely).
+    if howto_add_only:
+        if '"@type": "HowTo"' in html:
+            return "skip-already-has-howto"
+        if path.stem not in HOWTO_TARGETS:
+            return "skip-not-howto-target"
+        title = extract_title(html)
+        body = extract_article_text(html)
+        if len(body) < 500:
+            return "skip-body-too-short"
+        print(f"  generating HowTo for {path.stem} ...", flush=True)
+        howto = gen_howto(title, body)
+        howto_schema = render_howto_schema(howto)
+        if GA_SCRIPT_RE.search(html):
+            new_html = GA_SCRIPT_RE.sub("\n" + howto_schema + "    <script>window.GA_MEASUREMENT_ID", html, count=1)
+        else:
+            new_html = HEAD_CLOSE_RE.sub(howto_schema + "</head>", html, count=1)
+        if dry_run:
+            return "dry-run-howto-added"
+        path.write_text(new_html, encoding="utf-8")
+        return "updated-howto-added"
+
     if 'class="blog-faq"' in html or '"@type": "FAQPage"' in html:
         return "skip-already-has-faq"
     title = extract_title(html)
@@ -358,6 +399,7 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--only", default=None, help="single post slug to process")
     ap.add_argument("--howto-only", action="store_true", help="only run on HOWTO_TARGETS posts")
+    ap.add_argument("--howto-add", action="store_true", help="add HowTo schema to HOWTO_TARGETS posts that already have FAQ but no HowTo")
     args = ap.parse_args()
 
     load_env()
@@ -375,7 +417,7 @@ def main() -> int:
     results: dict[str, str] = {}
     for p in posts:
         try:
-            r = process(p, args.dry_run)
+            r = process(p, args.dry_run, howto_add_only=args.howto_add)
         except Exception as e:  # noqa: BLE001
             r = f"ERROR: {e}"
         results[p.stem] = r

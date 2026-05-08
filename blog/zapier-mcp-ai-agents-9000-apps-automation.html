@@ -110,6 +110,41 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Set Up Zapier MCP for AI Agents",
+        "description": "Zapier's Model Context Protocol (MCP) allows AI agents like Claude and ChatGPT to directly access and control over 9,000 business applications without writing any code. This guide outlines the simple steps to connect your AI agent to Zapier's MCP server.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Generate MCP Server URL",
+                "text": "Log into your Zapier account and navigate to the Model Context Protocol (MCP) section within your account settings. Locate and copy the unique server URL provided, as this URL contains your authentication credentials for connecting AI agents."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Connect Server to AI Client",
+                "text": "Open your preferred MCP-compatible AI client, such as Claude Desktop. Add the copied Zapier MCP server URL as a new server within the client's settings. The AI client will automatically discover and list all available tools and actions exposed by Zapier."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Configure Agent Access Permissions",
+                "text": "Return to your Zapier account and specify which applications and their corresponding actions your AI agent is permitted to access. Carefully select the scope of access to ensure the agent only interacts with the necessary tools for its defined tasks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Test AI Agent Functionality",
+                "text": "Initiate a test by providing your AI agent with a natural language command, such as 'add a contact to HubSpot and send them a welcome email via Gmail.' Observe the agent as it autonomously executes the requested multi-step workflow across different applications."
+            }
+        ],
+        "totalTime": "PT15M"
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
