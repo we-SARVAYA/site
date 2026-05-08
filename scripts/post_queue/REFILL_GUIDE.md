@@ -43,6 +43,20 @@ Full standalone HTML, structured exactly like `blog/seo-in-2026.html`. **Critica
 
 Body: 1200–1600 words, voice and structure per `writing_style.md`. Run the banlist in your head before writing — every word in `BANNED_PHRASES` (see `scripts/generate_blog.py` for the canonical list) and its tenses/synonyms is forbidden in `<article class="blog-body">`.
 
+**MANDATORY FAQ section.** Every spec must include a `faq` field — an array of 3–5 `{q, a}` items rendered between the article body and "More from our blog". Spec rules in `scripts/faq_spec.md` (3–5 items, 40–100 word answers, real long-tail queries, no overlap with body H2s, ≥1 internal link to a service page or related post). The build pipeline will:
+
+- Refuse to render the post if `faq` is missing or has the wrong item count (`build_post.py` validation)
+- Fail the queue validate step if the FAQ section / FAQPage JSON-LD aren't in the rendered HTML (`queue_helpers.py validate`)
+- Refuse to publish to the live site if the queued HTML lacks FAQ markup (`publish_next.py` guard)
+
+Spec field shape:
+```json
+"faq": [
+  {"q": "How is X different from Y?", "a": "X focuses on... while Y... <a href='/services/seo-geo'>Our GEO service</a> uses both."},
+  {"q": "...", "a": "..."}
+]
+```
+
 ### b) `scripts/post_queue/posts/your-slug-here.json`
 Optional metadata file (the manifest is the source of truth, but this is handy for diffing). Include the same fields as the manifest entry below.
 

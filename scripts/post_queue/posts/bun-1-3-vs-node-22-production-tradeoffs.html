@@ -70,6 +70,54 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Should I switch a production Node 22 service to Bun 1.3 today?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only if your service is mostly hot-path HTTP, JSON, and SQLite work, and your dependency tree is small enough to audit in an afternoon. Bun's wins are real for cold starts and bundling, but native modules, monkey-patched libraries, and observability tooling (OpenTelemetry, APM agents) still hit compatibility cliffs. For most existing Node 22 codebases the safest move is to ship a single non-critical worker on Bun first and read the logs for two weeks before going further."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Bun's npm compatibility good enough for typical SaaS dependencies?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For top-200 npm packages, yes. For long-tail packages with native bindings or unusual loader hooks, expect at least one surprise per project. Bun's package manager installs are dramatically faster than npm or pnpm, but install speed is the boring part. The risky part is runtime: a package that works in CI under Bun can still throw on production traffic shapes. Run your full integration test suite under Bun before promoting any service."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How big is the cold start difference in real serverless deployments?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On AWS Lambda and Cloudflare Workers comparable runtimes, Bun's cold start is roughly 30-50% lower than Node 22 for small handlers, shrinking to negligible once your bundle exceeds a few megabytes. For latency-critical webhooks where p99 cold start matters, the gap is meaningful. For background workers and long-running servers, the difference is invisible after the first request. Benchmark your own workload before architecting around it."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What about TypeScript - do I still need a build step under Bun?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Bun runs `.ts` files directly, so for scripts and small services you can drop tsc, esbuild, and ts-node entirely. For larger apps you still want a typecheck step in CI (`tsc --noEmit`) because Bun's runtime stripping doesn't catch type errors. The one-tool win is real for new projects. For existing apps with established build pipelines, the migration cost usually outweighs the savings."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "If I'm starting a new project in 2026, which should I pick?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pick Node 22 if you need long-term ecosystem stability, broad hosting support, or you'll lean on native modules. Pick Bun 1.3 if developer ergonomics, cold start, and bundling speed are the primary constraints and your team is comfortable debugging the occasional compatibility issue. We default to Node 22 for client production work at SARVAYA, with Bun reserved for internal tooling and prototypes."
+            }
+        }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -251,6 +299,46 @@
             </div>
         </aside>
     </div>
+
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Should I switch a production Node 22 service to Bun 1.3 today?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Only if your service is mostly hot-path HTTP, JSON, and SQLite work, and your dependency tree is small enough to audit in an afternoon. Bun's wins are real for cold starts and bundling, but native modules, monkey-patched libraries, and observability tooling (OpenTelemetry, APM agents) still hit compatibility cliffs. For most existing Node 22 codebases the safest move is to ship a single non-critical worker on Bun first and read the logs for two weeks before going further.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Is Bun&#x27;s npm compatibility good enough for typical SaaS dependencies?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>For top-200 npm packages, yes. For long-tail packages with native bindings or unusual loader hooks, expect at least one surprise per project. Bun's package manager installs are dramatically faster than npm or pnpm, but install speed is the boring part. The risky part is runtime: a package that works in CI under Bun can still throw on production traffic shapes. Run your full integration test suite under Bun before promoting any service.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How big is the cold start difference in real serverless deployments?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>On AWS Lambda and Cloudflare Workers comparable runtimes, Bun's cold start is roughly 30-50% lower than Node 22 for small handlers, shrinking to negligible once your bundle exceeds a few megabytes. For latency-critical webhooks where p99 cold start matters, the gap is meaningful. For background workers and long-running servers, the difference is invisible after the first request. Benchmark your own workload before architecting around it.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What about TypeScript - do I still need a build step under Bun?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Bun runs `.ts` files directly, so for scripts and small services you can drop tsc, esbuild, and ts-node entirely. For larger apps you still want a typecheck step in CI (`tsc --noEmit`) because Bun's runtime stripping doesn't catch type errors. The one-tool win is real for new projects. For existing apps with established build pipelines, the migration cost usually outweighs the savings.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">If I&#x27;m starting a new project in 2026, which should I pick?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Pick Node 22 if you need long-term ecosystem stability, broad hosting support, or you'll lean on native modules. Pick Bun 1.3 if developer ergonomics, cold start, and bundling speed are the primary constraints and your team is comfortable debugging the occasional compatibility issue. We default to Node 22 for client production work at <a href="/services/web-development">SARVAYA</a>, with Bun reserved for internal tooling and prototypes.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Posts -->
     <section class="blog-related">

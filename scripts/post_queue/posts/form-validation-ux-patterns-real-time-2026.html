@@ -70,6 +70,46 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "When should validation fire - on every keystroke or on blur?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On blur for almost everything. Validating on every keystroke shows red errors before the user has finished typing, which feels like the form is yelling at them. The two exceptions are password strength meters and username availability checks, which both reward live feedback. Everything else - email, phone, postcode, dates - should validate when focus leaves the field. The user has signalled they're done with that input."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Should I show errors inline next to the field or in a summary at the top?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Inline next to the field for screen-by-screen forms, summary at the top for long single-page forms with more than ten fields. Screen readers benefit from both: an inline aria-describedby link plus a top summary that lists each error as a jump link to the field that failed. The worst pattern is a generic toast saying \"please fix the errors below\" without telling the user which fields are wrong."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is real-time validation worth the engineering cost for a checkout form?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes for high-value commerce flows, no for low-stakes signups. For checkout, every form abandonment costs you a real conversion, so validating card numbers, postcodes, and expiry dates as the user finishes each field saves you money. For a newsletter signup, a single onSubmit pass is enough. Match the validation effort to the value of the conversion you're protecting."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I make form validation accessible without breaking the visual design?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three rules. First, errors must be announced to screen readers via aria-live or by associating the message with the field through aria-describedby. Second, error states need more than colour - add an icon or text label so colourblind users see the difference. Third, focus should move to the first invalid field on submit. Our web development team ships these as a baseline on every form, not a special request."
+            }
+        }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -249,6 +289,40 @@
             </div>
         </aside>
     </div>
+
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">When should validation fire - on every keystroke or on blur?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>On blur for almost everything. Validating on every keystroke shows red errors before the user has finished typing, which feels like the form is yelling at them. The two exceptions are password strength meters and username availability checks, which both reward live feedback. Everything else - email, phone, postcode, dates - should validate when focus leaves the field. The user has signalled they're done with that input.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Should I show errors inline next to the field or in a summary at the top?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Inline next to the field for screen-by-screen forms, summary at the top for long single-page forms with more than ten fields. Screen readers benefit from both: an inline aria-describedby link plus a top summary that lists each error as a jump link to the field that failed. The worst pattern is a generic toast saying "please fix the errors below" without telling the user which fields are wrong.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Is real-time validation worth the engineering cost for a checkout form?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Yes for high-value commerce flows, no for low-stakes signups. For checkout, every form abandonment costs you a real conversion, so validating card numbers, postcodes, and expiry dates as the user finishes each field saves you money. For a newsletter signup, a single onSubmit pass is enough. Match the validation effort to the value of the conversion you're protecting.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How do I make form validation accessible without breaking the visual design?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Three rules. First, errors must be announced to screen readers via aria-live or by associating the message with the field through aria-describedby. Second, error states need more than colour - add an icon or text label so colourblind users see the difference. Third, focus should move to the first invalid field on submit. Our <a href="/services/web-development">web development team</a> ships these as a baseline on every form, not a special request.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Posts -->
     <section class="blog-related">

@@ -25,6 +25,9 @@ Spec JSON schema:
                                   // EXCLUDING the <aside class="tldr-block"> (we add it).
   "related": [                    // exactly 3 entries
     {"slug": "...", "image": "blog-*.webp", "title": "...", "tag": "...", "date": "ISO", "date_human": "April 2026"}
+  ],
+  "faq": [                        // 3-5 items, see scripts/faq_spec.md
+    {"q": "Question text?", "a": "Answer text. May contain inline <a href='...'>HTML</a>."}
   ]
 }
 """
@@ -45,7 +48,11 @@ MANIFEST = Path(__file__).resolve().parent / "post_queue" / "manifest.json"
 REQUIRED_SPEC_FIELDS = {
     "slug", "title", "tag", "article_section", "excerpt",
     "meta_description", "keywords", "tldr", "body_html", "related",
+    "faq",
 }
+
+FAQ_MIN = 3
+FAQ_MAX = 5
 
 ALLOWED_RELATED_IMAGES = {
     "blog-website.webp",
@@ -130,6 +137,7 @@ TEMPLATE = """<!DOCTYPE html>
         ]
     }
     </script>
+{FAQ_JSONLD}
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -253,6 +261,8 @@ TEMPLATE = """<!DOCTYPE html>
             </div>
         </aside>
     </div>
+
+{FAQ_HTML}
 
     <!-- Related Posts -->
     <section class="blog-related">
@@ -411,11 +421,82 @@ def _validate_spec(spec: dict) -> None:
                 sys.exit(f"Related post missing field {k}: {r}")
         if r["image"] not in ALLOWED_RELATED_IMAGES:
             sys.exit(f"Related image not in allowed set: {r['image']}")
+    faq = spec["faq"]
+    if not isinstance(faq, list) or not (FAQ_MIN <= len(faq) <= FAQ_MAX):
+        sys.exit(f"Need {FAQ_MIN}-{FAQ_MAX} FAQ items (got {len(faq) if isinstance(faq, list) else type(faq).__name__})")
+    for i, item in enumerate(faq):
+        if not isinstance(item, dict) or "q" not in item or "a" not in item:
+            sys.exit(f"faq[{i}] must be an object with 'q' and 'a' string fields")
+        if not isinstance(item["q"], str) or not isinstance(item["a"], str):
+            sys.exit(f"faq[{i}] 'q' and 'a' must be strings")
+        if not item["q"].strip() or not item["a"].strip():
+            sys.exit(f"faq[{i}] 'q' and 'a' cannot be empty")
 
 
 def _normalize_dashes(text: str) -> str:
     text = text.replace("—", " - ").replace("–", " - ")
     return re.sub(r"  +", " ", text)
+
+
+def _faq_plain_text(answer_html: str) -> str:
+    text = re.sub(r"<[^>]+>", "", answer_html)
+    text = html_lib.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _render_faq_html(faq: list[dict]) -> str:
+    items = []
+    for item in faq:
+        q = html_lib.escape(_normalize_dashes(item["q"]))
+        a = _normalize_dashes(item["a"])
+        items.append(
+            '                <details class="blog-faq__item">\n'
+            f'                    <summary class="blog-faq__q"><span class="blog-faq__q-text">{q}</span></summary>\n'
+            '                    <div class="blog-faq__a">\n'
+            f'                        <p>{a}</p>\n'
+            '                    </div>\n'
+            '                </details>'
+        )
+    return (
+        '    <!-- FAQ -->\n'
+        '    <section class="blog-faq" aria-labelledby="blog-faq-heading">\n'
+        '        <div class="container">\n'
+        '            <div class="blog-faq__label">Common Questions</div>\n'
+        '            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>\n'
+        '            <div class="blog-faq__list">\n'
+        + "\n".join(items) + "\n"
+        '            </div>\n'
+        '        </div>\n'
+        '    </section>'
+    )
+
+
+def _render_faq_jsonld(faq: list[dict]) -> str:
+    entries = []
+    for item in faq:
+        q = _normalize_dashes(item["q"]).replace('"', '\\"')
+        a = _faq_plain_text(_normalize_dashes(item["a"])).replace('"', '\\"')
+        entries.append(
+            '        {\n'
+            '            "@type": "Question",\n'
+            f'            "name": "{q}",\n'
+            '            "acceptedAnswer": {\n'
+            '                "@type": "Answer",\n'
+            f'                "text": "{a}"\n'
+            '            }\n'
+            '        }'
+        )
+    return (
+        '    <script type="application/ld+json">\n'
+        '    {\n'
+        '        "@context": "https://schema.org",\n'
+        '        "@type": "FAQPage",\n'
+        '        "mainEntity": [\n'
+        + ",\n".join(entries) + "\n"
+        '        ]\n'
+        '    }\n'
+        '    </script>'
+    )
 
 
 def _render_related(related: list[dict]) -> str:
@@ -457,6 +538,8 @@ def build_post(spec: dict) -> str:
         "{TLDR_ESC}": tldr,
         "{BODY_HTML}": body,
         "{RELATED_HTML}": _render_related(spec["related"]),
+        "{FAQ_HTML}": _render_faq_html(spec["faq"]),
+        "{FAQ_JSONLD}": _render_faq_jsonld(spec["faq"]),
     }
     rendered = TEMPLATE
     for k, v in substitutions.items():

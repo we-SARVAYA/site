@@ -16,6 +16,7 @@ import base64
 import io
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -255,6 +256,15 @@ def cmd_validate(args: argparse.Namespace) -> int:
                 problems.append(f"{prefix}: {html_path.name} has no {{PUBLISH_DATE}} token")
             if f"blog-{slug}.webp" not in text:
                 problems.append(f"{prefix}: {html_path.name} doesn't reference blog-{slug}.webp")
+            if '<section class="blog-faq"' not in text:
+                problems.append(f"{prefix}: {html_path.name} missing <section class=\"blog-faq\">")
+            if '"@type": "FAQPage"' not in text and '"@type":"FAQPage"' not in text:
+                problems.append(f"{prefix}: {html_path.name} missing FAQPage JSON-LD schema")
+            faq_items = len(re.findall(r'<details class="blog-faq__item"', text))
+            if faq_items < 3:
+                problems.append(f"{prefix}: {html_path.name} only {faq_items} FAQ items (need 3-5)")
+            elif faq_items > 5:
+                problems.append(f"{prefix}: {html_path.name} {faq_items} FAQ items (max 5)")
         if not img_path.exists():
             problems.append(f"{prefix}: missing {img_path.name}")
 

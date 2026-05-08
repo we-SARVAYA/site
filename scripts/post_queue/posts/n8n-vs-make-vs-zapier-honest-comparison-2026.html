@@ -70,6 +70,46 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "If I'm starting from scratch in 2026, which one should I pick?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pick Zapier if you have fewer than 20 automations and a non-technical operator running them. Pick Make if you need branching, error handling, and visual debugging for moderate scale. Pick n8n if you have engineering capacity, want to self-host, or your monthly automation cost on Zapier is over a few hundred dollars. The decision is rarely about features any more - it's about cost shape and who maintains the workflows day to day."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does pricing actually compare at scale?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Zapier charges per task, which makes high-volume automations exponentially expensive. Make charges per operation, which is cheaper than Zapier at the same volume but still scales linearly. n8n self-hosted is effectively flat-rate (your server bill) and n8n Cloud is closer to Make's pricing with a workflow-execution cap. For 100,000 monthly tasks, Zapier costs roughly 4-6x what self-hosted n8n costs once you include the server and engineer time."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is self-hosting n8n worth the operational overhead?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Worth it if you have at least one engineer who already runs production services, you process more than 50,000 tasks a month, or you handle data your compliance team won't let leave your infrastructure. Not worth it for small teams or under 10,000 tasks. Self-hosting trades dollars for engineering hours, so the math depends on what your team's time costs and how many automations actually break in a given quarter."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which one handles AI agent workflows best in 2026?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "n8n has the most mature native AI agent nodes, including LangChain integrations and built-in vector store connectors. Make's AI module is solid for simple LLM calls but thinner on agent patterns. Zapier added AI features last but its app catalogue still wins for ChatGPT, Claude, and Anthropic integrations against business apps. For agent-heavy automation, our AI automation team defaults to n8n self-hosted with Zapier as the integration glue at the edges."
+            }
+        }
+        ]
+    }
+    </script>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
@@ -243,6 +283,40 @@
             </div>
         </aside>
     </div>
+
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">If I&#x27;m starting from scratch in 2026, which one should I pick?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Pick Zapier if you have fewer than 20 automations and a non-technical operator running them. Pick Make if you need branching, error handling, and visual debugging for moderate scale. Pick n8n if you have engineering capacity, want to self-host, or your monthly automation cost on Zapier is over a few hundred dollars. The decision is rarely about features any more - it's about cost shape and who maintains the workflows day to day.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How does pricing actually compare at scale?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Zapier charges per task, which makes high-volume automations exponentially expensive. Make charges per operation, which is cheaper than Zapier at the same volume but still scales linearly. n8n self-hosted is effectively flat-rate (your server bill) and n8n Cloud is closer to Make's pricing with a workflow-execution cap. For 100,000 monthly tasks, Zapier costs roughly 4-6x what self-hosted n8n costs once you include the server and engineer time.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Is self-hosting n8n worth the operational overhead?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Worth it if you have at least one engineer who already runs production services, you process more than 50,000 tasks a month, or you handle data your compliance team won't let leave your infrastructure. Not worth it for small teams or under 10,000 tasks. Self-hosting trades dollars for engineering hours, so the math depends on what your team's time costs and how many automations actually break in a given quarter.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Which one handles AI agent workflows best in 2026?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>n8n has the most mature native AI agent nodes, including LangChain integrations and built-in vector store connectors. Make's AI module is solid for simple LLM calls but thinner on agent patterns. Zapier added AI features last but its app catalogue still wins for ChatGPT, Claude, and Anthropic integrations against business apps. For agent-heavy automation, our <a href="/services/ai-automation">AI automation team</a> defaults to n8n self-hosted with Zapier as the integration glue at the edges.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Posts -->
     <section class="blog-related">

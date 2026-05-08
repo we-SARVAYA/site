@@ -303,6 +303,22 @@ def main() -> int:
     article_html = article_html.replace("{{PUBLISH_DATE}}", today)
     article_html = article_html.replace("{{PUBLISH_DATE_HUMAN}}", date_human)
 
+    faq_problems: list[str] = []
+    if '<section class="blog-faq"' not in article_html:
+        faq_problems.append('missing <section class="blog-faq">')
+    if '"@type": "FAQPage"' not in article_html and '"@type":"FAQPage"' not in article_html:
+        faq_problems.append("missing FAQPage JSON-LD schema")
+    faq_items = len(re.findall(r'<details class="blog-faq__item"', article_html))
+    if faq_items < 3:
+        faq_problems.append(f"only {faq_items} FAQ items (need 3-5)")
+    elif faq_items > 5:
+        faq_problems.append(f"{faq_items} FAQ items (max 5)")
+    if faq_problems:
+        sys.exit(
+            f"[publish_next] FAQ validation failed for {slug}: {faq_problems}. "
+            "Fix the queued post (regenerate via /refill-blog-queue) before publishing."
+        )
+
     topic = {
         "slug": slug,
         "title": entry["title"],
