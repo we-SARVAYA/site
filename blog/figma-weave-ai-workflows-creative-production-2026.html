@@ -70,7 +70,47 @@
  ]
  }
  </script>
- <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How does Figma Weave significantly reduce the time required for creative asset production?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Figma Weave dramatically cuts creative production time by automating repetitive tasks, transforming multi-day turnarounds into mere hours. It ships with over 20 AI workflows for image generation, image-to-video, and 3D asset creation, all within one canvas. Lyft, for instance, reported a 70% reduction in asset production time for localized campaigns. This efficiency stems from chaining AI models and applying design system rules automatically, eliminating the 48-hour gap between brief and finished asset that traditionally bottlenecks creative teams."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What technical approach does Figma Weave use to maintain brand consistency across its AI-generated assets?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Figma Weave maintains brand consistency through a multi-model AI architecture combined with a crucial consistency layer that references your design system. It employs different AI models for tasks like image generation or 3D asset creation. Critically, all outputs are routed through a consistency layer that checks generated assets against your defined design tokens, color palettes, and typography constraints. This ensures generated imagery and videos inherit your brand's visual language automatically, unlike generic third-party AI tools that lack this integrated validation step."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "For what specific types of video content is Figma Weave's image-to-video workflow most suitable, and where does it fall short?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Figma Weave's image-to-video workflow is highly suitable for generating short, social-ready motion assets for platforms like Instagram or LinkedIn, but it falls short for complex narrative or broadcast-quality productions. It excels at creating 5-15 second clips with subtle parallax, camera pushes, or element entrances, ideal for product landing pages or app onboarding. While it provides competent, on-brand motion assets, it is not designed for complex character animation or 60-second brand films requiring a dedicated production team. Its quality ceiling is social-ready, not Hollywood renders."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What practical steps can design system teams take to ensure their existing systems work effectively with Figma Weave?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "To ensure optimal performance with Figma Weave, design system teams should prioritize cleaning and formalizing their existing design tokens and component documentation. Key steps include auditing all color tokens so every color has a named token, defining a formal type scale with named text styles, and explicitly documenting component variants in Figma. Setting up brand kit guidelines within Weave before initial runs is also essential. This foundational work ensures AI-generated outputs consistently match product aesthetics, transforming the design system into a powerful training dataset for your internal AI creative pipeline. For assistance optimizing your design system for AI tools or other digital initiatives, consider our web development services ."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
  <div class="grain-overlay"></div>
@@ -265,8 +305,42 @@
  </aside>
  </div>
 
- <!-- Related Posts -->
- <section class="blog-related">
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How does Figma Weave significantly reduce the time required for creative asset production?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Figma Weave dramatically cuts creative production time by automating repetitive tasks, transforming multi-day turnarounds into mere hours. It ships with over 20 AI workflows for image generation, image-to-video, and 3D asset creation, all within one canvas. Lyft, for instance, reported a 70% reduction in asset production time for localized campaigns. This efficiency stems from chaining AI models and applying design system rules automatically, eliminating the 48-hour gap between brief and finished asset that traditionally bottlenecks creative teams.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What technical approach does Figma Weave use to maintain brand consistency across its AI-generated assets?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Figma Weave maintains brand consistency through a multi-model AI architecture combined with a crucial consistency layer that references your design system. It employs different AI models for tasks like image generation or 3D asset creation. Critically, all outputs are routed through a consistency layer that checks generated assets against your defined design tokens, color palettes, and typography constraints. This ensures generated imagery and videos inherit your brand's visual language automatically, unlike generic third-party AI tools that lack this integrated validation step.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">For what specific types of video content is Figma Weave's image-to-video workflow most suitable, and where does it fall short?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Figma Weave's image-to-video workflow is highly suitable for generating short, social-ready motion assets for platforms like Instagram or LinkedIn, but it falls short for complex narrative or broadcast-quality productions. It excels at creating 5-15 second clips with subtle parallax, camera pushes, or element entrances, ideal for product landing pages or app onboarding. While it provides competent, on-brand motion assets, it is not designed for complex character animation or 60-second brand films requiring a dedicated production team. Its quality ceiling is social-ready, not Hollywood renders.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What practical steps can design system teams take to ensure their existing systems work effectively with Figma Weave?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>To ensure optimal performance with Figma Weave, design system teams should prioritize cleaning and formalizing their existing design tokens and component documentation. Key steps include auditing all color tokens so every color has a named token, defining a formal type scale with named text styles, and explicitly documenting component variants in Figma. Setting up brand kit guidelines within Weave before initial runs is also essential. This foundational work ensures AI-generated outputs consistently match product aesthetics, transforming the design system into a powerful training dataset for your internal AI creative pipeline. For assistance optimizing your design system for AI tools or other digital initiatives, consider our <a href="/services/web-development">web development services</a>.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="blog-related">
  <div class="container">
  <h2 class="blog-related__title">More from our blog</h2>
  <div class="blog-page-grid" style="padding-bottom:80px;">

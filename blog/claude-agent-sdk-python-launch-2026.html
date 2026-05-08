@@ -70,7 +70,47 @@
  ]
  }
  </script>
- <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What specific problems does the Claude Agent SDK solve for developers building autonomous AI agents in Python?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Claude Agent SDK addresses common challenges in building autonomous AI agents by providing structured primitives that were previously manual. Before April 22, 2026, developers had to write custom code for retry logic, tool dispatch, context management, and subagent coordination when using the raw Messages API. The SDK now offers a stable interface for these components, including the agent loop, subagent spawning, and MCP tool wiring. This eliminates the need to reinvent scaffolding, allowing teams to focus on agent logic rather than infrastructure."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do subagents in the Claude Agent SDK help reduce API costs and improve model accuracy for complex tasks?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Subagents in the Claude Agent SDK significantly reduce API costs and improve accuracy by breaking down complex tasks into smaller, focused contexts. Instead of a single agent handling a massive 200K-token context, which costs approximately 12x more than a 16K-token context, a parent agent spawns child agents with narrow contexts and specific tools. For example, a child agent summarizing a contract only receives the contract and a summarization tool. This prevents context windows from ballooning, leading to more precise model responses and lower token usage. At SARVAYA, we build custom AI automation systems for clients who benefit from this efficiency."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can the Claude Agent SDK be used to build human-in-the-loop AI workflows for sensitive operations?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Claude Agent SDK is specifically designed to support human-in-the-loop workflows for sensitive operations through its first-class permission model. Every tool call can be intercepted by a Python function, allowing developers to implement a PermissionHandler that returns allow, deny, or ask. This enables real-time human confirmation before executing actions like initiating financial transfers or writing to external APIs. The agent loop pauses and resumes correctly, ensuring safety for scenarios like financial operations, external API calls, and multi-tenant systems by enforcing boundaries at the SDK level."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the initial steps to install and begin developing with the Claude Agent SDK for Python?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "To begin developing with the Claude Agent SDK for Python, the initial steps involve installing the package, defining tools, setting a permission policy, and running the agent loop. First, install the `anthropic` package using `pip install anthropic`. Next, define your tools as Python functions decorated with `@tool`, where type annotations automatically generate the JSON schema Claude uses. Then, set a permission policy by passing a PermissionHandler subclass or a simple callback. Finally, initiate the agent's execution by calling `agent.run(prompt)` and awaiting the result, letting the SDK manage turn management and tool dispatch."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
  <div class="grain-overlay"></div>
@@ -272,8 +312,42 @@
  </aside>
  </div>
 
- <!-- Related Posts -->
- <section class="blog-related">
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What specific problems does the Claude Agent SDK solve for developers building autonomous AI agents in Python?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>The Claude Agent SDK addresses common challenges in building autonomous AI agents by providing structured primitives that were previously manual. Before April 22, 2026, developers had to write custom code for retry logic, tool dispatch, context management, and subagent coordination when using the raw Messages API. The SDK now offers a stable interface for these components, including the agent loop, subagent spawning, and MCP tool wiring. This eliminates the need to reinvent scaffolding, allowing teams to focus on agent logic rather than infrastructure.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How do subagents in the Claude Agent SDK help reduce API costs and improve model accuracy for complex tasks?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Subagents in the Claude Agent SDK significantly reduce API costs and improve accuracy by breaking down complex tasks into smaller, focused contexts. Instead of a single agent handling a massive 200K-token context, which costs approximately 12x more than a 16K-token context, a parent agent spawns child agents with narrow contexts and specific tools. For example, a child agent summarizing a contract only receives the contract and a summarization tool. This prevents context windows from ballooning, leading to more precise model responses and lower token usage. At SARVAYA, we build custom <a href="/services/ai-automation">AI automation systems</a> for clients who benefit from this efficiency.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Can the Claude Agent SDK be used to build human-in-the-loop AI workflows for sensitive operations?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Yes, the Claude Agent SDK is specifically designed to support human-in-the-loop workflows for sensitive operations through its first-class permission model. Every tool call can be intercepted by a Python function, allowing developers to implement a PermissionHandler that returns allow, deny, or ask. This enables real-time human confirmation before executing actions like initiating financial transfers or writing to external APIs. The agent loop pauses and resumes correctly, ensuring safety for scenarios like financial operations, external API calls, and multi-tenant systems by enforcing boundaries at the SDK level.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What are the initial steps to install and begin developing with the Claude Agent SDK for Python?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>To begin developing with the Claude Agent SDK for Python, the initial steps involve installing the package, defining tools, setting a permission policy, and running the agent loop. First, install the `anthropic` package using `pip install anthropic`. Next, define your tools as Python functions decorated with `@tool`, where type annotations automatically generate the JSON schema Claude uses. Then, set a permission policy by passing a PermissionHandler subclass or a simple callback. Finally, initiate the agent's execution by calling `agent.run(prompt)` and awaiting the result, letting the SDK manage turn management and tool dispatch.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="blog-related">
  <div class="container">
  <h2 class="blog-related__title">More from our blog</h2>
  <div class="blog-page-grid" style="padding-bottom:80px;">

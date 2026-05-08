@@ -70,7 +70,47 @@
  ]
  }
  </script>
- <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why is the Internet Engineering Task Force developing new AI crawler standards when existing tools like robots.txt are already in place?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The IETF is developing new standards because robots.txt, created in 1994, was designed for indexing pages for retrieval, not for distinguishing between a search engine storing a URL and an AI system absorbing content into model weights. Publishers needed a formal mechanism to express this distinction. The AIPREF working group, formed in late 2024, addresses this precise problem, aiming to provide machine-readable, per-resource control over AI crawling, training, and citation, which existing tools do not adequately offer."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What specific content usage permissions will publishers be able to define for AI systems using the new IETF AIPREF protocols?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Publishers will gain granular control, enabling them to define permissions such as allowing summarization but disallowing training, requiring attribution metadata with source URLs, and targeting specific crawlers like GPTBot or ClaudeBot by name. They can also set path-level permissions for different content types, like public blogs versus proprietary research, and declare specific citation format preferences. These controls will be communicated via HTTP headers, robots.txt extensions, and JSON-LD schema additions, significantly impacting generative engine optimization strategies ."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long will it take for the IETF AIPREF standards to become formally ratified and widely adopted by AI companies?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Publishers can expect the IETF AIPREF standards to become an industry expectation typically 12 to 18 months after reaching the working group last call stage, which occurred in April 2026. This timeline is faster than the five years it took for search robots.txt to converge informally in the late 1990s, partly due to the AI industry's current regulatory scrutiny. Once ratified as RFCs, compliance will be strongly encouraged, pushing AI labs to implement the new protocols."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What was the main difficulty the IETF AIPREF working group faced when trying to standardize AI content attribution?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The main difficulty in standardizing AI content attribution was the technical ambiguity of implementing a strict referrer model for generative AI responses. Since AI systems produce new text by synthesizing dozens of sources rather than directly quoting, mandating a precise source URL for every piece of output is complex. The working group's current resolution is a \"citation-hint\" directive, requesting attribution in a standardized format without dictating the exact technical mechanism."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
  <div class="grain-overlay"></div>
@@ -261,8 +301,42 @@
  </aside>
  </div>
 
- <!-- Related Posts -->
- <section class="blog-related">
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Why is the Internet Engineering Task Force developing new AI crawler standards when existing tools like robots.txt are already in place?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>The IETF is developing new standards because robots.txt, created in 1994, was designed for indexing pages for retrieval, not for distinguishing between a search engine storing a URL and an AI system absorbing content into model weights. Publishers needed a formal mechanism to express this distinction. The AIPREF working group, formed in late 2024, addresses this precise problem, aiming to provide machine-readable, per-resource control over AI crawling, training, and citation, which existing tools do not adequately offer.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What specific content usage permissions will publishers be able to define for AI systems using the new IETF AIPREF protocols?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Publishers will gain granular control, enabling them to define permissions such as allowing summarization but disallowing training, requiring attribution metadata with source URLs, and targeting specific crawlers like GPTBot or ClaudeBot by name. They can also set path-level permissions for different content types, like public blogs versus proprietary research, and declare specific citation format preferences. These controls will be communicated via HTTP headers, robots.txt extensions, and JSON-LD schema additions, significantly impacting <a href="/services/seo-geo">generative engine optimization strategies</a>.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">How long will it take for the IETF AIPREF standards to become formally ratified and widely adopted by AI companies?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Publishers can expect the IETF AIPREF standards to become an industry expectation typically 12 to 18 months after reaching the working group last call stage, which occurred in April 2026. This timeline is faster than the five years it took for search robots.txt to converge informally in the late 1990s, partly due to the AI industry's current regulatory scrutiny. Once ratified as RFCs, compliance will be strongly encouraged, pushing AI labs to implement the new protocols.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">What was the main difficulty the IETF AIPREF working group faced when trying to standardize AI content attribution?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>The main difficulty in standardizing AI content attribution was the technical ambiguity of implementing a strict referrer model for generative AI responses. Since AI systems produce new text by synthesizing dozens of sources rather than directly quoting, mandating a precise source URL for every piece of output is complex. The working group's current resolution is a "citation-hint" directive, requesting attribution in a standardized format without dictating the exact technical mechanism.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="blog-related">
  <div class="container">
  <h2 class="blog-related__title">More from our blog</h2>
  <div class="blog-page-grid" style="padding-bottom:80px;">

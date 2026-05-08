@@ -70,7 +70,94 @@
  ]
  }
  </script>
- <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why did Remix 3 decide to replace React with Preact, and what are the primary advantages of this change?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Remix 3 replaced React with a Preact fork primarily to achieve significantly smaller bundle sizes and better alignment with web-standard APIs. Preact weighs approximately 3 KB, a substantial reduction compared to React's 45 KB, which improves load times, especially on mobile networks. This shift also allows Remix apps to run efficiently on modern edge runtimes like Cloudflare Workers and Deno Deploy without needing Node-specific shims, offering performance gains for specific deployment scenarios."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which popular React component libraries are currently incompatible with Remix 3 due to the Preact fork?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As of April 20, 2026, several popular React component libraries are currently incompatible with Remix 3 because they rely on React internals rather than treating React as a peer dependency. Specifically, Radix UI, React Aria, and Framer Motion do not have official Remix 3 compatible releases. Additionally, shadcn/ui has an open issue tracking Preact support but lacks a concrete timeline, meaning teams using these libraries will face significant rewrite costs if migrating to Remix 3."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Remix 3 support React Server Components (RSC) for modern web development?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No, Remix 3 does not support React Server Components (RSC); the Remix team has explicitly stated this decision is intentional. If your Remix 2 application utilized experimental RSC patterns, those parts of your codebase will require a complete rewrite to function within Remix 3. This architectural choice means teams focused on cutting-edge React features like RSCs might find Remix 3 unsuitable, potentially requiring a different framework or a re-evaluation of their rendering strategy for modern web development projects ."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "For most development teams, what is the recommended path forward after the Remix 3 announcement?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For most development teams, staying on React Router 7 is the recommended path forward after the Remix 3 announcement. React Router 7 offers an active release cadence, full React 19 support, and a clear upgrade path, providing the popular file-based routing patterns without the rendering-layer swap introduced in Remix 3. Shopify continues to invest heavily in React Router, ensuring its long-term viability and making it a stable choice for teams not specifically needing Remix 3's edge-first deployment capabilities."
+                }
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Migrate to Remix 3",
+        "description": "This guide outlines the sequential steps for development teams to migrate their applications from Remix 2 or React Router 7 to Remix 3, focusing on key technical changes and potential challenges.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Upgrade Node and Vite",
+                "text": "Upgrade Node.js to version 22+ and Vite to version 6. Perform these upgrades on a separate branch, run your test suite to ensure stability, and then merge the changes before proceeding with any Remix-specific modifications."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Run Remix Codemods",
+                "text": "Execute the official Remix codemod tool. This utility automatically handles import rewrites, replaces response helpers, and performs basic hook migrations, covering a significant portion (60-70%) of the mechanical changes required for the migration."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Replace Response Helpers Manually",
+                "text": "Manually update all instances where you used json(), redirect(), or defer() from @remix-run/node. Replace these with native Response and URL APIs. This process is repetitive but essential for compatibility with Remix 3's web-standard approach."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Audit React Hooks",
+                "text": "Review and test React-specific hooks such as useTransition, useDeferredValue, and useId. While Preact offers equivalents, their behavior may differ in edge cases. Explicitly test paths involving concurrent rendering assumptions to prevent unexpected issues."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Replace Incompatible Component Libraries",
+                "text": "Identify and replace any component libraries that are incompatible with Remix 3's Preact fork. Build minimal replacements using plain Preact or find suitable alternatives. For complex design systems, this step can be time-consuming, potentially taking several weeks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Test on Target Runtime",
+                "text": "Deploy your migrated application to your intended target runtime, such as a Cloudflare Workers test environment, early in the process. This proactive testing helps discover and address any runtime incompatibilities or performance issues before final deployment."
+            }
+        ],
+        "totalTime": "P8W"
+    }
+    </script>
+    <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
  <div class="grain-overlay"></div>
@@ -266,8 +353,42 @@
  </aside>
  </div>
 
- <!-- Related Posts -->
- <section class="blog-related">
+    <!-- FAQ -->
+    <section class="blog-faq" aria-labelledby="blog-faq-heading">
+        <div class="container">
+            <div class="blog-faq__label">Common Questions</div>
+            <h2 id="blog-faq-heading" class="blog-faq__title">Frequently Asked Questions</h2>
+            <div class="blog-faq__list">
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Why did Remix 3 decide to replace React with Preact, and what are the primary advantages of this change?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>Remix 3 replaced React with a Preact fork primarily to achieve significantly smaller bundle sizes and better alignment with web-standard APIs. Preact weighs approximately 3 KB, a substantial reduction compared to React's 45 KB, which improves load times, especially on mobile networks. This shift also allows Remix apps to run efficiently on modern edge runtimes like Cloudflare Workers and Deno Deploy without needing Node-specific shims, offering performance gains for specific deployment scenarios.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Which popular React component libraries are currently incompatible with Remix 3 due to the Preact fork?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>As of April 20, 2026, several popular React component libraries are currently incompatible with Remix 3 because they rely on React internals rather than treating React as a peer dependency. Specifically, Radix UI, React Aria, and Framer Motion do not have official Remix 3 compatible releases. Additionally, shadcn/ui has an open issue tracking Preact support but lacks a concrete timeline, meaning teams using these libraries will face significant rewrite costs if migrating to Remix 3.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">Does Remix 3 support React Server Components (RSC) for modern web development?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>No, Remix 3 does not support React Server Components (RSC); the Remix team has explicitly stated this decision is intentional. If your Remix 2 application utilized experimental RSC patterns, those parts of your codebase will require a complete rewrite to function within Remix 3. This architectural choice means teams focused on cutting-edge React features like RSCs might find Remix 3 unsuitable, potentially requiring a different framework or a re-evaluation of their rendering strategy for <a href="/services/web-development">modern web development projects</a>.</p>
+                    </div>
+                </details>
+                <details class="blog-faq__item">
+                    <summary class="blog-faq__q"><span class="blog-faq__q-text">For most development teams, what is the recommended path forward after the Remix 3 announcement?</span></summary>
+                    <div class="blog-faq__a">
+                        <p>For most development teams, staying on React Router 7 is the recommended path forward after the Remix 3 announcement. React Router 7 offers an active release cadence, full React 19 support, and a clear upgrade path, providing the popular file-based routing patterns without the rendering-layer swap introduced in Remix 3. Shopify continues to invest heavily in React Router, ensuring its long-term viability and making it a stable choice for teams not specifically needing Remix 3's edge-first deployment capabilities.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="blog-related">
  <div class="container">
  <h2 class="blog-related__title">More from our blog</h2>
  <div class="blog-page-grid" style="padding-bottom:80px;">
