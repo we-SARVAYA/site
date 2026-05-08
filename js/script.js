@@ -25,12 +25,12 @@
     }
 })();
 
-// ===== Smooth Scroll (Lenis) =====
+// ===== Smooth Scroll (Lenis - self-hosted) =====
 (function initSmoothScroll() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const lenisScript = document.createElement('script');
-    lenisScript.src = 'https://unpkg.com/lenis@1.1.13/dist/lenis.min.js';
+    lenisScript.src = '/js/lenis.min.js';
     lenisScript.onload = () => {
         const lenis = new Lenis({
             duration: 1.2,
@@ -41,11 +41,27 @@
         });
         window.lenis = lenis;
 
+        let rafActive = true;
         function raf(time) {
+            if (!rafActive) return;
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Pause Lenis when the tab is hidden; resume on visible (audit H7).
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                rafActive = false;
+                lenis.stop();
+            } else {
+                lenis.start();
+                if (!rafActive) {
+                    rafActive = true;
+                    requestAnimationFrame(raf);
+                }
+            }
+        });
 
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -114,7 +130,10 @@
             }
             overlay.classList.remove('is-enter');
             overlay.classList.add('is-leave');
-            setTimeout(() => { window.location.href = href; }, 520);
+            // Audit H6: previously 520ms (structural INP floor). 100ms is
+            // enough for the leave animation's first paint to be visible
+            // before the navigation actually fires.
+            setTimeout(() => { window.location.href = href; }, 100);
         });
     }
 
@@ -138,15 +157,31 @@ let mouseX = 0, mouseY = 0;
 let ringX = 0, ringY = 0;
 
 if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
+    let cursorDirty = false;
+    let cursorIdleTimer = null;
+    let cursorRafActive = true;
+
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         cursorDot.style.left = mouseX + 'px';
         cursorDot.style.top = mouseY + 'px';
+        cursorDirty = true;
+        if (cursorIdleTimer) clearTimeout(cursorIdleTimer);
+        cursorIdleTimer = setTimeout(() => { cursorDirty = false; }, 2000);
+        if (!cursorRafActive) {
+            cursorRafActive = true;
+            requestAnimationFrame(animateRing);
+        }
     });
 
-    // Smooth lag for the ring
+    // Smooth lag for the ring - pauses when idle (no recent mousemove) or
+    // when the tab is hidden (audit H7).
     function animateRing() {
+        if (document.hidden || !cursorDirty) {
+            cursorRafActive = false;
+            return;
+        }
         ringX += (mouseX - ringX) * 0.15;
         ringY += (mouseY - ringY) * 0.15;
         cursorRing.style.left = ringX + 'px';
@@ -154,6 +189,13 @@ if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
         requestAnimationFrame(animateRing);
     }
     animateRing();
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && cursorDirty && !cursorRafActive) {
+            cursorRafActive = true;
+            requestAnimationFrame(animateRing);
+        }
+    });
 
     // Hover expansion on interactive elements
     const hoverTargets = 'a, button, .service-card, .work-card, .pf-card, .blog-card, .faq-question';
@@ -174,21 +216,31 @@ if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
 const navbar = document.getElementById('navbar');
 const scrollProgress = document.getElementById('scrollProgress');
 
-window.addEventListener('scroll', () => {
+// Audit M6: rAF-coalesced scroll handler with passive listener so the read
+// (scrollY/scrollHeight) and write (style.width) happen together at frame
+// boundaries rather than on every scroll event.
+let scrollTicking = false;
+function onScroll() {
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-
-    // Update scroll progress bar
     if (scrollProgress) {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const percent = (scrollTop / docHeight) * 100;
         scrollProgress.style.width = percent + '%';
     }
-});
+    scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        requestAnimationFrame(onScroll);
+        scrollTicking = true;
+    }
+}, { passive: true });
 
 // ===== Mobile Menu Toggle =====
 const hamburger = document.getElementById('hamburger');
