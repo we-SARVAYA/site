@@ -1135,3 +1135,159 @@
 .breadcrumb__list [aria-current="page"] {
     color: #c8ff00;
 }
+
+/* ===== About Page ===== */
+.about-founder { padding: 60px 0 80px; }
+.about-founder__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+    align-items: start;
+}
+.about-founder__card {
+    background: rgba(20, 20, 20, 0.55);
+    border: 1px solid rgba(240, 240, 240, 0.08);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    position: sticky;
+    top: 100px;
+}
+.about-founder__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: #c8ff00;
+    color: #0a0a0a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 40px rgba(200, 255, 0, 0.15);
+}
+.about-founder__name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #f0f0f0;
+    margin-bottom: 4px;
+}
+.about-founder__role {
+    font-size: 14px;
+    color: rgba(240, 240, 240, 0.7);
+    margin-bottom: 4px;
+}
+.about-founder__location {
+    font-size: 13px;
+    color: rgba(240, 240, 240, 0.5);
+    margin-bottom: 20px;
+}
+.about-founder__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(240, 240, 240, 0.08);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.about-founder__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(240, 240, 240, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+    word-break: break-all;
+}
+.about-founder__links a:hover { color: #c8ff00; }
+.about-founder__body {
+    color: rgba(240, 240, 240, 0.78);
+    font-size: 16px;
+    line-height: 1.75;
+}
+.about-founder__heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: #f0f0f0;
+    margin: 0 0 16px;
+}
+.about-founder__heading + p { margin-top: 0; }
+.about-founder__body p { margin: 0 0 18px; }
+.about-founder__body p:last-child { margin-bottom: 0; }
+.about-founder__body h2 + p { margin-top: 0; }
+.about-founder__body h2 { margin-top: 36px; }
+.about-founder__body h2:first-of-type { margin-top: 0; }
+.about-founder__body .inline-link {
+    color: #c8ff00;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 255, 0, 0.3);
+    transition: border-color 0.2s ease;
+}
+.about-founder__body .inline-link:hover { border-bottom-color: #c8ff00; }
+
+.about-facts { padding: 30px 0 70px; }
+.about-facts__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid rgba(240, 240, 240, 0.08);
+    border-bottom: 1px solid rgba(240, 240, 240, 0.08);
+    padding: 32px 0;
+}
+.about-facts__list li {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.about-facts__num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #c8ff00;
+    line-height: 1;
+}
+.about-facts__label {
+    font-size: 13px;
+    color: rgba(240, 240, 240, 0.6);
+    letter-spacing: 0.3px;
+}
+
+/* Blog post inline byline (next to tag and date) */
+.blog-byline {
+    color: rgba(240, 240, 240, 0.7);
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.blog-byline a {
+    color: #f0f0f0;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.25);
+    transition: border-color 0.2s ease;
+}
+.blog-byline a:hover { border-bottom-color: #c8ff00; }
+.blog-hero__meta .blog-byline::before {
+    content: "·";
+    margin-right: 8px;
+    opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+    .about-founder__grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-founder__card { position: static; max-width: 380px; margin: 0 auto; }
+    .about-facts__list { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    .about-facts__num { font-size: 26px; }
+}

@@ -110,11 +110,7 @@ TEMPLATE = """<!DOCTYPE html>
         "description": "{META_DESC_JSON_ESC}",
         "datePublished": "{{PUBLISH_DATE}}",
         "dateModified": "{{PUBLISH_DATE}}",
-        "author": {
-            "@type": "Person",
-            "name": "SARVAYA Editorial Team",
-            "url": "https://sarvaya.in"
-        },
+        "author": {"@id": "https://sarvaya.in/about#person"},
         "publisher": {
             "@type": "Organization",
             "name": "SARVAYA",
@@ -224,6 +220,7 @@ TEMPLATE = """<!DOCTYPE html>
             <div class="blog-hero__meta">
                 <span class="blog-tag">{TAG_ESC}</span>
                 <time datetime="{{PUBLISH_DATE}}">{{PUBLISH_DATE_HUMAN}}</time>
+                <span class="blog-byline">By <a href="../about">Dev Sharma</a></span>
             </div>
             <h1 class="blog-hero__title">{TITLE_ESC}</h1>
             <p class="blog-hero__excerpt">{EXCERPT_ESC}</p>

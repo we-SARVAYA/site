@@ -10,7 +10,6 @@
     { "source": "/projects", "destination": "/portfolio", "permanent": true },
     { "source": "/projects/", "destination": "/portfolio", "permanent": true },
     { "source": "/work", "destination": "/portfolio", "permanent": true },
-    { "source": "/about", "destination": "/#about", "permanent": true },
     { "source": "/services", "destination": "/#services", "permanent": true },
     { "source": "/faq", "destination": "/#faq", "permanent": true },
     { "source": "/linkedin-video-downloader", "destination": "https://freetools.sarvaya.in/linkedin-video-downloader", "permanent": true },

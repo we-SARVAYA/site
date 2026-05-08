@@ -62,6 +62,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 ## Pages
 
 - [Home](https://sarvaya.in/)
+- [About SARVAYA - Founder Dev Sharma](https://sarvaya.in/about)
 - [Portfolio](https://sarvaya.in/portfolio)
 - [24-Hour Website](https://sarvaya.in/24hrs)
 - [White Label Services](https://sarvaya.in/whitelabel)
