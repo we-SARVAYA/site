@@ -4,86 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="msvalidate.01" content="1533B930C9DF3122F37B0AA0FB1DE5F3" />
-    <title>Contact SARVAYA - Get a Free Web Development Quote</title>
-    <meta name="description" content="Get in touch with SARVAYA. Reach out via WhatsApp, email, or fill out our contact form for a free project quote.">
-    <meta name="keywords" content="contact SARVAYA, website development quote, AI automation consultation, AEO GEO services enquiry, free project quote">
-    <link rel="canonical" href="https://sarvaya.in/contact">
-    <meta property="og:title" content="Contact SARVAYA - Get a Free Web Development Quote">
-    <meta property="og:description" content="Get in touch with SARVAYA. Reach out via WhatsApp, email, or fill out our contact form.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sarvaya.in/contact">
-    <meta property="og:image" content="https://sarvaya.in/assets/images/og-default.jpg">
-    <meta property="og:site_name" content="SARVAYA">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact SARVAYA - Get a Free Web Development Quote">
-    <meta name="twitter:description" content="Get in touch with SARVAYA. Reach out via WhatsApp, email, or fill out our contact form.">
-    <meta name="twitter:image" content="https://sarvaya.in/assets/images/og-default.jpg">
+    <title>Page Not Found | SARVAYA</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to SARVAYA's homepage.">
+    <meta name="robots" content="noindex, follow">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="preload" href="assets/images/logo.png" as="image">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#c8ff00">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <noscript><style>.fade-up{opacity:1!important;transform:none!important}.grain-overlay,.cursor-dot,.cursor-ring{display:none!important}</style></noscript>
-    <script type="application/ld+json">
-    [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sarvaya.in/"},
-                {"@type": "ListItem", "position": 2, "name": "Contact Us", "item": "https://sarvaya.in/contact"}
-            ]
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            "name": "Contact SARVAYA",
-            "description": "Get in touch with SARVAYA for web development, app development, and digital services. Free project consultation.",
-            "url": "https://sarvaya.in/contact",
-            "mainEntity": {
-                "@type": "Organization",
-                "@id": "https://sarvaya.in/#organization",
-                "name": "SARVAYA",
-                "telephone": "+91-9371553524",
-                "email": "dev.sharma@sarvaya.in",
-                "url": "https://sarvaya.in",
-                "contactPoint": [
-                    {"@type": "ContactPoint", "telephone": "+91-9371553524", "contactType": "sales", "availableLanguage": ["English", "Hindi"]},
-                    {"@type": "ContactPoint", "email": "dev.sharma@sarvaya.in", "contactType": "customer support"}
-                ]
-            }
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            position: relative;
         }
-    ]
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sarvaya.in/"},
-            {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://sarvaya.in/contact"}
-        ]
-    }
-    </script>
+        .error-page::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200,255,0,0.04) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .error-code {
+            font-family: var(--font-display);
+            font-size: clamp(100px, 20vw, 200px);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, rgba(200,255,0,0.15) 0%, rgba(200,255,0,0.03) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .error-title {
+            font-family: var(--font-display);
+            font-size: clamp(20px, 3vw, 32px);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .error-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 420px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .error-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: var(--radius-full);
+            transition: all 0.4s ease;
+        }
+        .error-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200,255,0,0.2);
+        }
+        .error-links {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+        .error-links a {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .error-links a:hover {
+            color: var(--accent);
+        }
+    </style>
     <script>window.GA_MEASUREMENT_ID = "G-KZ28NS98BR";</script>
 </head>
 <body>
     <div class="grain-overlay"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar scrolled" id="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
                 <img src="assets/images/logo.png" alt="SARVAYA - Web Development and Digital Agency Logo" class="logo-icon">
@@ -91,7 +106,7 @@
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="portfolio">Portfolio</a>
-                <a href="/about">About</a>
+                <a href="/#about">About</a>
                 <a href="24hrs">24hrs</a>
                 <div class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services
@@ -104,136 +119,43 @@
                         <a href="/#services" role="menuitem">All Services</a>
                     </div>
                 </div>
-                <div class="nav-dropdown">
-                    <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">More
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="nav-dropdown-menu" role="menu">
-                        <a href="whitelabel" role="menuitem">White Label</a>
-                        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener" role="menuitem">Free Tools</a>
-                        <a href="blog" role="menuitem">Blog</a>
-                        <a href="/#faq" role="menuitem">FAQ</a>
-                    </div>
-                </div>
+                <a href="blog">Blog</a>
                 <a href="contact">Contact</a>
             </div>
             <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="nav-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
         <a href="portfolio">Portfolio</a>
-        <a href="/about">About</a>
+        <a href="/#about">About</a>
         <a href="24hrs">24hrs</a>
         <a href="/#services">Services</a>
         <a href="/services/web-development" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; Web Development</a>
         <a href="/services/ai-automation" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; AI Automation</a>
         <a href="/services/seo-geo" style="padding-left:32px;font-size:15px;opacity:0.85;">&rsaquo; SEO &amp; GEO</a>
-        <a href="whitelabel">White Label</a>
-        <a href="https://freetools.sarvaya.in" target="_blank" rel="noopener">Free Tools</a>
         <a href="blog">Blog</a>
-        <a href="/#faq">FAQ</a>
         <a href="contact">Contact</a>
         <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." class="mobile-cta" target="_blank" rel="noopener noreferrer">Get on Call</a>
     </div>
 
     <main>
-    <!-- Hero -->
-    <section class="page-hero">
-        <div class="container">
-            <div class="page-hero__label">Get in Touch</div>
-            <h1 class="page-hero__title">Contact Us</h1>
-            <p class="page-hero__desc">Have a project in mind? Let's talk about how we can help your business grow.</p>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="contact-grid">
-                <!-- Contact Form -->
-                <div class="contact-form-wrap">
-                    <h2 class="contact-form__heading">Send us a message</h2>
-                    <p class="contact-form__sub">Have questions or need help? Fill out the form below, and we'll get back to you promptly. Or explore our <a href="portfolio" class="inline-link">recent projects</a> first.</p>
-                    <form class="contact-form" id="contactForm" action="https://formsubmit.co/dev.sharma@sarvaya.in" method="POST">
-                        <input type="hidden" name="_captcha" value="true">
-                        <input type="hidden" name="_next" value="https://sarvaya.in/contact?submitted=true">
-                        <input type="hidden" name="_subject" value="New Contact Form Submission - SARVAYA">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="you@company.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
-                        </div>
-                        <button type="submit" class="form-submit">Send Message
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <a href="https://wa.me/919371553524?text=Hi%20Team%20SARVAYA%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="contact-info__card">
-                        <div class="contact-info__icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        </div>
-                        <div class="contact-info__text">
-                            <h3>WhatsApp</h3>
-                            <p>Quick response, usually within minutes</p>
-                        </div>
-                        <span class="contact-info__arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </span>
-                    </a>
-                    <a href="tel:9371553524" class="contact-info__card">
-                        <div class="contact-info__icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
-                        </div>
-                        <div class="contact-info__text">
-                            <h3>Phone</h3>
-                            <p>9371553524</p>
-                        </div>
-                        <span class="contact-info__arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </span>
-                    </a>
-                    <a href="mailto:dev.sharma@sarvaya.in" class="contact-info__card">
-                        <div class="contact-info__icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </div>
-                        <div class="contact-info__text">
-                            <h3>Email</h3>
-                            <p>dev.sharma@sarvaya.in</p>
-                        </div>
-                        <span class="contact-info__arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </span>
-                    </a>
-                    <a href="https://www.instagram.com/sarvaya.in" target="_blank" rel="noopener noreferrer" class="contact-info__card">
-                        <div class="contact-info__icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </div>
-                        <div class="contact-info__text">
-                            <h3>Instagram</h3>
-                            <p>@sarvaya.in</p>
-                        </div>
-                        <span class="contact-info__arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </span>
-                    </a>
+        <section class="error-page">
+            <div>
+                <div class="error-code">404</div>
+                <h1 class="error-title">Page not found</h1>
+                <p class="error-desc">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+                <a href="/" class="error-cta">Back to Home
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <div class="error-links">
+                    <a href="portfolio">Portfolio</a>
+                    <a href="/#services">Services</a>
+                    <a href="contact">Contact</a>
+                    <a href="24hrs">24hrs Website</a>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
     <!-- Discovery Call CTA -->
     <section class="site-cta">
         <div class="container">
@@ -319,7 +241,7 @@
     </section>
 
     </main>
-    <!-- Footer -->
+
     <footer class="footer">
         <div class="container">
             <div class="footer-top">
@@ -334,7 +256,7 @@
                     <div class="footer-col">
                         <h4>Pages</h4>
                         <a href="portfolio">Portfolio</a>
-                        <a href="/about">About</a>
+                        <a href="/#about">About</a>
                         <a href="/#services">Services</a>
                         <a href="24hrs">24-Hour Website</a>
                     </div>

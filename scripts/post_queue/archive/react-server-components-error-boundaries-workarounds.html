@@ -43,11 +43,7 @@
         "description": "RSC and Error Boundaries: how server errors propagate, why Error Boundaries are client-only, and the hybrid pattern Next.js teams use to catch both kinds.",
         "datePublished": "{{PUBLISH_DATE}}",
         "dateModified": "{{PUBLISH_DATE}}",
-        "author": {
-            "@type": "Person",
-            "name": "SARVAYA Editorial Team",
-            "url": "https://sarvaya.in"
-        },
+        "author": {"@id": "https://sarvaya.in/about#person"},
         "publisher": {
             "@type": "Organization",
             "name": "SARVAYA",
@@ -111,7 +107,7 @@
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="../portfolio">Portfolio</a>
-                <a href="/#about">About</a>
+                <a href="/about">About</a>
                 <a href="../24hrs">24hrs</a>
                 <a href="/#services">Services</a>
                 <div class="nav-dropdown">
@@ -135,7 +131,7 @@
     </nav>
     <div class="mobile-menu" id="mobileMenu">
         <a href="../portfolio">Portfolio</a>
-        <a href="/#about">About</a>
+        <a href="/about">About</a>
         <a href="../24hrs">24hrs</a>
         <a href="/#services">Services</a>
         <a href="../whitelabel">White Label</a>
@@ -156,6 +152,7 @@
             <div class="blog-hero__meta">
                 <span class="blog-tag">Development</span>
                 <time datetime="{{PUBLISH_DATE}}">{{PUBLISH_DATE_HUMAN}}</time>
+                <span class="blog-byline">By <a href="../about">Dev Sharma</a></span>
             </div>
             <h1 class="blog-hero__title">React Server Components and Error Boundaries - The Workarounds You Need</h1>
             <p class="blog-hero__excerpt">React Server Components changed how errors propagate. The classic Error Boundary still works, but only for client components. Here is the architecture that catches errors on both sides without leaking server internals.</p>
@@ -321,7 +318,7 @@
                     <div class="footer-col">
                         <h4>Pages</h4>
                         <a href="../portfolio">Portfolio</a>
-                        <a href="/#about">About</a>
+                        <a href="/about">About</a>
                         <a href="/#services">Services</a>
                         <a href="../24hrs">24-Hour Website</a>
                     </div>
