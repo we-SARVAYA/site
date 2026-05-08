@@ -85,8 +85,8 @@
       "category": "Web development",
       "thumbnail_prompt": "An abstract bordered shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The border has one segment broken or jagged, indicating a fault. Inside the bordered area, a single solid lime green shield-like shape stands as protection. Tiny four-point sparkle dots in the negative space. Flat 2D, no text, no letters anywhere.",
       "queued_at": "2026-05-04T07:42:18.471288+00:00",
-      "published_at": null,
-      "status": "queued"
+      "published_at": "2026-05-08T05:51:03.941424+00:00",
+      "status": "published"
     },
     {
       "slug": "bun-1-3-vs-node-22-production-tradeoffs",

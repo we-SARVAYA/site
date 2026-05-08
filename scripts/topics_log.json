@@ -180,5 +180,11 @@
     "title": "Pillar-Cluster Content Architecture for Modern SEO",
     "date": "2026-05-07",
     "tag": "SEO"
+  },
+  {
+    "slug": "react-server-components-error-boundaries-workarounds",
+    "title": "React Server Components and Error Boundaries - The Workarounds You Need",
+    "date": "2026-05-08",
+    "tag": "Development"
   }
 ]
