@@ -111,12 +111,7 @@ TEMPLATE = """<!DOCTYPE html>
         "datePublished": "{{PUBLISH_DATE}}",
         "dateModified": "{{PUBLISH_DATE}}",
         "author": {"@id": "https://sarvaya.in/about#person"},
-        "publisher": {
-            "@type": "Organization",
-            "name": "SARVAYA",
-            "url": "https://sarvaya.in",
-            "logo": {"@type": "ImageObject", "url": "https://sarvaya.in/assets/images/logo.png"}
-        },
+        "publisher": {"@id": "https://sarvaya.in/#organization"},
         "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sarvaya.in/blog/{SLUG}"},
         "image": "https://sarvaya.in/assets/images/blog/blog-{SLUG}.webp",
         "articleSection": "{ARTICLE_SECTION_ESC}"
