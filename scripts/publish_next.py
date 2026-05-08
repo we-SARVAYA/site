@@ -228,7 +228,11 @@ def patch_sitemap(topic: dict, today: str) -> str:
 
 def patch_llms(topic: dict) -> str:
     text = LLMS.read_text(encoding="utf-8")
-    new_line = f"- [{topic['title']}](https://sarvaya.in/blog/{topic['slug']})"
+    slug_url = f"https://sarvaya.in/blog/{topic['slug']}"
+    # Idempotency: skip if this slug already appears anywhere in llms.txt.
+    if slug_url in text:
+        return text
+    new_line = f"- [{topic['title']}]({slug_url})"
     lines = text.split("\n")
     last_idx = -1
     for i, ln in enumerate(lines):

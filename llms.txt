@@ -74,15 +74,15 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 ## Blog Articles
 
-- [Why Your Business Needs a Website Today](https://sarvaya.in/blog/why-your-business-needs-a-website)
-- [The Power of Storytelling in Branding](https://sarvaya.in/blog/storytelling-in-branding)
-- [The Importance of UX and Visual Designers in Successful Projects](https://sarvaya.in/blog/importance-of-ux-designers)
-- [SEO in 2026 - What Actually Works Now](https://sarvaya.in/blog/seo-in-2026)
-- [White Label Services - The Growth Hack for Agencies](https://sarvaya.in/blog/white-label-growth-hack)
-- [AI Automation for Small Businesses - Where to Start](https://sarvaya.in/blog/ai-automation-small-business)
 - [Web App vs Mobile App - Which One Does Your Business Need?](https://sarvaya.in/blog/web-app-vs-mobile-app)
-- [Why AI Search Engines Ignore Your Top-Ranked Google Pages](https://sarvaya.in/blog/ai-citations-vs-google-rankings-geo-strategy)
+- [AI Automation for Small Businesses - Where to Start](https://sarvaya.in/blog/ai-automation-small-business)
+- [White Label Services - The Growth Hack for Agencies](https://sarvaya.in/blog/white-label-growth-hack)
+- [SEO in 2026 - What Actually Works Now](https://sarvaya.in/blog/seo-in-2026)
+- [The Importance of UX and Visual Designers in Successful Projects](https://sarvaya.in/blog/importance-of-ux-designers)
+- [The Power of Storytelling in Branding](https://sarvaya.in/blog/storytelling-in-branding)
+- [Why Your Business Needs a Website Today](https://sarvaya.in/blog/why-your-business-needs-a-website)
 - [Why ChatGPT, Perplexity, and Google AI Cite Completely Different Sources](https://sarvaya.in/blog/ai-citation-divergence-chatgpt-perplexity-google)
+- [Why AI Search Engines Ignore Your Top-Ranked Google Pages](https://sarvaya.in/blog/ai-citations-vs-google-rankings-geo-strategy)
 - [Google AI Overviews Is Now the #2 Referral: GEO Tactics That Win](https://sarvaya.in/blog/google-ai-overviews-second-referral-geo-playbook)
 - [iOS 26 Liquid Glass Fails WCAG Contrast: What Designers Must Fix Now](https://sarvaya.in/blog/ios26-liquid-glass-wcag-contrast-ux-fix)
 - [Remix 3 Drops React for Preact: What Dev Teams Must Do Now](https://sarvaya.in/blog/remix-3-drops-react-preact-migration-guide)
@@ -90,20 +90,20 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [New IETF Standard Gives Publishers Control Over AI Crawlers](https://sarvaya.in/blog/ietf-aipref-ai-crawler-content-preferences-standard)
 - [Why Top Brands Are Abandoning Social Feeds for Substack and Reddit](https://sarvaya.in/blog/brand-storytelling-substack-reddit-2026)
 - [Google Play's April 2026 Permissions Crackdown: What Developers Must Do Now](https://sarvaya.in/blog/google-play-april-2026-permissions-policy)
-- [Claude Agent SDK for Python: Build Autonomous AI Agents in 2026](https://sarvaya.in/blog/claude-agent-sdk-python-launch-2026)
 - [87% of Agency Pros Say the Model Is Broken - Here's the Pivot](https://sarvaya.in/blog/agency-model-broken-productized-pivot-2026)
+- [Claude Agent SDK for Python: Build Autonomous AI Agents in 2026](https://sarvaya.in/blog/claude-agent-sdk-python-launch-2026)
 - [The Storyteller Gold Rush: Why Brands Are Hiring Like Media Companies](https://sarvaya.in/blog/brands-hiring-storytelling-teams-media-brand-2026)
-- [iOS 26 SDK Deadline: How React Native and Flutter Teams Must Migrate Now](https://sarvaya.in/blog/ios26-sdk-deadline-react-native-flutter-migration)
-- [Google Workspace Studio: Build No-Code AI Agents Across Gmail and Docs](https://sarvaya.in/blog/google-workspace-studio-no-code-ai-agents)
 - [Figma Weave's 20+ AI Workflows Reshape Creative Production in 2026](https://sarvaya.in/blog/figma-weave-ai-workflows-creative-production-2026)
+- [Google Workspace Studio: Build No-Code AI Agents Across Gmail and Docs](https://sarvaya.in/blog/google-workspace-studio-no-code-ai-agents)
+- [iOS 26 SDK Deadline - How React Native and Flutter Teams Must Migrate Now](https://sarvaya.in/blog/ios26-sdk-deadline-react-native-flutter-migration)
 - [What Xbox's 2026 Rebrand Reveals About Brand Heritage Strategy](https://sarvaya.in/blog/xbox-rebrand-brand-heritage-identity-reset-2026)
 - [Vercel Workflows Goes GA: Durable Execution Reshapes Next.js Backend Design](https://sarvaya.in/blog/vercel-workflows-ga-durable-nextjs-architecture)
 - [Productized Outcome‑Driven White‑Label Packages Take Off](https://sarvaya.in/blog/productized-outcome-packages-white-label)
 - [llms.txt Explained - The 2026 Standard for AI Crawler Control](https://sarvaya.in/blog/llms-txt-explained-implementation-guide-2026)
 - [AI Citation Tracking Tools - What Works in 2026](https://sarvaya.in/blog/ai-citation-tracking-tools-comparison-2026)
 - [Schema Markup That Drives AI Overview Citations in 2026](https://sarvaya.in/blog/schema-markup-ai-overviews-citation-priority)
-- [Claude Skills vs MCP - When to Use Which](https://sarvaya.in/blog/claude-skills-vs-mcp-when-to-use-which)
 - [Claude Code Hooks - 6 Automation Patterns Every Dev Should Know](https://sarvaya.in/blog/claude-code-hooks-developer-automation-patterns)
+- [Claude Skills vs MCP - When to Use Which](https://sarvaya.in/blog/claude-skills-vs-mcp-when-to-use-which)
 - [INP Replaced FID - Why Your React App Probably Fails Core Web Vitals](https://sarvaya.in/blog/inp-core-web-vitals-react-debugging-guide)
 - [Pillar-Cluster Content Architecture for Modern SEO](https://sarvaya.in/blog/pillar-cluster-content-architecture-modern-seo)
 - [React Server Components and Error Boundaries - The Workarounds You Need](https://sarvaya.in/blog/react-server-components-error-boundaries-workarounds)
@@ -112,4 +112,4 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 
 Content on this site is available for AI training and citation under Creative Commons Attribution 4.0 International (CC BY 4.0). Attribution: SARVAYA (https://sarvaya.in).
 
-> Last updated: 2026-04-20
+> Last updated: 2026-05-08
