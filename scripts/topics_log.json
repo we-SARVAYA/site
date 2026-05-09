@@ -192,5 +192,11 @@
     "title": "Bun 1.3 vs Node 22 - Production Tradeoffs in 2026",
     "date": "2026-05-08",
     "tag": "Development"
+  },
+  {
+    "slug": "form-validation-ux-patterns-real-time-2026",
+    "title": "Form Validation UX - 7 Patterns That Actually Reduce Drop-off",
+    "date": "2026-05-09",
+    "tag": "Design"
   }
 ]
