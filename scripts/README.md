@@ -1,47 +1,30 @@
-# Auto-Blog Pipeline
+# Auto-Publish Pipeline
 
-Publishes one SEO-ready blog post every 12 hours: researches a trending AEO / GEO / Claude / AI-search topic, writes the full HTML, generates a matching hero thumbnail, patches the site index + sitemap + llms.txt, and commits to `main`.
+Publishes one pre-written blog post from the queue every 12 hours. No AI APIs.
 
 ## Files
 
-- `generate_blog.py` — the full pipeline (research → article → thumbnail → patch → commit-ready)
-- `requirements.txt` — Python deps (Pillow, requests)
-- `topics_log.json` — persistent record of past topics, prevents duplicates
-- `../.github/workflows/daily-blog.yml` — GitHub Actions cron (04:00 + 16:00 UTC)
-
-## One-time setup
-
-Add two secrets to the GitHub repo (Settings → Secrets and variables → Actions):
-
-| Secret | Value |
-|---|---|
-| `ANTHROPIC_API_KEY` | your Claude API key (https://console.anthropic.com) |
-| `GEMINI_API_KEY` | your Gemini API key (https://aistudio.google.com/apikey) |
-
-No other config required — `GITHUB_TOKEN` is automatic and the workflow pushes to `main` itself.
+- `publish_next.py` — copies the next queued post from `post_queue/posts/` into `blog/`, patches `blog.html` / `index.html` / `sitemap.xml` / `llms.txt`, and emits commit metadata.
+- `rebuild_llms.py` — rebuilds the `## Blog Articles` section of `llms.txt` from current `blog/*.html` files.
+- `topics_log.json` — record of past topics (used by `publish_next.py` to update history).
+- `post_queue/posts/` — queue of ready-to-publish HTML + WebP pairs.
+- `post_queue/archive/` — already-published posts (moved here after publish).
+- `post_queue/manifest.json` — queue metadata (slug order, titles, dates).
+- `../.github/workflows/daily-blog.yml` — GitHub Actions cron (04:00 + 16:00 UTC).
 
 ## How it runs
 
-- **Automatic** — twice a day at 04:00 and 16:00 UTC.
+- **Automatic** — twice a day at 04:00 and 16:00 UTC via GitHub Actions.
 - **Manual** — Actions tab → "Auto-publish blog (every 12h)" → Run workflow.
 
-## Running locally (dry test)
+The workflow uses no API keys. Only Gmail SMTP secrets (`GMAIL_USER`, `GMAIL_APP_PASSWORD`, `NOTIFY_EMAIL`) for notification emails.
 
-```bash
-# from repo root
-pip install -r scripts/requirements.txt
-npm install -g @anthropic-ai/claude-code
-export ANTHROPIC_API_KEY=sk-ant-...
-export GEMINI_API_KEY=AIza...
-python scripts/generate_blog.py
-```
+## Adding new posts to the queue
 
-The script only writes files at the very end; if any step fails, nothing on disk changes.
+Write the HTML manually following the structure of any existing post in `post_queue/posts/` or `blog/`. Each queued post needs:
 
-## Tuning
+- `post_queue/posts/<slug>.html` — the article HTML, using `{{PUBLISH_DATE}}` / `{{PUBLISH_DATE_HUMAN}}` tokens for date fields (the publisher substitutes them at deploy time).
+- `post_queue/posts/<slug>.webp` — the 1200×675 hero image.
+- An entry appended to `post_queue/manifest.json` under `posts[]`.
 
-- **Cadence** — edit the `cron` in `.github/workflows/daily-blog.yml` (UTC).
-- **Topic niche** — edit the research prompt in `research_topic()`.
-- **Voice / length** — edit the article prompt in `generate_article_html()`.
-- **Image style** — edit the prompt builder in `generate_thumbnail()`.
-- **Image model** — set env `GEMINI_IMAGE_MODEL` (default `gemini-2.5-flash-image`).
+When the queue empties, the workflow sends a "refill needed" email instead of publishing.
