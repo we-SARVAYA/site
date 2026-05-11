@@ -162,8 +162,8 @@
       "category": "Web Development",
       "thumbnail_prompt": "An abstract calendar grid shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The grid shows three horizontal rows of small square cells representing days. The thirtieth cell is filled solid lime green and slightly larger than the others. A small arrow shape in warm off-white points from the first cell toward the green cell. Tiny four-point sparkle dots scatter in the negative space. Flat 2D, no text, no letters anywhere.",
       "queued_at": "2026-05-11T04:05:45.034902+00:00",
-      "published_at": null,
-      "status": "queued"
+      "published_at": "2026-05-11T17:49:44.601756+00:00",
+      "status": "published"
     },
     {
       "slug": "aeo-vs-seo-answer-engine-optimisation-guide",
