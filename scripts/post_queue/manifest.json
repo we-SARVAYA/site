@@ -153,6 +153,171 @@
       "queued_at": "2026-05-04T07:42:18.471288+00:00",
       "published_at": null,
       "status": "queued"
+    },
+    {
+      "slug": "launch-startup-website-30-days-framework",
+      "title": "How to Launch a High-Converting Startup Website in Under 30 Days",
+      "tag": "Development",
+      "excerpt": "Most startup websites take three months. Here is the seven-step framework that ships a high-converting launch in under 30 days without cutting corners.",
+      "category": "Web Development",
+      "thumbnail_prompt": "An abstract calendar grid shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The grid shows three horizontal rows of small square cells representing days. The thirtieth cell is filled solid lime green and slightly larger than the others. A small arrow shape in warm off-white points from the first cell toward the green cell. Tiny four-point sparkle dots scatter in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "aeo-vs-seo-answer-engine-optimisation-guide",
+      "title": "What Is AEO and Why Your Business Needs It Before SEO Even Matters",
+      "tag": "GEO",
+      "excerpt": "SEO ranks you on Google. AEO gets you cited by ChatGPT, Perplexity, and AI Overviews. Here is what answer engine optimisation actually is and why it matters before SEO.",
+      "category": "AEO / GEO / AI search",
+      "thumbnail_prompt": "An abstract speech bubble shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. Inside the speech bubble, a single five-pointed star shape filled solid lime green. To the left of the speech bubble, three small horizontal lines in warm off-white representing search query text. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "mvp-without-development-team-founder-guide",
+      "title": "How to Build an MVP Without Hiring a Full Development Team",
+      "tag": "Development",
+      "excerpt": "An MVP is not a half-built product. It is the smallest version that validates one assumption. Here is the founder framework that skips the dev-team hire.",
+      "category": "Web Development",
+      "thumbnail_prompt": "An abstract rocket shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The rocket points upward and has three small horizontal fins at the base. The rocket's body is outlined only in warm off-white but the small circular porthole window in the middle of the body is filled solid lime green. Below the rocket, three short vertical lines in warm off-white representing exhaust. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "ai-automation-audit-where-to-start-2026",
+      "title": "AI Automation Audit - The Three Workflows Small Businesses Should Start With",
+      "tag": "Automation",
+      "excerpt": "Most small businesses automate the wrong things first. Here is the audit framework that identifies the three workflows worth automating before anything else.",
+      "category": "AI automation for business",
+      "thumbnail_prompt": "An abstract clipboard or checklist shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The clipboard shows three horizontal lines representing checklist items. The second checklist item has a small filled solid lime green checkmark next to it. To the right of the clipboard, two small circular gear shapes in warm off-white representing automation. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "technical-seo-launch-checklist-startups-2026",
+      "title": "Technical SEO Basics Every Startup Should Set Up at Launch, Not After",
+      "tag": "SEO",
+      "excerpt": "Treating SEO as a post-launch task costs startups three to six months of organic growth. Here are the ten technical SEO elements that must ship with the launch.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract checklist clipboard shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The clipboard shows five horizontal lines representing checklist items. Each item has a small square checkbox to the left. The third checkbox is filled solid lime green. To the right of the clipboard, a small magnifying glass shape in warm off-white. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "brand-identity-design-startup-budget-framework",
+      "title": "How to Design a Brand Identity That Works Before You Can Afford a Full Brand Agency",
+      "tag": "Branding",
+      "excerpt": "Brand identity is not the logo. It is the feeling a prospect gets before booking a call. Here is the lean brand framework that gets startups credible from day one.",
+      "category": "Brand identity + storytelling",
+      "thumbnail_prompt": "An abstract layered circle composition on a pure black background, drawn in warm off-white grainy hand-drawn lines. Five concentric circles are arranged from largest to smallest, each slightly offset. The smallest innermost circle is filled solid lime green. The other circles are outlined only in warm off-white. To the right of the circles, three small horizontal lines representing typography. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "website-lead-generation-without-paid-ads-organic",
+      "title": "How to Generate Leads from Your Website Without Running Paid Ads",
+      "tag": "SEO",
+      "excerpt": "Most startup sites get traffic but no enquiries. The conversion structure is missing. Here are the five elements every lead-generating website needs.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract funnel shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The funnel is wide at the top and narrow at the bottom. Inside the wide top of the funnel, five small horizontal lines representing incoming visitors. At the narrow bottom of the funnel, a single drop or filled circle shape filled solid lime green representing a converted lead. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "ui-ux-design-mistakes-killing-conversions",
+      "title": "UI/UX Design Mistakes That Are Killing Your Conversion Rate and How to Fix Them",
+      "tag": "Design",
+      "excerpt": "Beautiful design does not mean high conversion. Here are the seven UI/UX mistakes that damage trust within eight seconds and the fixes that recover the conversion rate.",
+      "category": "UI / UX design",
+      "thumbnail_prompt": "An abstract cursor or mouse pointer shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The cursor points toward a small square button shape filled solid lime green. Below the cursor, three small horizontal lines representing form fields. A small X or cross shape in warm off-white near the third line representing a UX problem. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "best-tech-stack-startup-website-app-2026",
+      "title": "How to Choose the Right Tech Stack for Your Startup Website or App in 2026",
+      "tag": "Development",
+      "excerpt": "Choosing the wrong stack early creates expensive rewrites later. Here is the comparison framework for Next.js, WordPress, Webflow, React Native, and Flutter in 2026.",
+      "category": "Web Development",
+      "thumbnail_prompt": "An abstract layered stack of three horizontal rectangles on a pure black background, drawn in warm off-white grainy hand-drawn lines. The top rectangle is outlined only. The middle rectangle is outlined only with three small dots inside. The bottom rectangle is filled solid lime green. To the right of the stack, a small wrench or tool shape in warm off-white. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "white-label-web-development-agency-scale-no-hiring",
+      "title": "How Agencies Use White-Label Web Development to Scale Without Hiring",
+      "tag": "Agency",
+      "excerpt": "White-label is how agencies double revenue without doubling headcount. Here is the partnership model that protects margin, brand, and delivery quality at once.",
+      "category": "Agency / white-label growth",
+      "thumbnail_prompt": "An abstract envelope or package shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The envelope is shown from the front with a triangular flap. Inside the envelope, a single solid lime green shield-like shape representing brand protection. To the left of the envelope, three small horizontal lines representing project deliverables. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "how-to-write-website-brief-developer-template",
+      "title": "How to Write a Website Brief That Gets You Exactly What You Want",
+      "tag": "Development",
+      "excerpt": "Vague briefs lead to expensive revisions. Here is the eight-section website brief template that compresses the project timeline and keeps the team accountable.",
+      "category": "Web Development",
+      "thumbnail_prompt": "An abstract document or notepad shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The document has eight horizontal lines representing brief sections. The fourth line is highlighted as a small solid lime green rectangle. To the right of the document, a small pen or pencil shape in warm off-white. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "google-maps-local-seo-india-business-ranking",
+      "title": "How to Get Your Business Found on Google Maps and Local Search in India",
+      "tag": "SEO",
+      "excerpt": "Local SEO is one of the highest-ROI marketing channels for service businesses in India. Here is the full Google Business Profile and citation playbook for 2026.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract map pin marker shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. The pin is shown from the front with a circular top and pointed bottom. The circular top of the pin is filled solid lime green. Around the pin, five small dots in warm off-white showing radiating distance markers and direction lines. Tiny four-point sparkle dots scattered in the negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "automate-client-onboarding-ai-workflows-2026",
+      "title": "How to Automate Your Client Onboarding Process Using AI Workflows",
+      "tag": "Automation",
+      "excerpt": "Manual onboarding is one of the biggest hidden time drains for service businesses. Here is the workflow that automates 80% of it without losing the human touch.",
+      "category": "AI automation for business",
+      "thumbnail_prompt": "An abstract flow diagram with three connected circular nodes on a pure black background, drawn in warm off-white grainy hand-drawn lines. The nodes are connected by short arrows showing left-to-right flow. The middle node is filled solid lime green. The first and third nodes are outlined only. Around the diagram, three small four-point sparkle dots in negative space. Tiny additional sparkles scattered. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "outsource-web-development-india-agency-evaluation",
+      "title": "How to Outsource Web Development to an Indian Agency Without Losing Quality or Control",
+      "tag": "Agency",
+      "excerpt": "Outsourcing to India works when you know which agencies to pick and which questions to ask. Here is the evaluation framework that separates the right partners from the wrong ones.",
+      "category": "Agency / white-label growth",
+      "thumbnail_prompt": "An abstract pair of overlapping circles on a pure black background, drawn in warm off-white grainy hand-drawn lines. The left circle and right circle overlap in the centre, and the overlap region is filled solid lime green representing partnership. Around the circles, three small four-point sparkle dots and a small arrow shape in warm off-white connecting them. Tiny additional sparkles scattered in negative space. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
+    },
+    {
+      "slug": "content-strategy-service-business-lead-generation",
+      "title": "How to Build a Content Strategy That Generates Leads for a Service Business",
+      "tag": "SEO",
+      "excerpt": "Most service business blogs fail because they write for volume instead of intent. Here is the 90-day content plan that produces inbound leads from zero.",
+      "category": "Traditional SEO",
+      "thumbnail_prompt": "An abstract growth chart shape on a pure black background, drawn in warm off-white grainy hand-drawn lines. A horizontal axis with three small vertical tick marks. A rising line with three plot points going from bottom-left to top-right. The topmost rightmost point is filled solid lime green and slightly larger. Around the chart, three small four-point sparkle dots in negative space. Tiny additional sparkles scattered. Flat 2D, no text, no letters anywhere.",
+      "queued_at": "2026-05-11T04:05:45.034902+00:00",
+      "published_at": null,
+      "status": "queued"
     }
   ]
 }
