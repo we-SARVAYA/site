@@ -117,6 +117,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [What Is AEO and Why Your Business Needs It Before SEO Even Matters](https://sarvaya.in/blog/aeo-vs-seo-answer-engine-optimisation-guide)
 - [How to Build an MVP Without Hiring a Full Development Team](https://sarvaya.in/blog/mvp-without-development-team-founder-guide)
 - [AI Automation Audit - The Three Workflows Small Businesses Should Start With](https://sarvaya.in/blog/ai-automation-audit-where-to-start-2026)
+- [Technical SEO Basics Every Startup Should Set Up at Launch, Not After](https://sarvaya.in/blog/technical-seo-launch-checklist-startups-2026)
 
 ## License
 
