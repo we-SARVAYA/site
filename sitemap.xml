@@ -366,4 +366,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://sarvaya.in/blog/white-label-web-development-agency-scale-no-hiring</loc>
+        <lastmod>2026-05-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
