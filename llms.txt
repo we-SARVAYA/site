@@ -125,6 +125,7 @@ Founded in 2024, SARVAYA serves clients worldwide with a focus on fast turnaroun
 - [How Agencies Use White-Label Web Development to Scale Without Hiring](https://sarvaya.in/blog/white-label-web-development-agency-scale-no-hiring)
 - [How to Write a Website Brief That Gets You Exactly What You Want](https://sarvaya.in/blog/how-to-write-website-brief-developer-template)
 - [How to Get Your Business Found on Google Maps and Local Search in India](https://sarvaya.in/blog/google-maps-local-seo-india-business-ranking)
+- [How to Automate Your Client Onboarding Process Using AI Workflows](https://sarvaya.in/blog/automate-client-onboarding-ai-workflows-2026)
 
 ## License
 
